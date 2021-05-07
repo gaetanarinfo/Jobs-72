@@ -1,0 +1,149 @@
+// Thèmes
+.bg-light {
+    background-color: #efefef!important;
+}
+
+// Form Search Navbar
+#search-form {
+    border: none;
+    transition: 200ms all;
+}
+
+#search-form:hover {
+    opacity: 0.5!important;
+}
+
+.badge-p {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 17px;
+    border: 2px solid #ffffff40;
+    font-weight: 400;
+    line-height: 1;
+    color: #fdfdfd;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    background: rgb(255 251 251 / 22%);
+    transition: 200ms all;
+    cursor: pointer;
+}
+
+.badge-p:hover {
+    border: 2px solid #ffffff40;
+    border-radius: 4px;
+    background: rgb(255 251 251 / 5%);
+}
+
+.mr-0 {
+    margin-right: 0 !important;
+}
+
+.mr-1 {
+    margin-right: .25rem!important;
+}
+
+.mr-2 {
+    margin-right: .5rem!important;
+}
+
+.mr-3 {
+    margin-right: 1rem!important;
+}
+
+.mr-4 {
+    margin-right: 1.5rem!important;
+}
+
+.mr-5 {
+    margin-right: 3rem!important;
+}
+
+.ml-0 {
+    margin-left: 0 !important;
+}
+
+.ml-1 {
+    margin-left: .25rem!important;
+}
+
+.ml-2 {
+    margin-left: .5rem!important;
+}
+
+.ml-3 {
+    margin-left: 1rem!important;
+}
+
+.ml-4 {
+    margin-left: 1.5rem!important;
+}
+
+.ml-5 {
+    margin-left: 3rem!important;
+}
+
+:-moz-ui-invalid .pr-0 {
+    padding-right: 0 !important;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.pr-1 {
+    padding-right: .25rem!important;
+}
+
+.pr-2 {
+    padding-right: .5rem!important;
+}
+
+.pr-3 {
+    padding-right: 1rem!important;
+}
+
+.pr-4 {
+    padding-right: 1.5rem!important;
+}
+
+.pr-5 {
+    padding-right: 3rem!important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.pl-1 {
+    padding-left: .25rem!important;
+}
+
+.pl-2 {
+    padding-left: .5rem!important;
+}
+
+.pl-3 {
+    padding-left: 1rem!important;
+}
+
+.pl-4 {
+    padding-left: 1.5rem!important;
+}
+
+.pl-5 {
+    padding-left: 3rem!important;
+}
+
+.form-p {
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, .55);
+    font-weight: 600;
+    font-size: 14px;
+    padding-right: 4em;
+}

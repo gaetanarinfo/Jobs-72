@@ -1,68 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-              <div class="card h-100">
-                <img
-                  src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                  </p>
+<div style="background-color: rgb(35, 9, 57); padding: 5rem 5rem 8rem 5rem !important;">
+    <div class="container">
+        <div class="row justify-content-center">
+          <h3 class="text-left mt-4 mb-0 text-white" style="margin-left: 1em;">Trouvez le job qui vous convient vraiment.</h3>
+            <div class="row row-cols-1 row-cols-md-3 mt-4">
+                <div class="input-group">
+                  <input style="height: 60px;" type="search" class="form-control rounded form-p" placeholder="Titre de poste ou mot-clé" aria-label="Search" aria-describedby="search-addon">
+                  <button type="button" class="btn btn-outline-success ripple-surface"><i class="fas fa-search"></i></button>
                 </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
             </div>
-            <div class="col">
-              <div class="card h-100">
-                <img
-                  src="https://mdbootstrap.com/img/new/standard/city/043.jpg"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This card has supporting text below as a natural lead-in to additional
-                    content.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
+  
+            <div class="text-left mt-4 mb-0" style="margin-left: 1em;">
+              <p class="text-white">Recherches fréquentes</p>
+  
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Télétravail</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> RH</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Commercial</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Distribution</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> IT</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Logistique</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Finance</span>
+              <span class="badge badge-p mr-2"><i class="fas fa-search"></i> Alternance</span>
+              <span class="badge badge-p mr-2 mb-2"><i class="fas fa-search"></i> Marketing</span>
+              <span class="badge badge-p"><i class="fas fa-search"></i> Ingénierie</span>
             </div>
-            <div class="col">
-              <div class="card h-100">
-                <img
-                  src="https://mdbootstrap.com/img/new/standard/city/042.jpg"
-                  class="card-img-top"
-                  alt="..."
-                />
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This card has even longer content than the first to show
-                    that equal height action.
-                  </p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
     </div>
-</div>
+  </div>
+  
+  
+  @include('components.news')
+  <hr/>
+  @include('components.emplois')
+  <hr/>
+  @include('components.search-emplois')
+
 @endsection
