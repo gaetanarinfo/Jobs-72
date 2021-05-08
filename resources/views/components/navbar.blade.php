@@ -39,7 +39,7 @@
             </li>
 
             <li class="nav-item me-3 me-lg-1">
-                <a class="nav-link" href="#" title="Mon profil">
+                <a class="nav-link" href="/profile" title="Mon profil">
                     <span><i class="fas fa-user fa-lg text-secondary mr-2"></i> Mon profil</span>
                 </a>
             </li>

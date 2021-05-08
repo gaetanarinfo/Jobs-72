@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/profile', function () {})->middleware('verified');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('verified');
+
+Route::get('/newsletter', [App\Http\Controllers\NewsletterController::class, 'index']);
+
+Route::post('/newsletter',[App\Http\Controllers\NewsletterController::class, 'store']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

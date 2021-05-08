@@ -1,21 +1,21 @@
-<footer class="bg-light text-center text-dark">
+<footer class="text-center text-white" style="background-color: rgb(35, 9, 57) !important;">
     <!-- Grid container -->
     <div class="container p-4">
         <!-- Section: Social media -->
         <section class="mb-4">
             <!-- Facebook -->
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
                     class="fab fa-facebook-f"></i></a>
 
             <!-- Twitter -->
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
 
             <!-- Instagram -->
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
                     class="fab fa-instagram"></i></a>
 
             <!-- Linkedin -->
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
                     class="fab fa-linkedin-in"></i></a>
 
         </section>
@@ -23,7 +23,6 @@
 
         <!-- Section: Form -->
         <section class="">
-            <form action="">
                 <!--Grid row-->
                 <div class="row d-flex justify-content-center">
                     <!--Grid column-->
@@ -35,21 +34,11 @@
                     <!--Grid column-->
 
                     <!--Grid column-->
-                    <div class="col-md-5 col-12">
-                        <!-- Email input -->
-                        <div class="form-outline form-dark mb-4">
-                            <input type="email" class="form-control" />
-                            <label class="form-label">Adresse email</label>
-                        </div>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
                     <div class="col-auto">
                         <!-- Submit button -->
-                        <button type="submit" class="btn btn-outline-dark mb-4">
+                        <a href="{{ url('/newsletter') }}" class="btn btn-outline-white mb-4">
                             S'abonner
-                        </button>
+                        </a>
                     </div>
                     <!--Grid column-->
                 </div>
@@ -84,16 +73,16 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-dark">Toutes les offres</a>
+                            <a href="#!" class="text-white">Toutes les offres</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Conseils Carrière</a>
+                            <a href="#!" class="text-white">Conseils Carrière</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Profils d'entreprises</a>
+                            <a href="#!" class="text-white">Profils d'entreprises</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Aide</a>
+                            <a href="#!" class="text-white">Aide</a>
                         </li>
                     </ul>
                 </div>
@@ -105,19 +94,19 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-dark">Nos produits</a>
+                            <a href="#!" class="text-white">Nos produits</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Sur mesure</a>
+                            <a href="#!" class="text-white">Sur mesure</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Nos Tarifs</a>
+                            <a href="#!" class="text-white">Nos Tarifs</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Infos RH</a>
+                            <a href="#!" class="text-white">Infos RH</a>
                         </li>
                         <li>
-                          <a href="#!" class="text-dark">Aide</a>
+                          <a href="#!" class="text-white">Aide</a>
                       </li>
                     </ul>
                 </div>
@@ -129,16 +118,16 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-dark">Mentions légales</a>
+                            <a href="#!" class="text-white">Mentions légales</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Conditions d’utilisation</a>
+                            <a href="#!" class="text-white">Conditions d’utilisation</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Conditions générale de vente</a>
+                            <a href="#!" class="text-white">Conditions générale de vente</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-dark">Données personnelles</a>
+                            <a href="#!" class="text-white">Données personnelles</a>
                         </li>
                     </ul>
                 </div>
@@ -153,7 +142,7 @@
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2021 Copyright -
-        <a class="text-dark" href="">Gaëtan Seigneur - Jobs-72</a>
+        <a class="text-white" href="">Gaëtan Seigneur - Jobs-72</a>
     </div>
     <!-- Copyright -->
 </footer>
