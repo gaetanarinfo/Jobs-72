@@ -194,3 +194,9 @@
   font-size: 14px;
   padding-right: 4em;
 }
+
+.is-invalid ~ .invalid-feedback, .is-invalid ~ .invalid-tooltip, .was-validated :invalid ~ .invalid-feedback, .was-validated :invalid ~ .invalid-tooltip {
+  display: block;
+  position: relative;
+  margin-bottom: 4px;
+}

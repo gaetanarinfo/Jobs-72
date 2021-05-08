@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
-Auth::routes();
+
+Auth::routes(['verify' => true]);
+
+Route::get('/profile', function () {})->middleware('verified');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

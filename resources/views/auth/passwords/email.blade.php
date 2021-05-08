@@ -1,11 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
+@include('components.head')
+
+<div class="container mt-3">
     <div class="row justify-content-center">
+
+        <div class="col-md-12 mb-3 text-center">
+            <img src="../images/change-password.png" width="200px" alt="user"/>
+        </div>
+
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">{{ __('Mot de passe oublié') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -18,7 +26,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -31,10 +39,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 mt-3">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
+                                <button type="submit" class="btn btn-secondary">
+                                    {{ __('Envoyer le lien de réinitialisation du mot de passe') }}
                                 </button>
                             </div>
                         </div>
