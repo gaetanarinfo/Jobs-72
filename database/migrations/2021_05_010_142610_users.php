@@ -21,18 +21,8 @@ class Users extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('avatar')->default('default.jpg');
             $table->string('password');
             $table->string('roles')->default('ROLES_USER');
-            $table->boolean('notification_news')->default(1)->nullable();
-            $table->boolean('notification_newsletter')->default(1)->nullable();
-            $table->boolean('notification_jobs')->default(1)->nullable();
-            $table->boolean('show_username')->default(0);
-            $table->boolean('show_email')->default(0);
-            $table->boolean('show_lastname')->default(0);
-            $table->boolean('show_firstname')->default(0);
-            $table->boolean('show_phone')->default(0);
-            $table->boolean('show_cv')->default(0);
             $table->string('cv')->nullable();
             $table->rememberToken();
             $table->timestamps();

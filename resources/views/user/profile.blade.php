@@ -292,56 +292,80 @@
                                                         <div class="mb-2"><b>Rester en contact</b></div>
                                                         <div class="row">
                                                             <div class="col">
-                                                                <label>Notifications que vous revcevez par email</label>
+                                                                <label>Notifications que vous revcevez par email (Il ne sont
+                                                                    pas gênant)</label>
+
+                                                                <hr />
+
                                                                 <div class="custom-controls-stacked px-2">
-                                                                    <div class="custom-control custom-checkbox mb-2 mt-2">
+                                                                    <div class=" mb-2 mt-2">
 
-                                                                        @if (Auth::user()->notification_news == 1)
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_news"
-                                                                                id="notification_news" value="0" checked="">
-                                                                        @else
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_news"
-                                                                                id="notification_news" value="1">
-                                                                        @endif
+                                                                        <div class="text-center">
+                                                                            <label class="custom-control-label"
+                                                                                for="news">Actualité</label>
+                                                                        </div>
 
-                                                                        <label class="custom-control-label"
-                                                                            for="news">Actualité</label>
+                                                                        <select name="notification_news"
+                                                                            class="form-control mt-2">
+                                                                            <option value="@if(Auth::user()->notification_news == 1)1 @else 0 @endif"
+                                                                                >
+                                                                                Actualité
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non
+                                                                            </option>
+                                                                            <option value="1">Oui
+                                                                            </option>
+                                                                        </select>
+
+                                                                        <hr />
+
                                                                     </div>
-                                                                    <div class="custom-control custom-checkbox">
+                                                                    <div class="custom-control">
 
-                                                                        @if (Auth::user()->notification_newsletter == 1)
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_newsletter" value="0"
-                                                                                checked="">
-                                                                        @else
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_newsletter" value="1">
-                                                                        @endif
+                                                                        <div class="text-center">
+                                                                            <label class="custom-control-label"
+                                                                                for="newsletter">Newsletter</label>
+                                                                        </div>
 
-                                                                        <label class="custom-control-label"
-                                                                            for="newsletter">Newsletter</label>
+                                                                        <select name="notification_newsletter"
+                                                                            class="form-control mt-2">
+                                                                            <option value="@if(Auth::user()->notification_newsletter ==
+                                                                            1)1 @else 0 @endif">
+                                                                                Newsletter
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non
+                                                                            </option>
+                                                                            <option value="1">Oui
+                                                                            </option>
+                                                                        </select>
+
+                                                                        <hr />
+
                                                                     </div>
-                                                                    <div class="custom-control custom-checkbox mt-2">
+                                                                    <div class="custom-control mt-2">
 
-                                                                        @if (Auth::user()->notification_jobs == 1)
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_jobs" value="0"
-                                                                                checked="">
-                                                                        @else
-                                                                            <input type="checkbox"
-                                                                                class="custom-control-input mr-1"
-                                                                                name="notification_jobs" value="1">
-                                                                        @endif
+                                                                        <div class="text-center">
+                                                                            <label class="custom-control-label"
+                                                                                for="emplois">Emplois</label>
+                                                                        </div>
 
-                                                                        <label class="custom-control-label"
-                                                                            for="emplois">Emplois</label>
+                                                                        <select name="notification_jobs"
+                                                                            class="form-control mt-2">
+                                                                            <option value="@if(Auth::user()->notification_jobs == 1)1 @else 0 @endif"
+                                                                                >
+                                                                                Emplois
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non
+                                                                            </option>
+                                                                            <option value="1">Oui
+                                                                            </option>
+                                                                        </select>
+
+                                                                        <hr />
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -374,9 +398,11 @@
 
                                         <div id="tab-2" class="tab-pane" style="pointer-events: all;">
 
-                                            <div class="alert alert-secondary text-center" role="alert" data-mdb-color="primary">
+                                            <div class="alert alert-secondary text-center" role="alert"
+                                                data-mdb-color="primary">
                                                 @if (Auth::user()->show_cv == 0)<i
-                                                    class="far fa-eye-slash mr-2"></i> CV non visible par les recruteurs @else<i class="fas fa-eye mr-2"></i> CV visible par les recruteurs
+                                                        class="far fa-eye-slash mr-2"></i> CV non visible par les recruteurs
+                                                @else<i class="fas fa-eye mr-2"></i> CV visible par les recruteurs
                                                 @endif
                                             </div>
 
