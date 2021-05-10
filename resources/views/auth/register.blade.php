@@ -30,7 +30,7 @@
                     <div class="card-header">{{ __('Vous n’avez pas de compte ?') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
                             @csrf
 
                             <div class="form-group row">

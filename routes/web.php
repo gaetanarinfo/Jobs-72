@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 Auth::routes(['verify' => true]);
 
@@ -25,4 +24,19 @@ Route::get('/newsletter', [App\Http\Controllers\NewsletterController::class, 'in
 
 Route::post('/newsletter',[App\Http\Controllers\NewsletterController::class, 'store']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/cv', [App\Http\Controllers\ProfileController::class, 'update_cv'])->middleware('verified');
+
+Route::post('/profile-picture', [App\Http\Controllers\ProfileController::class, 'update_avatar'])->middleware('verified');
+
+Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update_profil'])->middleware('verified');
+
+Route::post('/profile-visibility', [App\Http\Controllers\ProfileController::class, 'update_show'])->middleware('verified');
+
+Route::post('/profile-notif', [App\Http\Controllers\ProfileController::class, 'update_notif'])->middleware('verified');
+
+Route::get('/profile-remove', [App\Http\Controllers\ProfileController::class, 'remove_account'])->middleware('verified');
+
+Route::group(['middleware' => ['auth', 'active_user']], function() {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // ... Any other routes that are accessed only by non-blocked user
+});

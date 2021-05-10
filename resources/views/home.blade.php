@@ -4,7 +4,7 @@
 
 
   @include('components.head')
-  
+
   @include('components.news')
   <hr/>
   @include('components.emplois')

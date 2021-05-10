@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class NewsImages extends Migration
+class AddBlockedAtToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class NewsImages extends Migration
      */
     public function up()
     {
-        Schema::create('news_images', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->bigInteger('news_id')->unsigned();
-            $table->timestamps();
-            $table->foreign('news_id')->references('id')->on('news');
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('blocked_at')->nullable();
         });
     }
 
@@ -29,6 +25,6 @@ class NewsImages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_images');
+        Schema::dropIfExists('users');
     }
 }

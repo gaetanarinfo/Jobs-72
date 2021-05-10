@@ -20,7 +20,7 @@
 
         <!-- Center elements -->
         <ul class="navbar-nav flex-row d-none d-md-flex">
-            <li class="nav-item me-3 me-lg-1 active">
+            <li class="nav-item me-3 me-lg-1">
                 <a class="nav-link" href="/" title="Accueil">
                     <span><i class="fas fa-home fa-lg text-success mr-2"></i> Accueil</span>
                 </a>

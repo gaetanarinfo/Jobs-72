@@ -4,18 +4,18 @@
         <!-- Section: Social media -->
         <section class="mb-4">
             <!-- Facebook -->
-            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
                     class="fab fa-facebook-f"></i></a>
 
             <!-- Twitter -->
-            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i class="fab fa-twitter"></i></a>
 
             <!-- Instagram -->
-            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
                     class="fab fa-instagram"></i></a>
 
             <!-- Linkedin -->
-            <a class="btn btn-outline-white btn-floating m-1" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
                     class="fab fa-linkedin-in"></i></a>
 
         </section>
@@ -36,7 +36,7 @@
                     <!--Grid column-->
                     <div class="col-auto">
                         <!-- Submit button -->
-                        <a href="{{ url('/newsletter') }}" class="btn btn-outline-white mb-4">
+                        <a href="{{ url('/newsletter') }}" class="btn btn-outline-success mb-4 text-white">
                             S'abonner
                         </a>
                     </div>

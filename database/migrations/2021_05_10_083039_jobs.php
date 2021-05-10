@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class News extends Migration
+class Jobs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class News extends Migration
      */
     public function up()
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('author');
             $table->string('title')->unique();
+            $table->string('category')->unique();
             $table->string('smallContent');
             $table->text('content');
             $table->string('image')->default('default.jpg');
+            $table->string('localisation');
             $table->boolean('active');
-            // $table->bigInteger('comments_id')->unsigned();
             $table->timestamps();
-            // $table->foreign('comments_id')->references('id')->on('comments');
         });
     }
 
@@ -34,6 +34,6 @@ class News extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('jobs');
     }
 }
