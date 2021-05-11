@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Mon profil')
+
 @section('content')
 
     @include('components.head')
@@ -166,6 +168,8 @@
                                                 class="active nav-link">Paramètre</a></li>
                                         <li class="nav-item"><a href="" id="cvBtn" class="nav-link">Mon CV</a></li>
                                         <li class="nav-item"><a href="" id="viewBtn" class="nav-link">Visibilité</a></li>
+                                        <li class="nav-item"><a href="" id="jobsBtn" class="nav-link">Mes offres
+                                                sauvegardées</a></li>
                                     </ul>
 
                                     <div id="setting" class="pt-3">
@@ -252,6 +256,15 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="row  mt-2 mb-2">
+                                                            <div class="col">
+                                                                <label>Biographie</label>
+                                                                <textarea class="form-control mt-2" maxlength="160"
+                                                                    style="height: 200px;"
+                                                                    name="biography">{{ Auth::user()->biography }}</textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -307,7 +320,7 @@
 
                                                                         <select name="notification_news"
                                                                             class="form-control mt-2">
-                                                                            <option value="@if(Auth::user()->notification_news == 1)1 @else 0 @endif"
+                                                                            <option value="@if (Auth::user()->notification_news == 1) 1 @else 0 @endif"
                                                                                 >
                                                                                 Actualité
                                                                             </option>
@@ -330,8 +343,8 @@
 
                                                                         <select name="notification_newsletter"
                                                                             class="form-control mt-2">
-                                                                            <option value="@if(Auth::user()->notification_newsletter ==
-                                                                            1)1 @else 0 @endif">
+                                                                            <option value="@if (Auth::user()->notification_newsletter ==
+                                                                            1) 1 @else 0 @endif">
                                                                                 Newsletter
                                                                             </option>
                                                                             <option disabled>----------</option>
@@ -353,7 +366,7 @@
 
                                                                         <select name="notification_jobs"
                                                                             class="form-control mt-2">
-                                                                            <option value="@if(Auth::user()->notification_jobs == 1)1 @else 0 @endif"
+                                                                            <option value="@if (Auth::user()->notification_jobs == 1) 1 @else 0 @endif"
                                                                                 >
                                                                                 Emplois
                                                                             </option>
@@ -559,6 +572,34 @@
                                                             </div>
 
                                                             <div class="row  mt-2 mb-2">
+
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Profil public nom d'utilisateur</label>
+                                                                        @if (Auth::user()->show_username == 0)<i
+                                                                                class="far fa-eye-slash"
+                                                                                data-mdb-toggle="tooltip"
+                                                                            title="Non Visible"></i>@else<i
+                                                                                class="fas fa-eye ml-2"
+                                                                                data-mdb-toggle="tooltip"
+                                                                                title="Visible"></i>@endif
+
+                                                                        <select name="show_username"
+                                                                            class="form-control mt-2">
+                                                                            <option selected disabled>
+                                                                                @if (Auth::user()->show_username == 1)
+                                                                                Visible par les recruteurs @else Non
+                                                                                    visible par les recruteurs @endif
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non visible par les recruteurs
+                                                                            </option>
+                                                                            <option value="1">Visible par les recruteurs
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Profil public cv</label>
@@ -584,31 +625,6 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
-                                                                {{-- <div class="col">
-                                                                    <div class="form-group">
-                                                                        <label>Profil public email</label>
-                                                                        @if (Auth::user()->show_email == 0)<i
-                                                                                class="far fa-eye-slash"
-                                                                                data-mdb-toggle="tooltip"
-                                                                            title="Non Visible"></i>@else<i
-                                                                                class="fas fa-eye ml-2"
-                                                                                data-mdb-toggle="tooltip"
-                                                                                title="Visible"></i>@endif
-
-                                                                        <select name="show_email" class="form-control mt-2">
-                                                                            <option selected disabled>
-                                                                                @if (Auth::user()->show_email == 1)
-                                                                                Visible par les recruteurs @else Non
-                                                                                    visible par les recruteurs @endif
-                                                                            </option>
-                                                                            <option disabled>----------</option>
-                                                                            <option value="0">Non visible par les recruteurs
-                                                                            </option>
-                                                                            <option value="1">Visible par les recruteurs
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div> --}}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -621,6 +637,11 @@
                                                     </div>
                                                 </form>
                                             </div>
+
+                                            <div id="jobs" class="pt-3">
+
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -632,15 +653,28 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="px-xl-3">
+                                    @if (Auth::user()->cv != null)
+                                        <a href="{{ url('profile-cv-remove') }}" class="btn btn-block btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                            <span>Supprimer le CV</span>
+                                        </a>
+                                    @endif
+
                                     <a href="{{ url('profile-remove') }}" class="btn btn-block btn-danger">
                                         <i class="fa fa-trash"></i>
                                         <span>Supprimer le compte</span>
                                     </a>
 
-                                    <a href="{{ route('logout') }}" class="btn btn-block btn-secondary">
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"
+                                        class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>
                                     </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -702,9 +736,11 @@
         var settingBtn = document.getElementById('settingBtn'),
             cvBtn = document.getElementById('cvBtn'),
             viewBtn = document.getElementById('viewBtn'),
+            jobsBtn = document.getElementById('jobsBtn'),
             displaySetting = document.getElementById('setting'),
             displayCv = document.getElementById('cv'),
             displayView = document.getElementById('view'),
+            displayJobs = document.getElementById('jobs'),
             tab1 = document.getElementById('tab-1'),
             tab2 = document.getElementById('tab-2'),
             tab2 = document.getElementById('tab-3');
@@ -716,10 +752,12 @@
             settingBtn.classList.add('active');
             cvBtn.classList.remove('active');
             viewBtn.classList.remove('active');
+            jobsBtn.classList.remove('active');
 
             displaySetting.style.display = 'block';
             displayCv.style.display = 'none';
             displayView.style.display = 'none';
+            displayJobs.style.display = 'none';
 
             return false;
 
@@ -732,10 +770,12 @@
             settingBtn.classList.remove('active');
             cvBtn.classList.add('active');
             viewBtn.classList.remove('active');
+            jobsBtn.classList.remove('active');
 
             displaySetting.style.display = 'none';
             displayCv.style.display = 'block';
             displayView.style.display = 'none';
+            displayJobs.style.display = 'none';
 
             return false;
 
@@ -748,10 +788,30 @@
             settingBtn.classList.remove('active');
             cvBtn.classList.remove('active');
             viewBtn.classList.add('active');
+            jobsBtn.classList.remove('active');
 
             displaySetting.style.display = 'none';
             displayCv.style.display = 'none';
             displayView.style.display = 'block';
+            displayJobs.style.display = 'none';
+
+            return false;
+
+        });
+
+        jobsBtn.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            settingBtn.classList.remove('active');
+            cvBtn.classList.remove('active');
+            viewBtn.classList.remove('active');
+            jobsBtn.classList.add('active');
+
+            displaySetting.style.display = 'none';
+            displayCv.style.display = 'none';
+            displayView.style.display = 'none';
+            displayJobs.style.display = 'block';
 
             return false;
 

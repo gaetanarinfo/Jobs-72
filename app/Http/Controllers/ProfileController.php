@@ -35,13 +35,23 @@ class ProfileController extends Controller
 
     public function update_avatar(Request $request){
 
+        $user = Auth::user();
+
+        if($user->avatar != 'default.jpg')
+        {
+            $destinationPath = public_path('images/avatar/');
+            File::delete($destinationPath.$user->avatar);
+
+            $user->avatar = null;
+            $user->save();
+        }
+
     	// Handle the user upload of avatar
     	if($request->hasFile('file-1')){
     		$avatar = $request->file('file-1');
     		$filename = time() . '.' . $avatar->getClientOriginalExtension();
     		Image::make($avatar)->resize(140, 140)->save( public_path('/images/avatar/' . $filename ) );
 
-    		$user = Auth::user();
     		$user->avatar = $filename;
     		$user->save();
     	}else{
@@ -64,6 +74,7 @@ class ProfileController extends Controller
         'lastname' => 'max:255',
         'firstname' => 'max:255',
         'phone' => 'max:14',
+        'biography' => 'max:160',
         'email' => 'required|email|max:255|unique:users,id,'.$user->id,
 
     ]);
@@ -74,6 +85,7 @@ class ProfileController extends Controller
     $user->firstname = $request->firstname;
     $user->phone = $request->phone;
     $user->email = $request->email;        
+    $user->biography = $request->biography;
 
     if($request->password){
 
@@ -124,6 +136,7 @@ class ProfileController extends Controller
         $user->show_phone = $request->show_phone;
         $user->show_email = $request->show_email;
         $user->show_cv = $request->show_cv;
+        $user->show_username = $request->show_username;
 
         $user->save();
         return back()->with('success','Votre visibilité à été modifier.');
@@ -176,6 +189,22 @@ class ProfileController extends Controller
         $user->delete();
 
         return redirect('/');
+
+    }
+
+    public function remove_cv(Request $request){
+
+        $user = Auth::user();
+
+        if($user->cv != null)
+        {
+            $destinationPath = public_path('documents/cv/');
+            File::delete($destinationPath.$user->cv);
+        }
+        $user->cv = null;
+        $user->save();
+
+        return redirect('/profile');
 
     }
 }

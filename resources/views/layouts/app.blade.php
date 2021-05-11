@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Jobs-72 - Trouvez le job qu'il vous faut</title>
+    <title>Jobs-72 - @yield('title') - Trouvez le job qu'il vous faut</title>
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
     <link rel="icon" href="{{ asset('favicon.png') }}" />

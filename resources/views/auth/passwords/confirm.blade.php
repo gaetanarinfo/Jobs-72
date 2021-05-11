@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Confirmez le mot de passe')
+
 @section('content')
 
 @include('components.head')

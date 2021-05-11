@@ -36,6 +36,10 @@ Route::post('/profile-notif', [App\Http\Controllers\ProfileController::class, 'u
 
 Route::get('/profile-remove', [App\Http\Controllers\ProfileController::class, 'remove_account'])->middleware('verified');
 
+Route::get('/profile-cv-remove', [App\Http\Controllers\ProfileController::class, 'remove_cv'])->middleware('verified');
+
+Route::get('/jobs/{id}/{author}', [App\Http\Controllers\JobsController::class, 'show']);
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // ... Any other routes that are accessed only by non-blocked user

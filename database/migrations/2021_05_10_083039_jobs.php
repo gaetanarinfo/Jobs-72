@@ -17,12 +17,27 @@ class Jobs extends Migration
             $table->id();
             $table->string('author');
             $table->string('title')->unique();
-            $table->string('category')->unique();
+            $table->string('category');
             $table->string('smallContent');
             $table->text('content');
             $table->string('image')->default('default.jpg');
             $table->string('localisation');
             $table->boolean('active');
+
+            $table->string('status');
+            $table->string('type');
+            $table->string('salaire');
+
+            $table->string('avantages');
+            $table->string('horaires');
+            $table->string('teletravail');
+
+            $table->string('experience');
+
+            $table->integer('vue');
+            $table->integer('postulant');
+            $table->integer('likes');
+
             $table->timestamps();
         });
     }
