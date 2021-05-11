@@ -33,9 +33,10 @@ class Jobs extends Migration
             $table->string('teletravail');
 
             $table->string('experience');
+            $table->boolean('experience_exiger')->default(0);
 
             $table->integer('vue');
-            $table->integer('postulant');
+            $table->integer('apply');
             $table->integer('likes');
 
             $table->timestamps();

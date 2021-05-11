@@ -9,6 +9,31 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Jobs-72 - @yield('title') - Trouvez le job qu'il vous faut</title>
+    <meta name="Description" content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+    <meta name="affiliate" content="jobs" />
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Jobs-72 - @yield('title') - Trouvez le job qu'il vous faut">
+    <meta name="description"
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jobs-72.com">
+    <meta property="og:title" content="Jobs-72 - @yield('title') - Trouvez le job qu'il vous faut">
+    <meta property="og:description"
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+    <meta property="og:image"
+        content="https://jobs-72.com/images/entreprises.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jobs-72.com/">
+    <meta property="twitter:title" content="Jobs-72 - @yield('title') - Trouvez le job qu'il vous faut">
+    <meta property="twitter:description"
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+    <meta property="twitter:image"
+        content="https://jobs-72.com/images/entreprises.jpg">
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
     <link rel="icon" href="{{ asset('favicon.png') }}" />

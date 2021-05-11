@@ -40,7 +40,13 @@ Route::get('/profile-cv-remove', [App\Http\Controllers\ProfileController::class,
 
 Route::get('/jobs/{id}/{author}', [App\Http\Controllers\JobsController::class, 'show']);
 
+Route::get('/jobs/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes']);
+
+Route::get('/jobs/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply']);
+
+Route::get('/jobs/{category}', [App\Http\Controllers\JobsController::class, 'show_cat']);
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // ... Any other routes that are accessed only by non-blocked user
 });

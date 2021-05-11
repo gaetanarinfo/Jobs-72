@@ -3192,6 +3192,24 @@ blockquote .quote-name {
     }
 }
 
+a {
+    color: #777777;
+    transition: 200ms all;
+}
+
+a:hover {
+    color: #ed3974;
+}
+
+.btn-share {
+    color: #777777;
+    transition: 200ms all;
+}
+
+.btn-share:hover {
+    color: white;
+}
+
 
 /* ====== The End ====== */
 
