@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Models\Jobs;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Image;
 use File;
+use App\Models\JobsApplies;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -30,7 +33,20 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('user.profile');
+        $user = Auth::user();
+        $saveJobs = Jobs::select('jobs.*')
+            ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
+            ->where('jobs_applies.user_id', '=', $user->id)
+            ->paginate(6);
+
+        $saveJobs2 = JobsApplies::select('*')
+            ->where('jobs_applies.user_id', '=', $user->id)
+            ->paginate(6);      
+
+        return view('user.profile', [
+            'saveJobs' => $saveJobs,
+            'saveJobs2' => $saveJobs2
+        ]);
     }
 
     public function update_avatar(Request $request){

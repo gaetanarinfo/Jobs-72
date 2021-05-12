@@ -84,7 +84,7 @@
     margin-left: 3rem!important;
 }
 
-:-moz-ui-invalid .pr-0 {
+ :-moz-ui-invalid .pr-0 {
     padding-right: 0 !important;
 }
 
@@ -228,4 +228,12 @@ a:hover {
     &:focus {
         outline: none;
     }
+}
+
+.text-bolder {
+    font-weight: bolder;
+}
+
+.text-bold {
+    font-weight: bold;
 }

@@ -19,7 +19,8 @@
                                 title="{{ $jobs->title }}"></div>
 
                             <div class="video-meta-data d-flex align-items-center justify-content-between">
-                                <h6 class="total-views"><i class="fas fa-eye text-secondary"></i> {{ $jobs->vue }} Vue(s)</h6>
+                                <h6 class="total-views"><i class="fas fa-eye text-secondary"></i> {{ $jobs->vue }} Vue(s)
+                                </h6>
                                 <div class="like-dislike d-flex align-items-center">
                                     @if (Auth::user())
                                         @if ($likeVue->ip != $ipUser)
@@ -27,11 +28,13 @@
                                                     class="fas fa-thumbs-up text-danger"></i> {{ $jobs->likes }}
                                                 J'aime(s)</a>
                                         @else
-                                            <a class="mr-2 active"><i class="fas fa-thumbs-up text-danger"></i> {{ $jobs->likes }}
+                                            <a class="mr-2 active"><i class="fas fa-thumbs-up text-danger"></i>
+                                                {{ $jobs->likes }}
                                                 J'aime(s)</a>
                                         @endif
                                     @else
-                                        <a href="{{ route('login') }}" class="mr-2"><i class="fas fa-thumbs-up text-danger"></i>
+                                        <a href="{{ route('login') }}" class="mr-2"><i
+                                                class="fas fa-thumbs-up text-danger"></i>
                                             {{ $jobs->likes }}
                                             J'aime(s)</a>
                                     @endif
@@ -56,7 +59,8 @@
 
                                 <div class="post-meta-2">
                                     <a><i class="fas fa-eye text-secondary" aria-hidden="true"></i> {{ $jobs->vue }}</a>
-                                    <a><i class="fas fa-thumbs-up text-danger" aria-hidden="true"></i> {{ $jobs->likes }}</a>
+                                    <a><i class="fas fa-thumbs-up text-danger" aria-hidden="true"></i>
+                                        {{ $jobs->likes }}</a>
                                     <a><i class="fas fa-coffee text-info"></i> {{ $jobs->apply }}</a>
                                 </div>
 
@@ -123,21 +127,39 @@
                                 <hr>
 
                                 <div class="my-4 text-right">
-                                    @if (Auth::user())
-                                        @if ($apply->author != Auth::user()->username)
-                                            <a href="{{ url('/jobs/apply', [$jobs->id, $jobs->author]) }}"
-                                                class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
-                                                    class="fas fa-coffee mr-2"></i> Postuler à cette offre</a>
-                                        @else
-                                            <a class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2 active"><i
-                                                    class="fas fa-coffee mr-2"></i> Vous avez déjà postuler à cette
-                                                offre</a>
-                                        @endif
-                                    @else
-                                        <a href="{{ route('login') }}"
-                                            class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
-                                                class="fas fa-coffee mr-2"></i> Postuler à cette offre</a>
-                                    @endif
+                                    <div class="form-group">
+                                        <form method="POST" action="{{ url('/jobs/apply', [$jobs->id, $jobs->author]) }}"
+                                            class="mb-2">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <div style="text-align: left !important;"><label class="mb-2">Vos
+                                                    motivations</label></div>
+                                            @if (Auth::user())
+                                                <textarea name="motivation" required class="form-control mb-2" @if($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id) @else disabled @endif maxlength="160"
+                                                    style="height: 150px;"></textarea>
+                                                <input hidden name="id" value="{{ $jobs->id }}">    
+                                            @else
+                                                <textarea class="form-control mb-2" disabled maxlength="160"
+                                                    style="height: 150px;"></textarea>
+                                            @endif
+
+                                            @if (Auth::user())
+                                                @if ($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id)
+                                                    <button type="submit"
+                                                        class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
+                                                            class="fas fa-coffee mr-2"></i> Postuler à cette offre</button>
+                                                @else
+                                                    <a
+                                                        class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2 active"><i
+                                                            class="fas fa-coffee mr-2"></i> Vous avez déjà postuler à cette
+                                                        offre</a>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('login') }}"
+                                                    class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
+                                                        class="fas fa-coffee mr-2"></i> Postuler à cette offre</a>
+                                            @endif
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div class="post-author d-flex align-items-center">
@@ -276,8 +298,8 @@
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Finance</span> <span>{{ category('Finance') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Alternance']) }}"><span><i class="fas fa-angle-double-right"
-                                                    aria-hidden="true"></i>
+                                    <li><a href="{{ url('jobs', ['Alternance']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Alternance</span> <span>{{ category('Alternance') }}</span></a>
                                     </li>
 

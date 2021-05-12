@@ -2,7 +2,6 @@
 
 @section('content')
 
-
   @include('components.head')
 
   @include('components.news')

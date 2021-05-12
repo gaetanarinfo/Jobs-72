@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Confirmez le mot de passe')
+@section('title', '- Confirmez le mot de passe')
 
 @section('content')
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\JobsLikes;
 use App\Models\JobsApplies;
 use App\Providers\JobsServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -51,6 +52,7 @@ class JobsController extends Controller
             */
             DB::table('jobs_vues')->insert([
                 'jobs_id' => $id,
+                'user_id' => Auth::user()->id,
                 'ip' => request()->ip()
             ]);
 
@@ -112,20 +114,31 @@ class JobsController extends Controller
      * @param  string  $author
      * @return \Illuminate\View\View
      */
-    public function apply($id, $author)
+    public function apply(Request $request, $id, $author)
     {
-        $apply = DB::table('jobs_apply')->where('author', Auth::user()->username)->get();
+        $apply = JobsApplies::select('*')
+            ->where('jobs_applies.user_id', '=', Auth::user()->id)
+            ->where('jobs_applies.jobs_id', '=', $id)
+            ->get();      
  
         if(Auth::user()) {
 
            if($apply->count() == 0)
            {
+                $this->validate($request,[
+
+                    'motivation' => 'max:160',
+            
+                ]);
+
                /*
                    Insert le nombre de apply
                */
-               DB::table('jobs_apply')->insert([
+               DB::table('jobs_applies')->insert([
                    'jobs_id' => $id,
-                   'author' => Auth::user()->username
+                   'user_id' => Auth::user()->id,
+                   'author' => Auth::user()->username,
+                   'motivation' => $request->motivation
                ]);
    
                /*

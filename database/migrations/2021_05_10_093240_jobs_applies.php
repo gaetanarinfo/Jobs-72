@@ -16,7 +16,10 @@ class JobsApplies extends Migration
         Schema::create('jobs_applies', function (Blueprint $table) {
             $table->id();
             $table->integer('jobs_id');
+            $table->integer('user_id');
             $table->string('author');
+            $table->integer('status');
+            $table->string('motivation');
         });
     }
 

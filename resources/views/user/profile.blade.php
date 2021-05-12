@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Mon profil')
+@section('title', '- Mon profil')
 
 @section('content')
 
@@ -154,9 +154,11 @@
                                             <div class="text-right text-sm-right">
                                                 <span class="badge @if (Auth::user()->roles ==
                                                 'ROLES_USER') bg-success @elseif(Auth::user()->roles ==
-                                                    'ROLES_ADMIN') bg-danger @endif">@if (Auth::user()->roles == 'ROLES_USER')
+                                                    'ROLES_ADMIN') bg-danger @elseif(Auth::user()->roles ==
+                                                    'ROLES_RECRUTER') bg-info @endif">@if (Auth::user()->roles == 'ROLES_USER')
                                                     Utilisateur @elseif(Auth::user()->roles == 'ROLES_ADMIN')
-                                                        Administrateur @endif</span>
+                                                        Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
+                                                        Recruteur @endif</span>
                                                 <div class="text-muted"><small>Inscrit le
                                                         {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
                                                 </div>
@@ -169,7 +171,7 @@
                                         <li class="nav-item"><a href="" id="cvBtn" class="nav-link">Mon CV</a></li>
                                         <li class="nav-item"><a href="" id="viewBtn" class="nav-link">Visibilité</a></li>
                                         <li class="nav-item"><a href="" id="jobsBtn" class="nav-link">Mes offres
-                                                sauvegardées</a></li>
+                                                postulées</a></li>
                                     </ul>
 
                                     <div id="setting" class="pt-3">
@@ -637,11 +639,66 @@
                                                     </div>
                                                 </form>
                                             </div>
+                                        </div>
+                                    </div>
 
-                                            <div id="jobs" class="pt-3">
+                                    <div id="jobs" class="pt-3 mb-3" style="display: none;">
+                                        <div id="tab-1" class="tab-pane active" style="pointer-events: all;">
+                                            @foreach ($saveJobs as $jobs)
+                                                @foreach ($saveJobs2 as $jobs2)
+                                                    <div class="col-md-12">
+                                                        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                                                            <div class="card-body d-flex flex-column align-items-start">
+                                                                <strong
+                                                                    class="d-inline-block mb-2 text-success">{{ $jobs->category }}</strong>
+                                                                <h3 class="mb-0">
+                                                                    <a class="text-dark" href="#">{{ $jobs->title }}</a>
+                                                                </h3>
+                                                                <div class="mb-1 text-muted mt-1"><i
+                                                                        class="fas fa-clock text-warning"
+                                                                        aria-hidden="true"></i> Mise en ligne le
+                                                                    {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}
+                                                                </div>
+                                                                <div class="mb-1 text-muted"> <i
+                                                                        class="fas fa-map-pin text-secondary"></i>
+                                                                    <strong>{{ $jobs->localisation }}</strong>
+                                                                </div>
+                                                                <p class="card-text mb-auto">{{ $jobs->smallContent }}
+                                                                </p>
+                                                                <a href="{{ url('jobs', [$jobs->id, $jobs->author]) }}"
+                                                                    class="btn btn-outline-success ripple-surface ripple-surface-dark mt-2">Voir
+                                                                    l'emploi</a>
 
+                                                                <div class="mt-2 text-right">
+                                                                    @if ($jobs2->status == 1)
+                                                                        <h6 class="d-inline-block"><span
+                                                                                class="badge bg-success">Accepter par l'employeur</span>
+                                                                        </h6>
+                                                                    @elseif($jobs2->status == 2)
+                                                                        <h6 class="d-inline-block"><span
+                                                                                class="badge bg-danger">Refusée par l'employeur</span>
+                                                                        </h6>
+                                                                    @elseif($jobs2->status == 0)
+                                                                        <h6 class="d-inline-block"><span
+                                                                                class="badge bg-warning">En attente de
+                                                                                validation</span>
+                                                                        </h6>
+                                                                    @endif
+                                                                </div>
+
+                                                            </div>
+                                                            <img class="card-img-right flex-auto d-none d-md-block"
+                                                                alt="{{ $jobs->title }}"
+                                                                style="position: relative;width: 267px;top: 19px;left: -10px;height: 192px;"
+                                                                src="images/jobs/{{ $jobs->image }}">
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endforeach
+
+                                            <div class="d-flex justify-content-center">
+                                                {!! $saveJobs->links() !!}
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -666,7 +723,7 @@
                                     </a>
 
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();"
+                                                                        document.getElementById('logout-form').submit();"
                                         class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>

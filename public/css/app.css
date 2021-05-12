@@ -276,3 +276,11 @@ a:hover {
 .file-input:focus {
   outline: none;
 }
+
+.text-bolder {
+  font-weight: bolder;
+}
+
+.text-bold {
+  font-weight: bold;
+}

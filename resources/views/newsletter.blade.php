@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', '- Newsletter')
+
 @section('content')
 
     @include('components.head')

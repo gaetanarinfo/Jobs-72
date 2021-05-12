@@ -86,7 +86,7 @@
                     @endif
                 @else
                     <a class="nav-link pr-3" href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
+                                document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt text-danger mr-1"></i> Déconnexion
                     </a>
 
@@ -96,7 +96,9 @@
                 @endguest
             </li>
 
-            <a class="btn btn-outline-info ripple-surface ripple-surface-dark">Accès Recruteurs</a>
+            <a @if(Auth::user()) @if (Auth::user()->roles=='ROLES_RECRUTER' ||
+                Auth::user()->roles=='ROLES_ADMIN') href="{{ url('recruter') }}" @endif @endif class="btn btn-outline-info ripple-surface ripple-surface-dark">Accès
+                Recruteurs</a>
 
         </ul>
         <!-- Right elements -->
