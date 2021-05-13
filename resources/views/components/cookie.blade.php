@@ -173,12 +173,6 @@
 
 @if (Session::get('cookie-consent') == 'accord-ok')
 
-    <script type="text/javascript">
-        document.getElementById('cookie_notif').style.opacity = '0';
-        document.getElementById('cookie_notif').style.display = 'none';
-
-    </script>
-
 @else
     <script type="text/javascript">
         if (localStorage.getItem("cookie-consent") === null) {

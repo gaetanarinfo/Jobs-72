@@ -24,54 +24,68 @@ class JobsController extends Controller
     public function show($id, $author)
     {
         $jobsAuthor2 = User::where('username', '=', $author)->firstOrFail();
-        $cat = DB::table('jobs')->where('id', $id)->first();
-        $latestJobs = Jobs::where('active', 1)->where('category', $cat->category)->orderBy('created_at', 'desc')->limit('3')->get();
+        $cat2 = DB::table('jobs')->where('id', $id)->get();
 
-        $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->get();
-        $likeVue = DB::table('jobs_likes')->where('id', $id)->get();
-        
-
-        if(Auth::user() != null)
+        if($cat2->count() == 0)
         {
-            $apply = JobsApplies::where('author', '=', Auth::user()->username)->firstOrFail();
+            return redirect('/');
         }else{
-            $apply = null;
+
+            $cat = DB::table('jobs')->where('id', $id)->first();
+
+            if($cat->active == 1)
+            {
+                $cat = DB::table('jobs')->where('id', $id)->first();
+                $latestJobs = Jobs::where('active', 1)->where('category', $cat->category)->orderBy('created_at', 'desc')->limit('3')->get();
+                $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->get();
+                $likeVue = DB::table('jobs_likes')->where('id', $id)->get();
+                
+
+                if(Auth::user() != null)
+                {
+                    $apply = JobsApplies::where('author', '=', Auth::user()->username)->firstOrFail();
+                }else{
+                    $apply = null;
+                }
+
+                $publicite = DB::table('jobs_pub')->first();
+
+                if($likeVue->count() == 0)
+                {
+                    $likeVue->ip = null;
+                }
+
+                if($ipVue->count() == 0)
+                {
+                    /*
+                        Insert le nombre de vue
+                    */
+                    DB::table('jobs_vues')->insert([
+                        'jobs_id' => $id,
+                        'user_id' => Auth::user()->id,
+                        'ip' => request()->ip()
+                    ]);
+
+                    /*
+                        Met à jour le nombre de vue
+                    */
+                    DB::table('jobs')
+                    ->where('id', $id)->increment('vue');                       
+                }  
+
+                return view('jobs-details', [
+                    'jobs' => Jobs::findOrFail($id),
+                    'userJobs' => $jobsAuthor2,
+                    'latestJobs' => $latestJobs,
+                    'likeVue' => $likeVue,
+                    'ipUser' => request()->ip(),
+                    'publicite' => $publicite,
+                    'apply' => $apply
+                ]);
+            }else{
+                return redirect('/');
+            }
         }
-
-        $publicite = DB::table('jobs_pub')->first();
-
-        if($likeVue->count() == 0)
-        {
-            $likeVue->ip = null;
-        }
-
-        if($ipVue->count() == 0)
-        {
-            /*
-                Insert le nombre de vue
-            */
-            DB::table('jobs_vues')->insert([
-                'jobs_id' => $id,
-                'user_id' => Auth::user()->id,
-                'ip' => request()->ip()
-            ]);
-
-            /*
-                Met à jour le nombre de vue
-            */
-            DB::table('jobs')
-            ->where('id', $id)->increment('vue');                       
-        }  
-
-        return view('jobs-details', [
-            'jobs' => Jobs::findOrFail($id),
-            'userJobs' => $jobsAuthor2,
-            'latestJobs' => $latestJobs,
-            'likeVue' => $likeVue,
-            'ipUser' => request()->ip(),
-            'publicite' => $publicite,
-            'apply' => $apply
-        ]);
     }
 
     /**

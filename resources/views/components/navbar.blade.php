@@ -97,7 +97,7 @@
             </li>
 
             <a @if(Auth::user()) @if (Auth::user()->roles=='ROLES_RECRUTER' ||
-                Auth::user()->roles=='ROLES_ADMIN') href="{{ url('recruter') }}" @endif @endif class="btn btn-outline-info ripple-surface ripple-surface-dark">Accès
+                Auth::user()->roles=='ROLES_ADMIN') href="{{ url('recruter') }}" @endif @else href="{{ url('login') }}" @endif class="btn btn-outline-info ripple-surface ripple-surface-dark">Accès
                 Recruteurs</a>
 
         </ul>

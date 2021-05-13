@@ -51,6 +51,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- CKEditor --}}
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 </head>
 
 <body>

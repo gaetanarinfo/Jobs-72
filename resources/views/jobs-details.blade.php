@@ -24,8 +24,9 @@
                                 <div class="like-dislike d-flex align-items-center">
                                     @if (Auth::user())
                                         @if ($likeVue->ip != $ipUser)
-                                            <a href="{{ url('jobs/like', [$jobs->id, $jobs->author]) }}" class="mr-2"><i
-                                                    class="fas fa-thumbs-up text-danger"></i> {{ $jobs->likes }}
+                                            <a href="{{ url('emplois/like', [$jobs->id, $jobs->author]) }}"
+                                                class="mr-2"><i class="fas fa-thumbs-up text-danger"></i>
+                                                {{ $jobs->likes }}
                                                 J'aime(s)</a>
                                         @else
                                             <a class="mr-2 active"><i class="fas fa-thumbs-up text-danger"></i>
@@ -87,8 +88,13 @@
                                             @endforeach
                                             </li>
                                             <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i> Horaires
-                                                :
-                                                {{ $jobs->horaires }}</li>
+                                                :</li>
+
+                                            @foreach (json_decode($jobs->horaires, true) as $key => $value)
+                                                <li class="ml-3"><i class="fa fa-check text-success" aria-hidden="true"></i>
+                                                    {{ $value }}</li>
+                                            @endforeach
+
                                             <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i>
                                                 Télétravail :
                                                 {{ $jobs->teletravail }}</li>
@@ -115,11 +121,11 @@
 
                                 <div class="like-dislike-share my-4">
                                     <a target="_new"
-                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/jobs/{{ $jobs->id }}/{{ $jobs->author }}"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/emplois/{{ $jobs->id }}/{{ $jobs->author }}"
                                         class="facebook btn-share"><i class="fab fa-facebook-f"></i> Partager sur
                                         Facebook</a>
                                     <a target="_new"
-                                        href="https://twitter.com/intent/tweet?url=https://jobs-72.com/jobs/{{ $jobs->id }}/{{ $jobs->author }}&text={{ $jobs->smallContent }}"
+                                        href="https://twitter.com/intent/tweet?url=https://jobs-72.com/emplois/{{ $jobs->id }}/{{ $jobs->author }}&text={{ $jobs->smallContent }}"
                                         class="twitter btn-share"><i class="fab fa-twitter"></i> Partager sur
                                         Twitter</a>
                                 </div>
@@ -128,15 +134,16 @@
 
                                 <div class="my-4 text-right">
                                     <div class="form-group">
-                                        <form method="POST" action="{{ url('/jobs/apply', [$jobs->id, $jobs->author]) }}"
+                                        <form method="POST"
+                                            action="{{ url('/emplois/apply', [$jobs->id, $jobs->author]) }}"
                                             class="mb-2">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <div style="text-align: left !important;"><label class="mb-2">Vos
                                                     motivations</label></div>
                                             @if (Auth::user())
-                                                <textarea name="motivation" required class="form-control mb-2" @if($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id) @else disabled @endif maxlength="160"
+                                                <textarea name="motivation" required class="form-control mb-2" @if ($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id) @else disabled @endif maxlength="160"
                                                     style="height: 150px;"></textarea>
-                                                <input hidden name="id" value="{{ $jobs->id }}">    
+                                                <input hidden name="id" value="{{ $jobs->id }}">
                                             @else
                                                 <textarea class="form-control mb-2" disabled maxlength="160"
                                                     style="height: 150px;"></textarea>
@@ -235,11 +242,11 @@
                                 <div class="social-followers-info">
 
                                     <a target="_new"
-                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/jobs/{{ $jobs->id }}/{{ $jobs->author }}"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/emplois/{{ $jobs->id }}/{{ $jobs->author }}"
                                         class="facebook-fans btn-share"><i class="fab fa-facebook-f"></i> Partager sur
                                         Facebook
                                         <a target="_new"
-                                            href="https://twitter.com/intent/tweet?url=https://jobs-72.com/jobs/{{ $jobs->id }}/{{ $jobs->author }}&text={{ $jobs->smallContent }}"
+                                            href="https://twitter.com/intent/tweet?url=https://jobs-72.com/emplois/{{ $jobs->id }}/{{ $jobs->author }}&text={{ $jobs->smallContent }}"
                                             class="twitter-followers btn-share"><i class="fab fa-twitter"></i> Partager
                                             sur
                                             Twitter</a>

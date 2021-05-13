@@ -38,15 +38,27 @@ Route::get('/profile-remove', [App\Http\Controllers\ProfileController::class, 'r
 
 Route::get('/profile-cv-remove', [App\Http\Controllers\ProfileController::class, 'remove_cv'])->middleware('verified');
 
-Route::get('/jobs/{id}/{author}', [App\Http\Controllers\JobsController::class, 'show']);
+Route::get('/emplois/{id}/{author}', [App\Http\Controllers\JobsController::class, 'show']);
 
-Route::get('/jobs/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes'])->middleware('verified');
+Route::get('/emplois/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes'])->middleware('verified');
 
-Route::post('/jobs/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
+Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
 
-Route::get('/jobs/{category}', [App\Http\Controllers\JobsController::class, 'show_cat']);
+Route::get('/emplois/{category}', [App\Http\Controllers\JobsController::class, 'show_cat']);
 
-Route::get('/recruter', [App\Http\Controllers\RecruterController::class, 'index']);
+Route::get('/recruter', [App\Http\Controllers\RecruterController::class, 'index'])->middleware('verified');
+
+Route::get('/recruter/emplois/create', [App\Http\Controllers\RecruterController::class, 'show'])->middleware('verified');
+
+Route::post('/recruter/emplois/post/create', [App\Http\Controllers\RecruterController::class, 'create'])->middleware('verified');
+
+Route::get('/recruter/emplois/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_jobs'])->middleware('verified');
+
+Route::get('/recruter/emplois/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_jobs'])->middleware('verified');
+
+Route::get('/recruter/emplois/invalidate/{id}', [App\Http\Controllers\RecruterController::class, 'invalidate_jobs'])->middleware('verified');
+
+Route::get('/recruter/emplois/update/{id}', [App\Http\Controllers\RecruterController::class, 'update_jobs'])->middleware('verified');
 
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
