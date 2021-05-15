@@ -94,10 +94,23 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row mt-2 mb-2">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="0" id="cgu-confirm"
+                                            required />
+                                        <label class="form-check-label" for="cgu-confirm">
+                                            <a
+                                                href="{{ url('cgu') }}">{{ __('Conditions Général D\'utilisation') }}</a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group row mb-0 mt-2">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Valider') }}
+                                <div class="col-md-12">
+                                    <button id="submit" type="submit" class="btn btn-secondary" disabled>
+                                        {{ __('Valider l\'inscription') }}
                                     </button>
                                 </div>
                             </div>
@@ -107,4 +120,14 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var cgu = document.getElementById('cgu-confirm'),
+            button = document.getElementById('submit');
+
+            cgu.onchange = function() {
+                this.checked = true;
+                button.disabled =  false;
+        };
+    </script>
 @endsection

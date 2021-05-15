@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12 text-center mt-3 mb-3">
                 <h1>Crée un poste</h1>
-                <hr/>
+                <hr />
             </div>
         </div>
     </div>
@@ -53,6 +53,9 @@
                                                 <div class="text-muted"><small>Inscrit le
                                                         {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
                                                 </div>
+                                                <div class="text-muted"><i
+                                                        class="fas fa-coins text-info mr-2"></i><small>Mes
+                                                        crédits : <b>{{ Auth::user()->credits }}</b></small></div>
                                             </div>
                                         </div>
                                     </div>
@@ -99,6 +102,33 @@
                                                                 <option>--------------</option>
                                                                 <option value="Ressources Humaines">Ressources Humaines
                                                                 </option>
+                                                                <option value="Commercial">Commercial</option>
+                                                                <option value="Distribution et Grande Distribution">
+                                                                    Distribution et Grande Distribution</option>
+                                                                <option
+                                                                    value="Informatique et Technologie de l’information">
+                                                                    Informatique et Technologie de l’information</option>
+                                                                <option value="Logistique">Logistique</option>
+                                                                <option value="Temps partiel">Temps partiel</option>
+                                                                <option value="Maintenance et Réparation">Maintenance et
+                                                                    Réparation</option>
+                                                                <option value="Tourisme">Tourisme</option>
+                                                                <option value="Finance">Finance</option>
+                                                                <option value="Alternance">Alternance</option>
+                                                                <option value="Fashion">Fashion</option>
+                                                                <option value="Marketing et Communication">Marketing et
+                                                                    Communication</option>
+                                                                <option value="Restauration">Restauration</option>
+                                                                <option value="Transport">Transport</option>
+                                                                <option value="Environnement et Développement durable">
+                                                                    Environnement et Développement durable</option>
+                                                                <option value="Sécurité">Sécurité</option>
+                                                                <option value="Banque">Banque</option>
+                                                                <option value="Psychologue">Psychologue</option>
+                                                                <option value="Hôtellerie">Hôtellerie</option>
+                                                                <option value="Cadres et Direction">Cadres et Direction
+                                                                </option>
+                                                                <option value="Santé">Santé</option>
                                                             </select>
 
                                                             @error('category')
@@ -399,10 +429,24 @@
                                                         </div>
 
                                                     </div>
-
+                                                    <hr />
+                                                    <div class="form-group row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" value="0"
+                                                                    id="cgu-confirm" required />
+                                                                <label class="form-check-label" for="cgu-confirm">
+                                                                    <a
+                                                                        href="{{ url('cgu') }}">{{ __('Conditions Général D\'utilisation') }}</a>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
                                                     <div class="form-group row mb-0 mt-2">
                                                         <div class="col-md-12 text-right">
-                                                            <button type="submit" class="btn btn-secondary">
+                                                            <button id="submit" type="submit" class="btn btn-secondary"
+                                                                disabled>
                                                                 {{ __('Valider') }}
                                                             </button>
                                                         </div>
@@ -498,13 +542,15 @@
 
     </script>
 
-    {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#content'))
-            .catch(error => {
-                console.error(error);
-            });
+    <script type="text/javascript">
+        var cgu = document.getElementById('cgu-confirm'),
+            button = document.getElementById('submit');
 
-    </script> --}}
+        cgu.onchange = function() {
+            this.checked = true;
+            button.disabled = false;
+        };
+
+    </script>
 
 @endsection

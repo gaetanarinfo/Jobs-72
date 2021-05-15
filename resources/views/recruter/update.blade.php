@@ -53,6 +53,9 @@
                                                 <div class="text-muted"><small>Inscrit le
                                                         {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
                                                 </div>
+                                                <div class="text-muted"><i
+                                                    class="fas fa-coins text-info mr-2"></i><small>Mes
+                                                    crédits : <b>{{ Auth::user()->credits }}</b></small></div>
                                             </div>
                                         </div>
                                     </div>
@@ -98,8 +101,27 @@
                                                                     {{ $jobs->category }}
                                                                 </option>
                                                                 <option>--------------</option>
-                                                                <option value="Ressources Humaines">Ressources Humaines
-                                                                </option>
+                                                                <option value="Ressources Humaines">Ressources Humaines</option>
+                                                                <option value="Commercial">Commercial</option>
+                                                                <option value="Distribution et Grande Distribution">Distribution et Grande Distribution</option>
+                                                                <option value="Informatique et Technologie de l’information">Informatique et Technologie de l’information</option>
+                                                                <option value="Logistique">Logistique</option>
+                                                                <option value="Temps partiel">Temps partiel</option>
+                                                                <option value="Maintenance et Réparation">Maintenance et Réparation</option>
+                                                                <option value="Tourisme">Tourisme</option>
+                                                                <option value="Finance">Finance</option>
+                                                                <option value="Alternance">Alternance</option>
+                                                                <option value="Fashion">Fashion</option>
+                                                                <option value="Marketing et Communication">Marketing et Communication</option>
+                                                                <option value="Restauration">Restauration</option>
+                                                                <option value="Transport">Transport</option>
+                                                                <option value="Environnement et Développement durable">Environnement et Développement durable</option>
+                                                                <option value="Sécurité">Sécurité</option>
+                                                                <option value="Banque">Banque</option>
+                                                                <option value="Psychologue">Psychologue</option>
+                                                                <option value="Hôtellerie">Hôtellerie</option>
+                                                                <option value="Cadres et Direction">Cadres et Direction</option>
+                                                                <option value="Santé">Santé</option>
                                                             </select>
 
                                                             @error('category')

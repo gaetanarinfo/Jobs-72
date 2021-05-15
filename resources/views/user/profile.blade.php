@@ -154,10 +154,10 @@
                                             <div class="text-right text-sm-right">
                                                 <span class="badge @if (Auth::user()->roles ==
                                                 'ROLES_USER') bg-success @elseif(Auth::user()->roles ==
-                                                    'ROLES_ADMIN') bg-danger @elseif(Auth::user()->roles ==
+                                                'ROLES_ADMIN') bg-danger @elseif(Auth::user()->roles ==
                                                     'ROLES_RECRUTER') bg-info @endif">@if (Auth::user()->roles == 'ROLES_USER')
                                                     Utilisateur @elseif(Auth::user()->roles == 'ROLES_ADMIN')
-                                                        Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
+                                                    Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
                                                 <div class="text-muted"><small>Inscrit le
                                                         {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
@@ -165,7 +165,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="nav nav-tabs">
+                                    <ul class="nav nav-tabs" style="justify-content: center;">
                                         <li class="nav-item"><a href="" id="settingBtn"
                                                 class="active nav-link">Paramètre</a></li>
                                         <li class="nav-item"><a href="" id="cvBtn" class="nav-link">Mon CV</a></li>
@@ -670,13 +670,15 @@
                                                                     l'emploi</a>
 
                                                                 <div class="mt-2 text-right">
-                                                                    @if ($jobs2->status == 1)
+                                                                    @if ($jobs2->status == 2)
                                                                         <h6 class="d-inline-block"><span
-                                                                                class="badge bg-success">Accepter par l'employeur</span>
+                                                                                class="badge bg-success">Accepter par
+                                                                                l'employeur</span>
                                                                         </h6>
-                                                                    @elseif($jobs2->status == 2)
+                                                                    @elseif($jobs2->status == 1)
                                                                         <h6 class="d-inline-block"><span
-                                                                                class="badge bg-danger">Refusée par l'employeur</span>
+                                                                                class="badge bg-danger">Refusée par
+                                                                                l'employeur</span>
                                                                         </h6>
                                                                     @elseif($jobs2->status == 0)
                                                                         <h6 class="d-inline-block"><span
@@ -722,8 +724,9 @@
                                         <span>Supprimer le compte</span>
                                     </a>
 
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                        document.getElementById('logout-form').submit();"
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();"
                                         class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>

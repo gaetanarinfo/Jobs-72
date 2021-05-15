@@ -40,12 +40,11 @@ class JobsController extends Controller
                 $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->get();
                 $likeVue = DB::table('jobs_likes')->where('id', $id)->get();
                 
-
-                if(Auth::user() != null)
+                if(Auth::user())
                 {
-                    $apply = JobsApplies::where('author', '=', Auth::user()->username)->firstOrFail();
+                    $apply = JobsApplies::where('user_id', Auth::user()->id)->firstOrFail();
                 }else{
-                    $apply = null;
+                    $apply = 0;
                 }
 
                 $publicite = DB::table('jobs_pub')->first();
@@ -152,7 +151,8 @@ class JobsController extends Controller
                    'jobs_id' => $id,
                    'user_id' => Auth::user()->id,
                    'author' => Auth::user()->username,
-                   'motivation' => $request->motivation
+                   'motivation' => $request->motivation,
+                   'cv' => Auth::user()->cv
                ]);
    
                /*

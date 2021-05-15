@@ -25,6 +25,7 @@ class Users extends Migration
             $table->string('biography')->nullable();
             $table->string('roles')->default('ROLES_USER');
             $table->string('cv')->nullable();
+            $table->integer('credits')->default(0)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

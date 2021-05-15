@@ -60,6 +60,20 @@ Route::get('/recruter/emplois/invalidate/{id}', [App\Http\Controllers\RecruterCo
 
 Route::get('/recruter/emplois/update/{id}', [App\Http\Controllers\RecruterController::class, 'update_jobs'])->middleware('verified');
 
+Route::get('/recruter/credits/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_credits'])->middleware('verified');
+
+Route::get('/recruter/credits/create/10/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_10'])->middleware('verified');
+
+Route::get('/recruter/credits/create/26/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_26'])->middleware('verified');
+
+Route::get('/recruter/credits/error', [App\Http\Controllers\TransactionsController::class, 'error_credits'])->middleware('verified');
+
+Route::get('/recruter/apply/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_apply'])->middleware('verified');
+
+Route::get('/recruter/apply/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_apply'])->middleware('verified');
+
+Route::get('/recruter/apply/refused/{id}', [App\Http\Controllers\RecruterController::class, 'refused_apply'])->middleware('verified');
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
     // ... Any other routes that are accessed only by non-blocked user
