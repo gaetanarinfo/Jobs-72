@@ -59,7 +59,7 @@ class TransactionsController extends Controller
                 'price' => 10,
                 'transaction' => uniqid(),
                 'status' => 1,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now('Europe/Paris')
             ]);
 
             return redirect('recruter')->with('success','Vous avez été crédité de 10 euros.');
@@ -85,7 +85,7 @@ class TransactionsController extends Controller
                 'price' => 26,
                 'transaction' => uniqid(),
                 'status' => 1,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now('Europe/Paris')
             ]);
 
             return redirect('recruter')->with('success','Vous avez été crédité de 26 euros.');

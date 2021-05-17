@@ -34,12 +34,11 @@
         content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
     <meta property="twitter:image"
         content="https://jobs-72.com/images/entreprises.jpg">
+    <meta name="csrf-token" content="{{ csrf_token() }}" >    
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
     <link rel="icon" href="{{ asset('favicon.png') }}" />
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -73,6 +72,9 @@
         <!-- Footer -->
         @include('components.footer')
     </div>
+
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 
 </html>

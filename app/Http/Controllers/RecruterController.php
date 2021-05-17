@@ -153,7 +153,7 @@ class RecruterController extends Controller
                 'teletravail' => $request->teletravail,
                 'experience' => $request->experience,
                 'experience_exiger' => $request->experience_exiger,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now('Europe/Paris')
             ]);
 
             if($jobsAllCount < 1 || $user->credits > 1)
@@ -166,7 +166,7 @@ class RecruterController extends Controller
                     'price' => 2,
                     'transaction' => uniqid(),
                     'status' => 1,
-                    'created_at' => Carbon::now()
+                    'created_at' => Carbon::now('Europe/Paris')
                 ]);
             }
 

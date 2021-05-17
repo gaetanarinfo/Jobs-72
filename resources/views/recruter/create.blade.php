@@ -100,33 +100,33 @@
                                                                 <option selected disabled>Sélectionner une catégorie
                                                                 </option>
                                                                 <option>--------------</option>
-                                                                <option value="Ressources Humaines">Ressources Humaines
+                                                                <option value="Ressources-Humaines">Ressources Humaines
                                                                 </option>
                                                                 <option value="Commercial">Commercial</option>
-                                                                <option value="Distribution et Grande Distribution">
+                                                                <option value="Distribution-et-Grande-Distribution">
                                                                     Distribution et Grande Distribution</option>
                                                                 <option
-                                                                    value="Informatique et Technologie de l’information">
+                                                                    value="Informatique-et-Technologie-de-l’information">
                                                                     Informatique et Technologie de l’information</option>
                                                                 <option value="Logistique">Logistique</option>
-                                                                <option value="Temps partiel">Temps partiel</option>
-                                                                <option value="Maintenance et Réparation">Maintenance et
+                                                                <option value="Temps-partiel">Temps partiel</option>
+                                                                <option value="Maintenance-et-Réparation">Maintenance et
                                                                     Réparation</option>
                                                                 <option value="Tourisme">Tourisme</option>
                                                                 <option value="Finance">Finance</option>
                                                                 <option value="Alternance">Alternance</option>
                                                                 <option value="Fashion">Fashion</option>
-                                                                <option value="Marketing et Communication">Marketing et
+                                                                <option value="Marketing-et-Communication">Marketing et
                                                                     Communication</option>
                                                                 <option value="Restauration">Restauration</option>
                                                                 <option value="Transport">Transport</option>
-                                                                <option value="Environnement et Développement durable">
+                                                                <option value="Environnement-et-Développement-durable">
                                                                     Environnement et Développement durable</option>
                                                                 <option value="Sécurité">Sécurité</option>
                                                                 <option value="Banque">Banque</option>
                                                                 <option value="Psychologue">Psychologue</option>
                                                                 <option value="Hôtellerie">Hôtellerie</option>
-                                                                <option value="Cadres et Direction">Cadres et Direction
+                                                                <option value="Cadres-et-Direction">Cadres et Direction
                                                                 </option>
                                                                 <option value="Santé">Santé</option>
                                                             </select>

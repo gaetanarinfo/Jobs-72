@@ -27,7 +27,7 @@
             </li>
 
             <li class="nav-item me-3 me-lg-1">
-                <a class="nav-link" href="#" title="Offres d'emploi">
+                <a class="nav-link" href="{{ url('offres-emploi') }}" title="Offres d'emploi">
                     <span><i class="fas fa-flag fa-lg text-info mr-2"></i> Offres d'emploi</span>
                 </a>
             </li>
@@ -86,7 +86,7 @@
                     @endif
                 @else
                     <a class="nav-link pr-3" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt text-danger mr-1"></i> Déconnexion
                     </a>
 
@@ -96,9 +96,17 @@
                 @endguest
             </li>
 
-            <a @if(Auth::user()) @if (Auth::user()->roles=='ROLES_RECRUTER' ||
-                Auth::user()->roles=='ROLES_ADMIN') href="{{ url('recruter') }}" @endif @else href="{{ url('login') }}" @endif class="btn btn-outline-info ripple-surface ripple-surface-dark">Accès
+            <a @if (Auth::user())  @if (Auth::user()->roles=='ROLES_RECRUTER' ||
+                Auth::user()->roles=='ROLES_ADMIN') href="{{ url('recruter') }}" @endif @else href="{{ url('login') }}" @endif class="btn btn-outline-info ripple-surface
+                ripple-surface-dark">Accès
                 Recruteurs</a>
+
+            @if (Auth::user())
+                @if (Auth::user()->roles == 'ROLES_ADMIN')
+                    <a href="{{ route('admin') }}" class="btn btn-outline-warning ripple-surface
+                    ripple-surface-dark ml-3">Administration</a>
+                @endif
+            @endif
 
         </ul>
         <!-- Right elements -->

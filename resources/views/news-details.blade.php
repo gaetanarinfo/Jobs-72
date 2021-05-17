@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $jobs->title)
+@section('title', $news->title)
 
 @section('content')
 
@@ -15,15 +15,30 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="single-video-area bg-white mb-30 box-shadow">
-                            <div style="background: url('../images/jobs/{{ $jobs->image }}');width: 100%;height: 416px;background-position: center;background-attachment: scroll;background-size: cover;background-repeat: no-repeat;"
-                                title="{{ $jobs->title }}"></div>
+                            <div style="background: url('../images/news/{{ $news->image }}');width: 100%;height: 416px;background-position: center;background-attachment: scroll;background-size: cover;background-repeat: no-repeat;"
+                                title="{{ $news->title }}"></div>
 
                             <div class="video-meta-data d-flex align-items-center justify-content-between">
-                                <h6 class="total-views"><i class="fas fa-eye"></i> 0 Vue(s)</h6>
+                                <h6 class="total-views"><i class="fas fa-eye text-secondary"></i> {{ $news->vue }} Vue(s)
+                                </h6>
                                 <div class="like-dislike d-flex align-items-center">
-                                    <button type="button"><i class="fas fa-thumbs-up"></i> 0
-                                        J'aime(s)</button>
-                                    <p><i class="fas fa-comments" aria-hidden="true"></i> 0 Commentaire(s)</p>
+                                    @if (Auth::user())
+                                        @if ($likeVue->ip != $ipUser)
+                                            <a href="{{ url('news/like', [$news->id, $news->author]) }}"
+                                                class="mr-2"><i class="fas fa-thumbs-up text-danger"></i>
+                                                {{ $news->likes }}
+                                                J'aime(s)</a>
+                                        @else
+                                            <a class="mr-2 active"><i class="fas fa-thumbs-up text-danger"></i>
+                                                {{ $news->likes }}
+                                                J'aime(s)</a>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('login') }}" class="mr-2"><i
+                                                class="fas fa-thumbs-up text-danger"></i>
+                                            {{ $news->likes }}
+                                            J'aime(s)</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -35,83 +50,49 @@
                         <div class="post-details-content bg-white mb-30 p-30 box-shadow">
                             <div class="blog-content">
                                 <div class="post-meta">
-                                    <a href="#">Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</a>
-                                    <a href="archive.html">{{ $jobs->category }}</a>
+                                    <a href="#">Mise en ligne le
+                                        {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</a>
+                                    <a href="#">{{ $news->category }}</a>
                                 </div>
-                                <h4 class="post-title">{{ $jobs->title }}</h4>
+                                <h4 class="post-title">{{ $news->title }}</h4>
 
                                 <div class="post-meta-2">
-                                    <a href="#"><i class="fas fa-eye" aria-hidden="true"></i> 1034</a>
-                                    <a href="#"><i class="fas fa-thumbs-up" aria-hidden="true"></i> 834</a>
-                                    <a href="#"><i class="fas fa-comments" aria-hidden="true"></i> 234</a>
+                                    <a><i class="fas fa-eye text-secondary" aria-hidden="true"></i> {{ $news->vue }}</a>
+                                    <a><i class="fas fa-thumbs-up text-danger" aria-hidden="true"></i>
+                                        {{ $news->likes }}</a>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur sita adipiscing elit. Proin molestie accumsan
-                                    orci suneget placerat. Etiama faucibuss orci quis posuere vestibulu. Ut id purusos
-                                    ultricies, dictumax quam id, ullamcorper urna. Curabitur sitdown nisi vitae nisi
-                                    vestotana vestibul ut non massa. Aliquam erat volutpat. Morbi nect nunc et orci euismode
-                                    finibus. Donec lobortis venenatis turpis. Aenean act congue arcu, nect porttitor magna.
-                                    Nam consequa ligula nibh, in maximus gravida. Vivamus nuornare masa. Quisque sed honcus
-                                    leo, ullamcorper auctor mi. Maecenas mollis purus, mattis nisl condimentum. Nam eros
-                                    elementu, congue diam imperdiet, interdum tellus.</p>
-                                <p>Mauris dapibus turpis vel ialis tempor. Morbi turpis leon, pulvinar vitae convallis
-                                    vitae, scelerisque necto eros. Suspendisse vitae pharetra risus. Pellentesque varius,
-                                    felis in lacinia faucibus, ipsum liula aliquam nulla, non honcus nunc ipsum eu risus.
-                                    Nunc finibus euismod magna sagittis. Sed dictum libero consectetur.</p>
-                                <div class="row">
-                                    <div class="col-12 col-lg-8">
-                                        <p>Vivamus nisl metus, dictum sit amet porttitor sit amet, lobortis sit amet ipsum.
-                                            Mauris ut quam non magna gravida egestas. Sed rutrum sapien eget lorem bibendum
-                                            ullamcorper.</p>
-                                        <ul>
-                                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Duis blandit maximus
-                                                tellus, sagittis volutpat tellus sandi.</li>
-                                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Etiam vel auctor
-                                                elit. Usaceros suscipit, lobortis felis non.</li>
-                                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Integer sagittis
-                                                finibus nequer, euster tincidunt misult.</li>
-                                            <li><i class="fas fa-check-circle" aria-hidden="true"></i> Pellentesque euismod
-                                                semeget diam ege</li>
-                                        </ul>
-                                        <p>Aliquam venenatis dui elit, et viverra mi maximus quis. Etiam vel auctor elit. Ut
-                                            ac eros suscipit, lobortis felison, vulputate tellus. Suspendisse hendrerit
-                                            aliquet lectus.</p>
-                                    </div>
-                                </div>
-                                <p>Mauris nisi arcu, consectetur convallis fringilla quis, posuere ac mauris. Ut in placerat
-                                    lorem. Donec cursus malesuada nibhem, eget consectetur posuere sed. Suspendisse auctor
-                                    nec diamet consectetur. Etiam ac maurised nisib tincidunt viverra. Sed nulla lacus,
-                                    convallis vel nunc sed, fringilla venenatis neque.</p>
-                                <blockquote>
-                                    <h6 class="quote-text">“Design is a funny word. Some people think design means how it
-                                        looks. But of course, if you dig deeper, it's really how it works. The design of the
-                                        Mac wasn't what it looked like, although that was part of it.”</h6>
-                                    <h6 class="quote-name">STEVE JOBS</h6>
-                                </blockquote>
-                                <p>Phasellus laoreet mattis ultrices. Integer ex sem, ultrices eu sem in, laoreet vehicula
-                                    ligula. Phasellus quistor blandit salah convallis augue. Sed velot dictum sapient. In
-                                    pulvinar libero turpis. Quisque facilisis bigbang consenti. Nullam bendumaz, massan
-                                    consequat in gravida porttitor, aguet lacus condimentum mauris, id blandit quam augue
-                                    eget mana. Etiam denim jeans lacus, nascetur auge bibendum vel pulvinar viverra, mattis
-                                    sit amet mi. Mauris fringilla, ex vitae maximus fringilla, neque sapien maximus justo,
-                                    cursus risus neque sed nibh. Donec at urna eros scelerisque non nibh sed.</p>
 
-                                <div class="like-dislike-share my-5">
-                                    <h4 class="share">240<span>Share</span></h4>
-                                    <a href="#" class="facebook"><i class="fab fa-facebook-f"></i> Share on
+                                {!! html_entity_decode($news->content) !!}
+
+                                <hr />
+
+                                <div class="like-dislike-share my-4">
+                                    <a target="_new"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/article/{{ $news->id }}"
+                                        class="facebook btn-share"><i class="fab fa-facebook-f"></i> Partager sur
                                         Facebook</a>
-                                    <a href="#" class="twitter"><i class="fab fa-twitter"></i> Share on
+                                    <a target="_new"
+                                        href="https://twitter.com/intent/tweet?url=https://jobs-72.com/article/{{ $news->id }}&text={{ $news->smallContent }}"
+                                        class="twitter btn-share"><i class="fab fa-twitter"></i> Partager sur
                                         Twitter</a>
                                 </div>
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="../test/52.jpg" alt="">
+                                        <img src="../../images/avatar/@foreach(user($news->author) as
+                                        $user){{ $user->avatar }}@endforeach" width="100px"
+                                        height="100px" alt="@foreach(user($news->author) as
+                                        $user){{ $user->username }}@endforeach">
                                     </div>
-                                    <div class="post-author-desc pl-4">
-                                        <a href="#" class="author-name">Alan Shaerer</a>
-                                        <p>Duis tincidunt turpis sodales, tincidunt nisi et, auctor nisi. Curabitur
-                                            vulputate sapien eu metus ultricies fermentum nec vel augue. Maecenas eget
-                                            lacinia est.</p>
+                                    <div class="post-author-desc">
+                                        <a href="#" class="author-name">
+                                            @foreach (user($news->author) as $user)
+                                                {{ $user->lastname }} {{ $user->firstname }} @endforeach
+                                        </a>
+                                        <p>
+                                            @foreach (user($news->author) as $user)
+                                                {{ $user->biography }}@endforeach
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -120,161 +101,93 @@
                         <div class="related-post-area bg-white mb-30 px-30 pt-30 pb-0 box-shadow">
 
                             <div class="section-heading">
-                                <h5>Related Post</h5>
+                                <h5>Article similaires</h5>
                             </div>
                             <div class="row">
-
+                                @foreach ($latestNews as $dataLatests)
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="single-blog-post style-4 mb-30">
                                         <div class="post-thumbnail">
-                                            <img src="../test/29.jpg" alt="">
+                                            <img src="../../images/jobs/{{ $dataLatests->image }}"
+                                            alt="{{ $dataLatests->title }}">
                                         </div>
                                         <div class="post-content">
-                                            <a href="single-post.html" class="post-title">Dentists Are Smiling Over Painless
-                                                Veneer</a>
+                                            <a href="{{ route('news', $dataLatests->id) }}"
+                                                class="post-title">{{ $dataLatests->title }}</a>
+                                            <div class="mb-3">{{ $dataLatests->smallContent }}</div>    
+                                            <a href="{{ route('news', $dataLatests->id) }}"
+                                                class="btn btn-info mb-3 ripple-surface">Lire la suite...</a>
                                             <div class="post-meta d-flex">
-                                                <a href="#"><i class="fas fa-eye" aria-hidden="true"></i> 1034</a>
-                                                <a href="#"><i class="fas fa-thumbs-up" aria-hidden="true"></i> 834</a>
-                                                <a href="#"><i class="fas fa-comments" aria-hidden="true"></i> 234</a>
+                                                <a><i class="fas fa-eye text-secondary" aria-hidden="true"></i>
+                                                    {{ $dataLatests->vue }}</a>
+                                                <a><i class="fas fa-thumbs-up text-danger" aria-hidden="true"></i>
+                                                    {{ $dataLatests->likes }}</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="single-blog-post style-4 mb-30">
-                                        <div class="post-thumbnail">
-                                            <img src="../test/30.jpg" alt="">
-                                            <a href="video-post.html" class="video-play"><i class="fas fa-play"></i></a>
-                                            <span class="video-duration">09:27</span>
-                                        </div>
-                                        <div class="post-content">
-                                            <a href="single-post.html" class="post-title">Will The Democrats Be Able To
-                                                Reverse</a>
-                                            <div class="post-meta d-flex">
-                                                <a href="#"><i class="fas fa-eye" aria-hidden="true"></i> 1034</a>
-                                                <a href="#"><i class="fas fa-thumbs-up" aria-hidden="true"></i> 834</a>
-                                                <a href="#"><i class="fas fa-comments" aria-hidden="true"></i> 234</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4">
-                                    <div class="single-blog-post style-4 mb-30">
-                                        <div class="post-thumbnail">
-                                            <img src="../test/28.jpg" alt="">
-                                        </div>
-                                        <div class="post-content">
-                                            <a href="single-post.html" class="post-title">A Guide To Rocky Mountain
-                                                Vacations</a>
-                                            <div class="post-meta d-flex">
-                                                <a href="#"><i class="fas fa-eye" aria-hidden="true"></i> 1034</a>
-                                                <a href="#"><i class="fas fa-thumbs-up" aria-hidden="true"></i> 834</a>
-                                                <a href="#"><i class="fas fa-comments" aria-hidden="true"></i> 234</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
 
                         <div class="comment_area clearfix bg-white mb-30 p-30 box-shadow">
 
                             <div class="section-heading">
-                                <h5>COMMENTS</h5>
+                                <h5>COMMENTAIRE(S) {{ $countComment }}</h5>
                             </div>
                             <ol>
+                                @if ($countComment != 0)
+                                    @foreach ($commentAll as $comments)
+                                    <li class="single_comment_area">
 
-                                <li class="single_comment_area">
+                                        <div class="comment-content d-flex">
 
-                                    <div class="comment-content d-flex">
-
-                                        <div class="comment-author">
-                                            <img src="../test/53.jpg" alt="author">
-                                        </div>
-
-                                        <div class="comment-meta">
-                                            <a href="#" class="comment-date">27 Aug 2019</a>
-                                            <h6>Tomas Mandy</h6>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                                adipisci velit, sed quia non numquam eius</p>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#" class="like">like</a>
-                                                <a href="#" class="reply">Reply</a>
+                                            <div class="comment-author">
+                                                <img src="../../images/avatar/@foreach(user($comments->author) as
+                                                $user){{ $user->avatar }}@endforeach" alt="@foreach(user($comments->author) as
+                                                $user){{ $user->username }}@endforeach" width="70px"
+                                        height="70px">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <ol class="children">
-                                        <li class="single_comment_area">
 
-                                            <div class="comment-content d-flex">
-
-                                                <div class="comment-author">
-                                                    <img src="../test/54.jpg" alt="author">
-                                                </div>
-
-                                                <div class="comment-meta">
-                                                    <a href="#" class="comment-date">27 Aug 2019</a>
-                                                    <h6>Britney Millner</h6>
-                                                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-                                                        consectetur, adipisci velit, sed quia non numquam eius</p>
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#" class="like">like</a>
-                                                        <a href="#" class="reply">Reply</a>
-                                                    </div>
+                                            <div class="comment-meta">
+                                                <a href="#" class="comment-date">Le {{ date('d/m/Y à H:i', strtotime($comments->created_at)) }}</a>
+                                                <h6>@foreach(user($comments->author) as $user){{ $user->lastname }} {{ $user->firstname }}@endforeach</h6>
+                                                <p>{{ $comments->content }}</p>
+                                                <div class="d-flex align-items-center">
+                                                    @if (Auth::user())
+                                                            <a href="{{ route('like_news', [$comments->news_id, $comments->user_id]) }}" class="like"><i class="fas fa-thumbs-up mr-0 text-danger"></i> J'aime <b>({{ $comments->likes }})</b></a>
+                                                    @else
+                                                        <a href="{{ route('login') }}" class="like"><i class="fas fa-thumbs-up mr-0 text-danger"></i> J'aime <b>({{ $comments->likes }})</b></a>
+                                                    @endif
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ol>
-                                </li>
-
-                                <li class="single_comment_area">
-
-                                    <div class="comment-content d-flex">
-
-                                        <div class="comment-author">
-                                            <img src="../test/55.jpg" alt="author">
                                         </div>
+                                    </li>
+                                    @endforeach
+                                @else
+                                    <li class="text-danger text-center"><b>Aucun commentaire pour le moment.</b></li>    
+                                @endif
+                                
 
-                                        <div class="comment-meta">
-                                            <a href="#" class="comment-date">27 Aug 2019</a>
-                                            <h6>Simon Downey</h6>
-                                            <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                                adipisci velit, sed quia non numquam eius</p>
-                                            <div class="d-flex align-items-center">
-                                                <a href="#" class="like">like</a>
-                                                <a href="#" class="reply">Reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
                             </ol>
                         </div>
 
                         <div class="post-a-comment-area bg-white mb-30 p-30 box-shadow clearfix">
 
                             <div class="section-heading">
-                                <h5>LEAVE A REPLY</h5>
+                                <h5>LAISSER UN COMMENTAIRE</h5>
                             </div>
 
                             <div class="contact-form-area">
-                                <form action="#" method="post">
+                                <form action="{{ route('post_comment', $news->id) }}" method="post">
+                                    @csrf
                                     <div class="row">
-                                        <div class="col-12 col-lg-6">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name*"
-                                                required="">
-                                        </div>
-                                        <div class="col-12 col-lg-6">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email*"
-                                                required="">
+                                        <div class="col-12">
+                                            <textarea name="content" class="form-control" cols="30" rows="10"
+                                                placeholder="Votre message *" required></textarea>
                                         </div>
                                         <div class="col-12">
-                                            <textarea name="message" class="form-control" id="message" cols="30" rows="10"
-                                                placeholder="Message*" required=""></textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <button class="btn mag-btn mt-30" type="submit">Submit Comment</button>
+                                            <button type="submit" class="btn mag-btn mt-30">Poster le commentaire</button>
                                         </div>
                                     </div>
                                 </form>
@@ -283,110 +196,155 @@
                     </div>
 
                     <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-block">
+                                <i class="fas fa-check mr-1 text-success"></i>
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
+                        @if ($message = Session::get('error'))
+                            <div class="alert alert-danger alert-block">
+                                <i class="fas fa-times mr-1 text-danger"></i>
+                                <strong>{{ $message }}</strong>
+                            </div>
+                        @endif
+
                         <div class="sidebar-area bg-white mb-30 box-shadow">
 
-                            <div class="single-sidebar-widget p-30">
+                             <div class="single-sidebar-widget p-30">
 
                                 <div class="social-followers-info">
 
-                                    <a href="#" class="facebook-fans"><i class="fab fa-facebook-f"></i> Share on
-                                        Fans</a>
-
-                                    <a href="#" class="twitter-followers"><i class="fab fa-twitter"></i> Share on
-                                        Followers</a>
+                                    <a target="_new"
+                                        href="https://www.facebook.com/sharer/sharer.php?u=https://jobs-72.com/article/{{ $news->id }}"
+                                        class="facebook-fans btn-share"><i class="fab fa-facebook-f"></i> Partager sur
+                                        Facebook
+                                        <a target="_new"
+                                            href="https://twitter.com/intent/tweet?url=https://jobs-72.com/article/{{ $news->id }}&text={{ $news->smallContent }}"
+                                            class="twitter-followers btn-share"><i class="fab fa-twitter"></i> Partager
+                                            sur
+                                            Twitter</a>
 
                                 </div>
                             </div>
 
-                            <div class="single-sidebar-widget p-30">
+                            <div class="single-sidebar-widget p-30" style="padding-top: 0px !important;">
 
                                 <div class="section-heading">
-                                    <h5>Categories</h5>
+                                    <h5>Nos catégories</h5>
                                 </div>
 
                                 <ul class="catagory-widgets">
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i> Life
-                                                Style</span> <span>35</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                                                Travel</span> <span>30</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                                                Foods</span> <span>13</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                                                Game</span> <span>06</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                                                Sports</span> <span>28</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i>
-                                                Football</span> <span>08</span></a></li>
-                                    <li><a href="#"><span><i class="fas fa-angle-double-right" aria-hidden="true"></i> TV
-                                                Show</span> <span>13</span></a></li>
+                                    <li><a href="{{ url('emplois', ['Ressources-Humaines']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Ressources Humaines</span>
+                                            <span>{{ category('Ressources Humaines') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Commercial']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Commercial</span> <span>{{ category('Commercial') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Distribution-et-Grande-Distribution']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Distribution et Grande Distribution</span>
+                                            <span>{{ category('Distribution et Grande Distribution') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Informatique-et-Technologie-de-l’information']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Informatique et Technologie de l’information</span>
+                                            <span>{{ category('Informatique et Technologie de l’information') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Logistique']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Logistique</span> <span>{{ category('Logistique') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Temps-partiel']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Temps partiel</span>
+                                            <span>{{ category('Temps partiel') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Maintenance-et-Réparation']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Maintenance et Réparation</span>
+                                            <span>{{ category('Maintenance et Réparation') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Tourisme']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Tourisme</span> <span>{{ category('Tourisme') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Finance']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Finance</span> <span>{{ category('Finance') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Alternance']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Alternance</span> <span>{{ category('Alternance') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Fashion']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Fashion</span> <span>{{ category('Fashion') }}</span></a></li>
+
+                                    <li><a href={{ url('emplois', ['Marketing-et-Communication']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Marketing et Communication</span>
+                                            <span>{{ category('Marketing et Communication') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Restauration']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Restauration</span>
+                                            <span>{{ category('Restauration') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Transport']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Transport</span> <span>{{ category('Transport') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Environnement-et-Développement-durable']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Environnement et Développement durable</span>
+                                            <span>{{ category('Environnement et Développement durable') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Sécurité']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Sécurité</span> <span>{{ category('Sécurité') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Banque']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Banque</span> <span>{{ category('Banque') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Psychologue']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Psychologue</span> <span>{{ category('Psychologue') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Hôtellerie']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Hôtellerie</span> <span>{{ category('Hôtellerie') }}</span></a>
+                                    </li>
+
+                                    <li><a href="{{ url('emplois', ['Cadres-et-Direction']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Cadres et Direction</span>
+                                            <span>{{ category('Cadres et Direction') }}</span></a></li>
+
+                                    <li><a href="{{ url('emplois', ['Santé']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
+                                                Emploi Santé</span>
+                                            <span>{{ category('Santé') }}</span></a></li>
                                 </ul>
                             </div>
 
                             <div class="single-sidebar-widget">
-                                <a href="#" class="add-img"><img src="../test/add2.png" alt=""></a>
+                                <a href="{{ $publicite->url }}" target="_new" class="add-img"><img
+                                        src="../../images/jobs/publicite/{{ $publicite->image }}"
+                                        alt="{{ $news->title }}"></a>
                             </div>
 
-                            <div class="single-sidebar-widget p-30">
-
-                                <div class="section-heading">
-                                    <h5>Hot Channels</h5>
-                                </div>
-
-                                <div class="single-youtube-channel d-flex">
-                                    <div class="youtube-channel-thumbnail">
-                                        <img src="../test/14.jpg" alt="">
-                                    </div>
-                                    <div class="youtube-channel-content">
-                                        <a href="single-post.html" class="channel-title">TV Show</a>
-                                        <a href="#" class="btn subscribe-btn"><i class="fas fa-play-circle"
-                                                aria-hidden="true"></i> Subscribe</a>
-                                    </div>
-                                </div>
-
-                                <div class="single-youtube-channel d-flex">
-                                    <div class="youtube-channel-thumbnail">
-                                        <img src="../test/15.jpg" alt="">
-                                    </div>
-                                    <div class="youtube-channel-content">
-                                        <a href="single-post.html" class="channel-title">Game Channel</a>
-                                        <a href="#" class="btn subscribe-btn"><i class="fas fa-play-circle"
-                                                aria-hidden="true"></i> Subscribe</a>
-                                    </div>
-                                </div>
-
-                                <div class="single-youtube-channel d-flex">
-                                    <div class="youtube-channel-thumbnail">
-                                        <img src="../test/16.jpg" alt="">
-                                    </div>
-                                    <div class="youtube-channel-content">
-                                        <a href="single-post.html" class="channel-title">Sport Channel</a>
-                                        <a href="#" class="btn subscribe-btn"><i class="fas fa-play-circle"
-                                                aria-hidden="true"></i> Subscribe</a>
-                                    </div>
-                                </div>
-
-                                <div class="single-youtube-channel d-flex">
-                                    <div class="youtube-channel-thumbnail">
-                                        <img src="../test/17.jpg" alt="">
-                                    </div>
-                                    <div class="youtube-channel-content">
-                                        <a href="single-post.html" class="channel-title">Travel Channel</a>
-                                        <a href="#" class="btn subscribe-btn"><i class="fas fa-play-circle"
-                                                aria-hidden="true"></i> Subscribe</a>
-                                    </div>
-                                </div>
-
-                                <div class="single-youtube-channel d-flex">
-                                    <div class="youtube-channel-thumbnail">
-                                        <img src="../test/18.jpg" alt="">
-                                    </div>
-                                    <div class="youtube-channel-content">
-                                        <a href="single-post.html" class="channel-title">LifeStyle Channel</a>
-                                        <a href="#" class="btn subscribe-btn"><i class="fas fa-play-circle"
-                                                aria-hidden="true"></i> Subscribe</a>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="single-sidebar-widget p-30">
 
@@ -394,12 +352,10 @@
                                     <h5>Newsletter</h5>
                                 </div>
                                 <div class="newsletter-form">
-                                    <p>Subscribe our newsletter gor get notification about new updates, information
-                                        discount, etc.</p>
-                                    <form action="#" method="get">
-                                        <input type="search" name="widget-search" placeholder="Enter your email">
-                                        <button type="submit" class="btn mag-btn w-100">Subscribe</button>
-                                    </form>
+                                    <p>Abonnez-vous à notre newsletter pour recevoir des notifications sur les nouvelles
+                                        mises à jour, informations etc.</p>
+
+                                    <a href="{{ url('newsletter') }}" class="btn mag-btn w-100">S'abonner</a>
                                 </div>
                             </div>
                         </div>

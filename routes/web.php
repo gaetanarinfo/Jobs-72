@@ -46,6 +46,8 @@ Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController
 
 Route::get('/emplois/{category}', [App\Http\Controllers\JobsController::class, 'show_cat']);
 
+Route::get('/search/{key}', [App\Http\Controllers\JobsController::class, 'show_key'])->name('search_mot');
+
 Route::get('/recruter', [App\Http\Controllers\RecruterController::class, 'index'])->middleware('verified');
 
 Route::get('/recruter/emplois/create', [App\Http\Controllers\RecruterController::class, 'show'])->middleware('verified');
@@ -73,6 +75,18 @@ Route::get('/recruter/apply/delete/{id}', [App\Http\Controllers\RecruterControll
 Route::get('/recruter/apply/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_apply'])->middleware('verified');
 
 Route::get('/recruter/apply/refused/{id}', [App\Http\Controllers\RecruterController::class, 'refused_apply'])->middleware('verified');
+
+Route::get('/offres-emploi', [App\Http\Controllers\JobsAllController::class, 'index']);
+
+Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
+
+Route::get('/article/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news');
+
+Route::get('/article/like/{news_id}/{user_id}', [App\Http\Controllers\NewsController::class, 'likes'])->name('like_news')->middleware('verified');
+
+Route::post('/article/comment/{news_id}', [App\Http\Controllers\NewsController::class, 'post_comment'])->name('post_comment')->middleware('verified');
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'show'])->name('admin')->middleware('verified');
 
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);

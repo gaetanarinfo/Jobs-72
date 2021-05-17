@@ -23,7 +23,6 @@ class JobsController extends Controller
      */
     public function show($id, $author)
     {
-        $jobsAuthor2 = User::where('username', '=', $author)->firstOrFail();
         $cat2 = DB::table('jobs')->where('id', $id)->get();
 
         if($cat2->count() == 0)
@@ -39,13 +38,6 @@ class JobsController extends Controller
                 $latestJobs = Jobs::where('active', 1)->where('category', $cat->category)->orderBy('created_at', 'desc')->limit('3')->get();
                 $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->get();
                 $likeVue = DB::table('jobs_likes')->where('id', $id)->get();
-                
-                if(Auth::user())
-                {
-                    $apply = JobsApplies::where('user_id', Auth::user()->id)->firstOrFail();
-                }else{
-                    $apply = 0;
-                }
 
                 $publicite = DB::table('jobs_pub')->first();
 
@@ -74,12 +66,10 @@ class JobsController extends Controller
 
                 return view('jobs-details', [
                     'jobs' => Jobs::findOrFail($id),
-                    'userJobs' => $jobsAuthor2,
                     'latestJobs' => $latestJobs,
                     'likeVue' => $likeVue,
                     'ipUser' => request()->ip(),
-                    'publicite' => $publicite,
-                    'apply' => $apply
+                    'publicite' => $publicite
                 ]);
             }else{
                 return redirect('/');
@@ -177,6 +167,37 @@ class JobsController extends Controller
      */
     public function show_cat($category)
     {
+
+        $jobsCat = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.category', '=', $category)
+        ->paginate(24);
+
+        return view('jobs-category', [
+            'jobsCat' => $jobsCat,
+            'category' => $category
+        ]);
+
+    }
+
+    /**
+     * Show the profile for a given user.
+     *
+     * @param  string  $category
+     * @return \Illuminate\View\View
+     */
+    public function show_key($key)
+    {
+
+        $jobsKey = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.title', '=', '%' . $key . '%')
+        ->paginate(24);
+
+        return view('jobs-key', [
+            'jobsKey' => $jobsKey,
+            'key' => $key
+        ]);
 
     }
 

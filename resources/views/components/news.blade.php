@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                             <img src="images/news/{{ $news->image }}" class="img-fluid" />
-                            <a href="#!">
+                            <a href="{{ route('news', $news->id) }}">
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                             </a>
                         </div>
@@ -23,7 +23,7 @@
                             <p class="card-text">
                               {{ $news->smallContent }}
                             </p>
-                            <a href="#!" class="btn btn-outline-success ripple-surface ripple-surface-dark">Lire la
+                            <a href="{{ route('news', $news->id) }}" class="btn btn-outline-success ripple-surface ripple-surface-dark">Lire la
                                 suite</a>
                         </div>
                     </div>

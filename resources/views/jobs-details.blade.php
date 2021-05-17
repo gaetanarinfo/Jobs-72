@@ -54,7 +54,7 @@
                                 <div class="post-meta">
                                     <a>Mise en ligne le
                                         {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</a>
-                                    <a href="{{ url('jobs', $jobs->category) }}">Emplois {{ $jobs->category }}</a>
+                                    <a href="{{ url('emplois', $jobs->category) }}">Emplois {{ $jobs->category }}</a>
                                 </div>
                                 <h4 class="post-title">{{ $jobs->title }}</h4>
 
@@ -141,8 +141,8 @@
                                             <div style="text-align: left !important;"><label class="mb-2">Vos
                                                     motivations</label></div>
                                             @if (Auth::user())
-                                                <textarea name="motivation" required class="form-control mb-2" @if ($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id) @else disabled @endif maxlength="160"
-                                                    style="height: 150px;"></textarea>
+                                                <textarea name="motivation" required class="form-control mb-2"
+                                                    maxlength="160" style="height: 150px;"></textarea>
                                                 <input hidden name="id" value="{{ $jobs->id }}">
                                             @else
                                                 <textarea class="form-control mb-2" disabled maxlength="160"
@@ -150,16 +150,9 @@
                                             @endif
 
                                             @if (Auth::user())
-                                                @if ($apply->author != Auth::user()->username || $apply->jobs_id != $jobs->id)
-                                                    <button type="submit"
-                                                        class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
-                                                            class="fas fa-coffee mr-2"></i> Postuler à cette offre</button>
-                                                @else
-                                                    <a
-                                                        class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2 active"><i
-                                                            class="fas fa-coffee mr-2"></i> Vous avez déjà postuler à cette
-                                                        offre</a>
-                                                @endif
+                                                <button type="submit"
+                                                    class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
+                                                        class="fas fa-coffee mr-2"></i> Postuler à cette offre</button>
                                             @else
                                                 <a href="{{ route('login') }}"
                                                     class="btn btn-outline-info ripple-surface ripple-surface-dark mt-2"><i
@@ -171,13 +164,19 @@
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="../../images/avatar/{{ $userJobs->avatar }}" width="100px"
-                                            height="100px" alt="">
+                                        <img src="../../images/avatar/@foreach(user($jobs->author) as
+                                        $user){{ $user->avatar }}@endforeach" width="100px"
+                                        height="100px" alt="">
                                     </div>
                                     <div class="post-author-desc">
-                                        <a href="#" class="author-name">{{ $userJobs->lastname }}
-                                            {{ $userJobs->firstname }}</a>
-                                        <p>{{ $userJobs->biography }}</p>
+                                        <a href="#" class="author-name">
+                                            @foreach (user($jobs->author) as $user)
+                                                {{ $user->lastname }} {{ $user->firstname }} @endforeach
+                                        </a>
+                                        <p>
+                                            @foreach (user($jobs->author) as $user)
+                                                {{ $user->biography }}@endforeach
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -198,9 +197,9 @@
                                                     alt="{{ $dataLatests->title }}">
                                             </div>
                                             <div class="post-content">
-                                                <a href="{{ url('jobs', [$dataLatests->id, $dataLatests->author]) }}"
+                                                <a href="{{ url('emplois', [$dataLatests->id, $dataLatests->author]) }}"
                                                     class="post-title">{{ $dataLatests->title }}</a>
-                                                <a href="{{ url('jobs', [$dataLatests->id, $dataLatests->author]) }}"
+                                                <a href="{{ url('emplois', [$dataLatests->id, $dataLatests->author]) }}"
                                                     class="btn btn-outline-success ripple-surface ripple-surface-dark mt-0 mb-2">Postuler</a>
                                                 <div class="post-meta d-flex">
                                                     <a><i class="fas fa-eye text-secondary" aria-hidden="true"></i>
@@ -261,104 +260,104 @@
                                 </div>
 
                                 <ul class="catagory-widgets">
-                                    <li><a href="{{ url('jobs', ['Ressources-Humaines']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Ressources-Humaines']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Ressources Humaines</span>
                                             <span>{{ category('Ressources Humaines') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Commercial']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Commercial']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Commercial</span> <span>{{ category('Commercial') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Distribution-et-Grande-Distribution']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Distribution-et-Grande-Distribution']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Distribution et Grande Distribution</span>
                                             <span>{{ category('Distribution et Grande Distribution') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Informatique-et-Technologie-de-l’information']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Informatique-et-Technologie-de-l’information']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Informatique et Technologie de l’information</span>
                                             <span>{{ category('Informatique et Technologie de l’information') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Logistique']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Logistique']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Logistique</span> <span>{{ category('Logistique') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Temps-partiel']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Temps-partiel']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Temps partiel</span>
                                             <span>{{ category('Temps partiel') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Maintenance-et-Réparation']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Maintenance-et-Réparation']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Maintenance et Réparation</span>
                                             <span>{{ category('Maintenance et Réparation') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Tourisme']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Tourisme']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Tourisme</span> <span>{{ category('Tourisme') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Finance']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Finance']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Finance</span> <span>{{ category('Finance') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Alternance']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Alternance']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Alternance</span> <span>{{ category('Alternance') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Fashion']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Fashion']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Fashion</span> <span>{{ category('Fashion') }}</span></a></li>
 
-                                    <li><a href={{ url('jobs', ['Marketing-et-Communication']) }}"><span><i
+                                    <li><a href={{ url('emplois', ['Marketing-et-Communication']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Marketing et Communication</span>
                                             <span>{{ category('Marketing et Communication') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Restauration']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Restauration']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Restauration</span>
                                             <span>{{ category('Restauration') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Transport']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Transport']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Transport</span> <span>{{ category('Transport') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Environnement-et-Développement-durable']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Environnement-et-Développement-durable']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Environnement et Développement durable</span>
                                             <span>{{ category('Environnement et Développement durable') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Sécurité']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Sécurité']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Sécurité</span> <span>{{ category('Sécurité') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Banque']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Banque']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Banque</span> <span>{{ category('Banque') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Psychologue']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Psychologue']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Psychologue</span> <span>{{ category('Psychologue') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Hôtellerie']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Hôtellerie']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Hôtellerie</span> <span>{{ category('Hôtellerie') }}</span></a>
                                     </li>
 
-                                    <li><a href="{{ url('jobs', ['Cadres-et-Direction']) }}"><span><i
+                                    <li><a href="{{ url('emplois', ['Cadres-et-Direction']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Cadres et Direction</span>
                                             <span>{{ category('Cadres et Direction') }}</span></a></li>
 
-                                    <li><a href="{{ url('jobs', ['Santé']) }}"><span><i class="fas fa-angle-double-right"
-                                                    aria-hidden="true"></i>
+                                    <li><a href="{{ url('emplois', ['Santé']) }}"><span><i
+                                                    class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Santé</span>
                                             <span>{{ category('Santé') }}</span></a></li>
                                 </ul>

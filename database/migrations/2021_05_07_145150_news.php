@@ -21,9 +21,9 @@ class News extends Migration
             $table->text('content');
             $table->string('image')->default('default.jpg');
             $table->boolean('active');
-            // $table->bigInteger('comments_id')->unsigned();
+            $table->integer('vue');
+            $table->integer('likes');
             $table->timestamps();
-            // $table->foreign('comments_id')->references('id')->on('comments');
         });
     }
 
