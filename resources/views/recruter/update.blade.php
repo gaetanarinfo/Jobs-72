@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '- Crée une annonce')
+@section('title', '- Editer le poste - {{ $jobs->title }}')
 
 @section('content')
 
@@ -30,7 +30,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="../../../images/avatar/{{ Auth::user()->avatar }}"
+                                                    <img src="../../../../images/avatar/{{ Auth::user()->avatar }}"
                                                         width="140px" alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -67,7 +67,7 @@
 
                                             <div class="card-body">
                                                 <form method="POST" enctype="multipart/form-data"
-                                                    action="{{ url('recruter/emplois/create') }}">
+                                                    action="{{ route('update_jobs_post', $jobs->id) }}">
                                                     @csrf
 
                                                     <div class="form-group row">
@@ -97,7 +97,7 @@
                                                                 class="form-control @error('category') is-invalid @enderror"
                                                                 name="category" value="{{ old('category') }}" required
                                                                 autocomplete="category">
-                                                                <option value="{{ $jobs->category }}" selected disabled>
+                                                                <option value="{{ $jobs->category }}" selected>
                                                                     {{ $jobs->category }}
                                                                 </option>
                                                                 <option>--------------</option>
@@ -206,7 +206,7 @@
                                                                 autocomplete="active">
                                                                 <option value="@if ($jobs->active ==
                                                                 1) 1 @else 0 @endif" selected
-                                                                    disabled>@if ($jobs->active == 1)Oui
+                                                                    >@if ($jobs->active == 1)Oui
                                                                     @else Non @endif
                                                                 </option>
                                                                 <option>--------------</option>
@@ -325,11 +325,19 @@
                                                             class="col-md-6 col-form-label text-md-right">{{ __('Télétravail') }}</label>
 
                                                         <div class="col-md-6">
-                                                            <input id="teletravail" type="text"
+                                                            <select
                                                                 class="form-control @error('teletravail') is-invalid @enderror"
-                                                                name="teletravail" value="{{ $jobs->teletravail }}"
-                                                                required autocomplete="teletravail" autofocus
-                                                                placeholder="* Temporairement en raison du COVID-19">
+                                                                name="teletravail" value="{{ old('teletravail') }}"
+                                                                required autocomplete="teletravail">
+                                                                <option value="@if ($jobs->teletravail
+                                                                == 1) 1 @else 0 @endif"
+                                                                    selected>@if ($jobs->teletravail == 1)Oui
+                                                                    @else Non @endif
+                                                                </option>
+                                                                <option>--------------</option>
+                                                                <option value="1">Oui</option>
+                                                                <option value="0">Non</option>
+                                                            </select>
 
                                                             @error('teletravail')
                                                                 <span class="invalid-feedback" role="alert">
@@ -370,7 +378,7 @@
                                                                 value="{{ old('experience_exiger') }}" required
                                                                 autocomplete="experience_exiger">
                                                                 <option value="@if ($jobs->
-                                                                    experience_exiger == 1) 1 @else 0 @endif" selected disabled>@if ($jobs->experience_exiger == 1)Oui
+                                                                    experience_exiger == 1) 1 @else 0 @endif" selected>@if ($jobs->experience_exiger == 1)Oui
                                                                     @else Non @endif
                                                                 </option>
                                                                 <option>--------------</option>

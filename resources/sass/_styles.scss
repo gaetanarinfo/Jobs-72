@@ -237,3 +237,50 @@ a:hover {
 .text-bold {
     font-weight: bold;
 }
+
+.build {
+    transition: 300ms all;
+}
+
+.build:hover {
+    opacity: 0.4;
+}
+
+.clignote {
+    animation-duration: .8s;
+    animation-name: clignoter;
+    animation-iteration-count: infinite;
+    transition: none;
+}
+
+@keyframes clignoter {
+    0% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.media-29101 {
+    text-align: center;
+}
+
+.media-29101 img {
+    border-radius: 6%;
+    width: 202px !important;
+    margin: 0 auto 17px auto;
+}
+
+.media-29101 h3 {
+    font-size: 18px;
+    font-weight: 900 !important;
+    margin-bottom: 30px;
+}
+
+.media-29101 h3 a {
+    color: #6c757d;
+}

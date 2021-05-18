@@ -23,6 +23,7 @@ class News extends Migration
             $table->boolean('active');
             $table->integer('vue');
             $table->integer('likes');
+            $table->integer('comments');
             $table->timestamps();
         });
     }

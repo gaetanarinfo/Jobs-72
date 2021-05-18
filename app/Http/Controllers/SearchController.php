@@ -18,4 +18,15 @@ class SearchController extends Controller
             'jobs' => $posts
         ]);
     }
+
+    public function order_tel(Request $request): JsonResponse
+    {
+        $q = $request->input('q');
+
+        $posts = Jobs::where('teletravail', '=', $q)->orderBy('created_at', 'desc')->paginate(12);
+
+        return response()->json([
+            'jobs' => $posts
+        ]);
+    }
 }

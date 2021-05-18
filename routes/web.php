@@ -14,67 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'], ['middleware' => ['auth', 'active_user']]);
 
 Auth::routes(['verify' => true]);
-
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->middleware('verified');
 
 Route::get('/newsletter', [App\Http\Controllers\NewsletterController::class, 'index']);
 
 Route::post('/newsletter',[App\Http\Controllers\NewsletterController::class, 'store']);
 
-Route::post('/cv', [App\Http\Controllers\ProfileController::class, 'update_cv'])->middleware('verified');
-
-Route::post('/profile-picture', [App\Http\Controllers\ProfileController::class, 'update_avatar'])->middleware('verified');
-
-Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update_profil'])->middleware('verified');
-
-Route::post('/profile-visibility', [App\Http\Controllers\ProfileController::class, 'update_show'])->middleware('verified');
-
-Route::post('/profile-notif', [App\Http\Controllers\ProfileController::class, 'update_notif'])->middleware('verified');
-
-Route::get('/profile-remove', [App\Http\Controllers\ProfileController::class, 'remove_account'])->middleware('verified');
-
-Route::get('/profile-cv-remove', [App\Http\Controllers\ProfileController::class, 'remove_cv'])->middleware('verified');
-
 Route::get('/emplois/{id}/{author}', [App\Http\Controllers\JobsController::class, 'show']);
-
-Route::get('/emplois/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes'])->middleware('verified');
-
-Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
 
 Route::get('/emplois/{category}', [App\Http\Controllers\JobsController::class, 'show_cat']);
 
 Route::get('/search/{key}', [App\Http\Controllers\JobsController::class, 'show_key'])->name('search_mot');
-
-Route::get('/recruter', [App\Http\Controllers\RecruterController::class, 'index'])->middleware('verified');
-
-Route::get('/recruter/emplois/create', [App\Http\Controllers\RecruterController::class, 'show'])->middleware('verified');
-
-Route::post('/recruter/emplois/post/create', [App\Http\Controllers\RecruterController::class, 'create'])->middleware('verified');
-
-Route::get('/recruter/emplois/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_jobs'])->middleware('verified');
-
-Route::get('/recruter/emplois/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_jobs'])->middleware('verified');
-
-Route::get('/recruter/emplois/invalidate/{id}', [App\Http\Controllers\RecruterController::class, 'invalidate_jobs'])->middleware('verified');
-
-Route::get('/recruter/emplois/update/{id}', [App\Http\Controllers\RecruterController::class, 'update_jobs'])->middleware('verified');
-
-Route::get('/recruter/credits/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_credits'])->middleware('verified');
-
-Route::get('/recruter/credits/create/10/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_10'])->middleware('verified');
-
-Route::get('/recruter/credits/create/26/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_26'])->middleware('verified');
-
-Route::get('/recruter/credits/error', [App\Http\Controllers\TransactionsController::class, 'error_credits'])->middleware('verified');
-
-Route::get('/recruter/apply/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_apply'])->middleware('verified');
-
-Route::get('/recruter/apply/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_apply'])->middleware('verified');
-
-Route::get('/recruter/apply/refused/{id}', [App\Http\Controllers\RecruterController::class, 'refused_apply'])->middleware('verified');
 
 Route::get('/offres-emploi', [App\Http\Controllers\JobsAllController::class, 'index']);
 
@@ -82,13 +34,88 @@ Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])-
 
 Route::get('/article/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news');
 
-Route::get('/article/like/{news_id}/{user_id}', [App\Http\Controllers\NewsController::class, 'likes'])->name('like_news')->middleware('verified');
+Route::get('/v/{city}', [App\Http\Controllers\JobsController::class, 'show_city'])->name('order_city');
 
-Route::post('/article/comment/{news_id}', [App\Http\Controllers\NewsController::class, 'post_comment'])->name('post_comment')->middleware('verified');
-
-Route::get('/admin', [App\Http\Controllers\AdminController::class, 'show'])->name('admin')->middleware('verified');
+Route::post('/teletravail', [App\Http\Controllers\SearchController::class, 'order_tel'])->name('order_tel');
 
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
-    // ... Any other routes that are accessed only by non-blocked user
+
+    Route::post('/cv', [App\Http\Controllers\ProfileController::class, 'update_cv'])->middleware('verified');
+
+    Route::get('/emplois/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes'])->middleware('verified');
+
+    Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
+
+    Route::post('/profile-picture', [App\Http\Controllers\ProfileController::class, 'update_avatar'])->middleware('verified');
+
+    Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'update_profil'])->middleware('verified');
+
+    Route::post('/profile-visibility', [App\Http\Controllers\ProfileController::class, 'update_show'])->middleware('verified');
+
+    Route::post('/profile-notif', [App\Http\Controllers\ProfileController::class, 'update_notif'])->middleware('verified');
+
+    Route::get('/profile-remove', [App\Http\Controllers\ProfileController::class, 'remove_account'])->middleware('verified');
+
+    Route::get('/profile-cv-remove', [App\Http\Controllers\ProfileController::class, 'remove_cv'])->middleware('verified');
+
+    Route::get('/emplois/like/{id}/{author}', [App\Http\Controllers\JobsController::class, 'likes'])->middleware('verified');
+
+    Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
+
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware('verified');
+
+    Route::get('/admin/news/create', [App\Http\Controllers\AdminController::class, 'news_create'])->name('news_create')->middleware('verified');
+
+    Route::post('/admin/news/create', [App\Http\Controllers\AdminController::class, 'news_create_post'])->name('news_create_post')->middleware('verified');
+
+    Route::get('/admin/news/validate/{id}', [App\Http\Controllers\AdminController::class, 'news_validate'])->name('news_validate')->middleware('verified');
+
+    Route::get('/admin/news/draft/{id}', [App\Http\Controllers\AdminController::class, 'news_invalidate'])->name('news_invalidate')->middleware('verified');
+
+    Route::get('/admin/news/update/{id}', [App\Http\Controllers\AdminController::class, 'news_update'])->name('news_update')->middleware('verified');
+
+    Route::post('/admin/news/update/confirm/{id}', [App\Http\Controllers\AdminController::class, 'news_update_post'])->name('news_update_post')->middleware('verified');
+
+    Route::get('/admin/news/delete/{id}', [App\Http\Controllers\AdminController::class, 'news_delete'])->name('news_delete')->middleware('verified');
+
+    Route::get('/article/like/{news_id}/{user_id}', [App\Http\Controllers\NewsController::class, 'likes'])->name('like_news')->middleware('verified');
+
+    Route::post('/article/comment/{news_id}', [App\Http\Controllers\NewsController::class, 'post_comment'])->name('post_comment')->middleware('verified');  
+
+    Route::get('/recruter', [App\Http\Controllers\RecruterController::class, 'index'])->middleware('verified');
+
+    Route::get('/recruter/emplois/create', [App\Http\Controllers\RecruterController::class, 'show'])->middleware('verified');
+
+    Route::post('/recruter/emplois/post/create', [App\Http\Controllers\RecruterController::class, 'create'])->middleware('verified');
+
+    Route::get('/recruter/emplois/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_jobs'])->middleware('verified');
+
+    Route::get('/recruter/emplois/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_jobs'])->middleware('verified');
+
+    Route::get('/recruter/emplois/invalidate/{id}', [App\Http\Controllers\RecruterController::class, 'invalidate_jobs'])->middleware('verified');
+
+    Route::get('/recruter/emplois/update/{id}', [App\Http\Controllers\RecruterController::class, 'update_jobs'])->middleware('verified');
+
+    Route::post('/recruter/emplois/update/confirm/{id}', [App\Http\Controllers\RecruterController::class, 'update_jobs_post'])->name('update_jobs_post')->middleware('verified');
+
+    Route::get('/recruter/credits/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_credits'])->middleware('verified');
+
+    Route::get('/recruter/credits/create/10/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_10'])->middleware('verified');
+
+    Route::get('/recruter/credits/create/26/{token}', [App\Http\Controllers\TransactionsController::class, 'add_credits_26'])->middleware('verified');
+
+    Route::get('/recruter/credits/error', [App\Http\Controllers\TransactionsController::class, 'error_credits'])->middleware('verified');
+
+    Route::get('/recruter/apply/delete/{id}', [App\Http\Controllers\RecruterController::class, 'remove_apply'])->middleware('verified');
+
+    Route::get('/recruter/apply/validate/{id}', [App\Http\Controllers\RecruterController::class, 'validate_apply'])->middleware('verified');
+
+    Route::get('/recruter/apply/refused/{id}', [App\Http\Controllers\RecruterController::class, 'refused_apply'])->middleware('verified');
+
+    Route::get('/admin/users/validate/{id}', [App\Http\Controllers\AdminController::class, 'users_validate'])->name('users_validate')->middleware('verified');
+
+    Route::get('/admin/users/invalidate/{id}', [App\Http\Controllers\AdminController::class, 'users_invalidate'])->name('users_invalidate')->middleware('verified');
+
+    Route::get('/admin/users/delete/{id}', [App\Http\Controllers\AdminController::class, 'remove_users'])->name('remove_users')->middleware('verified');
 });

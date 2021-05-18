@@ -171,11 +171,17 @@ class JobsController extends Controller
         $jobsCat = Jobs::select('jobs.*')
         ->where('jobs.active', '=', 1)
         ->where('jobs.category', '=', $category)
-        ->paginate(24);
+        ->paginate(15);
+
+        $jobsCatCount = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.category', '=', $category)
+        ->count();
 
         return view('jobs-category', [
             'jobsCat' => $jobsCat,
-            'category' => $category
+            'category' => $category,
+            'jobsCatCount' => $jobsCatCount
         ]);
 
     }
@@ -183,7 +189,7 @@ class JobsController extends Controller
     /**
      * Show the profile for a given user.
      *
-     * @param  string  $category
+     * @param  string  $key
      * @return \Illuminate\View\View
      */
     public function show_key($key)
@@ -191,12 +197,46 @@ class JobsController extends Controller
 
         $jobsKey = Jobs::select('jobs.*')
         ->where('jobs.active', '=', 1)
-        ->where('jobs.title', '=', '%' . $key . '%')
-        ->paginate(24);
+        ->where('jobs.title', 'like', '%' . $key . '%')
+        ->paginate(15);
+
+        $jobsCityCount = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.title', 'like', '%' . $key . '%')
+        ->count();
+
 
         return view('jobs-key', [
             'jobsKey' => $jobsKey,
-            'key' => $key
+            'key' => $key,
+            'jobsCityCount' => $jobsCityCount
+        ]);
+
+    }
+
+    /**
+     * Show the profile for a given user.
+     *
+     * @param  string  $city
+     * @return \Illuminate\View\View
+     */
+    public function show_city($city)
+    {
+
+        $jobsCity = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.localisation', 'like', '%' . $city . '%')
+        ->paginate(15);
+
+        $jobsCityCount = Jobs::select('jobs.*')
+        ->where('jobs.active', '=', 1)
+        ->where('jobs.localisation', 'like', '%' . $city . '%')
+        ->count();
+
+        return view('jobs-city', [
+            'jobsCity' => $jobsCity,
+            'city' => $city,
+            'jobsCityCount' => $jobsCityCount
         ]);
 
     }

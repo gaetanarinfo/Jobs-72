@@ -28,7 +28,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="images/avatar/{{ Auth::user()->avatar }}" width="140px"
+                                                    <img src="../../images/avatar/{{ Auth::user()->avatar }}" width="140px"
                                                         alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -92,7 +92,7 @@
                                         @endif
 
                                         <div id="tab-1" class="tab-pane active" style="pointer-events: all;">
-                                            <div class="row">
+                                            <div class="row table-responsive">
 
                                                 <table class="table table-hover text-nowrap">
                                                     <thead class="text-center">

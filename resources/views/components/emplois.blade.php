@@ -3,7 +3,7 @@
     <h4 class="mb-3 text-center"><strong>Offres d'emploi</strong></h4>
 
     <div class="text-center mb-3">
-        <img src="images/localisation.png" width="120px" alt="emplois" />
+        <img src="images/localisation.png" width="120px" alt="emplois" class="clignote" />
     </div>
 
     <div class="row mb-2">

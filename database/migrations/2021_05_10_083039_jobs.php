@@ -30,7 +30,7 @@ class Jobs extends Migration
 
             $table->string('avantages');
             $table->string('horaires');
-            $table->string('teletravail');
+            $table->boolean('teletravail')->nullable();
 
             $table->string('experience');
             $table->boolean('experience_exiger')->default(0);

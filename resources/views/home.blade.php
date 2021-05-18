@@ -8,6 +8,8 @@
   <hr/>
   @include('components.emplois')
   <hr/>
+  @include('components.carriere')
+  <hr/>
   @include('components.search-emplois')
 
 @endsection

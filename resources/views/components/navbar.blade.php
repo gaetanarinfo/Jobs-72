@@ -7,14 +7,6 @@
                 <img src="{{ asset('logo.png') }}" height="30" alt="Jobs-72" loading="lazy"
                     style="margin-top: 2px;" />
             </a>
-
-            <!-- Search form -->
-            <form class="input-group w-auto my-auto d-none d-sm-flex">
-                <input autocomplete="off" type="search" class="form-control rounded"
-                    placeholder="Faites une recherche..." style="min-width: 125px;" />
-                <span class="input-group-text border-0 d-none d-lg-flex"><button id="search-form" type="submit"><i
-                            class="fas fa-search"></i></button></span>
-            </form>
         </div>
         <!-- Left elements -->
 

@@ -8,18 +8,18 @@
 
     <div class="container mt-5">
 
-        <h3 class="mb-3 text-center"><strong>Nos offres d'emploi - {{ $key }}</strong></h3>
+        <h3 class="mb-3 text-center"><strong>Nos offres d'emploi pour {{ $city }}</strong></h3>
 
         <hr />
 
-        @if ($jobsKeyCount > 0)
+        @if ($jobsCityCount > 0)
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 m-auto text-center">
                         <img src="{{ asset('images/city-buildings.png') }}" alt="city" class="build" />
                         <p class="text-center build" style="font-size: 30px;color: #3d2462;line-height: 1.5;">Nous avons
                             trouvé
-                            {{ $jobsKeyCount }} ooffre(s) qui pourraient vous convenir !</p>
+                            {{ $jobsCityCount }} offre(s) qui pourraient vous convenir !</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
         <hr/>
 
         <div class="row mb-2">
-            @foreach ($jobsKey as $jobs)
+            @foreach ($jobsCity as $jobs)
                 <div class="col-md-6">
                     <div class="card flex-md-row mb-4 box-shadow h-md-250" style="min-height: 390px;">
                         <div class="card-body d-flex flex-column align-items-start">
@@ -59,7 +59,8 @@
                             <div class="mb-1 text-muted mt-1"><i class="fas fa-clock text-warning" aria-hidden="true"></i>
                                 Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</div>
                             <div class="mb-1 text-muted"> <i class="fas fa-map-pin text-secondary"></i>
-                                <strong>{{ $jobs->localisation }}</strong></div>
+                                <strong>{{ $jobs->localisation }}</strong>
+                            </div>
                             <p class="card-text mb-auto">{{ $jobs->smallContent }}</p>
                             <a href="{{ url('emplois', [$jobs->id, $jobs->author]) }}"
                                 class="btn btn-outline-success ripple-surface ripple-surface-dark mt-2">Postuler</a>
@@ -73,7 +74,7 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            {!! $jobsKey->links() !!}
+            {!! $jobsCity->links() !!}
         </div>
     </div>
 

@@ -42,6 +42,7 @@ class RecruterController extends Controller
 
         $jobsAll = Jobs::select('jobs.*')
             ->where('jobs.author', '=', $user->username)
+            ->orderBy('created_at', 'DESC')
             ->paginate(12);
 
         $jobsAllCount = Jobs::select('jobs.*')
@@ -49,44 +50,51 @@ class RecruterController extends Controller
             ->count();  
             
         $transactionsAll = DB::table('users_transactions')
+            ->orderBy('created_at', 'DESC')
             ->where('user_id', '=', $user->id)
             ->paginate(12); 
 
         $jobsRefused = DB::table('jobs')
+            ->orderBy('created_at', 'DESC')
             ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
             ->where('jobs.author', '=', Auth::user()->username)
             ->where('jobs_applies.status', '=', 1)
             ->paginate(12);    
 
         $jobsCheck = DB::table('jobs')
+            ->orderBy('created_at', 'DESC')
             ->join('jobs_applies', 'jobs.id', '=', 'jobs_applies.jobs_id')
             ->where('jobs.author', '=', Auth::user()->username)
             ->where('jobs_applies.status', '=', 2)
             ->paginate(12);        
 
         $jobsRefusedCount = DB::table('jobs')
-        ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
-        ->where('jobs.author', '=', Auth::user()->username)
-        ->where('jobs_applies.status', '=', 1)
-        ->count();   
+            ->orderBy('created_at', 'DESC')
+            ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
+            ->where('jobs.author', '=', Auth::user()->username)
+            ->where('jobs_applies.status', '=', 1)
+            ->count();   
 
         $jobsCheckCount = DB::table('jobs')
-        ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
-        ->where('jobs.author', '=', Auth::user()->username)
-        ->where('jobs_applies.status', '=', 2)
-        ->count();   
+            ->orderBy('created_at', 'DESC')
+            ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
+            ->where('jobs.author', '=', Auth::user()->username)
+            ->where('jobs_applies.status', '=', 2)
+            ->count();   
 
         $jobsPending = DB::table('jobs')
+            ->orderBy('created_at', 'DESC')
             ->join('jobs_applies', 'jobs.id', '=', 'jobs_applies.jobs_id')
             ->where('jobs.author', '=', Auth::user()->username)
             ->where('jobs_applies.status', '=', 0)
             ->paginate(12); 
             
         $jobsPendingCount  = DB::table('jobs')
-        ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
-        ->where('jobs.author', '=', Auth::user()->username)
-        ->where('jobs_applies.status', '=', 0)
-        ->count();     
+            ->orderBy('created_at', 'DESC')
+            ->join('jobs_applies', 'jobs_applies.jobs_id', '=', 'jobs.id')
+            ->where('jobs.author', '=', Auth::user()->username)
+            ->where('jobs_applies.status', '=', 0)
+            ->count();     
 
         return view('recruter.index', [
             'jobsAll' => $jobsAll,
@@ -126,7 +134,6 @@ class RecruterController extends Controller
                 'salaire' => 'required',
                 'avantages' => 'required',
                 'horaires' => 'required',
-                'teletravail' => 'required',
                 'experience' => 'required',
                 'experience_exiger' => 'required'
         
@@ -255,6 +262,52 @@ class RecruterController extends Controller
         return view('recruter.update', [
             'jobs' => $jobs
         ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function update_jobs_post(Request $request, $id)
+    {
+
+        $this->validate($request,[
+            'title' => 'max:255|required',
+            'category' => 'required',
+            'smallContent' => 'max:160',
+            'content' => 'required',
+            'active' => 'required',
+            'localisation' => 'required',
+            'status' => 'required',
+            'type' => 'required',
+            'salaire' => 'required',
+            'avantages' => 'required',
+            'horaires' => 'required',
+            'experience' => 'required',
+            'experience_exiger' => 'required'
+            
+        ]);
+        
+        DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->update(array(
+            'title' => $request->title,
+            'category' => $request->category,
+            'smallContent' => $request->smallContent,
+            'content' => $request->content,
+            'localisation' => $request->localisation,
+            'active' => $request->active,
+            'status' => $request->status,
+            'type' => $request->type,
+            'salaire' => $request->salaire,
+            'avantages' => json_encode($request->avantages),
+            'horaires' => json_encode($request->horaires),
+            'teletravail' => $request->teletravail,
+            'experience' => $request->experience,
+            'experience_exiger' => $request->experience_exiger
+        ));
+
+        return redirect('recruter')->with('success','Votre poste à été modifier');
+
     }
 
      /**

@@ -18,8 +18,13 @@ class JobsAllController extends Controller
             ->where('jobs.active', '=', 1)
             ->paginate(24);
 
+            $jobsCount = Jobs::select('jobs.*')
+            ->where('jobs.active', '=', 1)
+            ->count();    
+
         return view('jobs', [
-            'jobsAll' => $jobsAll
+            'jobsAll' => $jobsAll,
+            'jobsCount' => $jobsCount
         ]);
     }
 }

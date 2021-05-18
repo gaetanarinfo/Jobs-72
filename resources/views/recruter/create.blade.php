@@ -30,7 +30,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="../../images/avatar/{{ Auth::user()->avatar }}"
+                                                    <img src="../../../images/avatar/{{ Auth::user()->avatar }}"
                                                         width="140px" alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -370,11 +370,13 @@
                                                             class="col-md-6 col-form-label text-md-right">{{ __('Télétravail') }}</label>
 
                                                         <div class="col-md-6">
-                                                            <input id="teletravail" type="text"
-                                                                class="form-control @error('teletravail') is-invalid @enderror"
-                                                                name="teletravail" value="{{ old('teletravail') }}"
-                                                                required autocomplete="teletravail" autofocus
-                                                                placeholder="* Temporairement en raison du COVID-19">
+                                                            <input class="form-check-input" type="checkbox" value="1"
+                                                                @error('teletravail') is-invalid @enderror"
+                                                                name="teletravail"
+                                                                value="{{ old('teletravail') }}" />
+                                                            <label class="form-check-label" for="teletravail">
+                                                                Oui
+                                                            </label>    
 
                                                             @error('teletravail')
                                                                 <span class="invalid-feedback" role="alert">

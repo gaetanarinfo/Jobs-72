@@ -97,7 +97,7 @@
 
                                             <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i>
                                                 Télétravail :
-                                                {{ $jobs->teletravail }}</li>
+                                                @if($jobs->teletravail != 1)Non @else Oui @endif</li>
                                         </ul>
 
                                         <hr />
