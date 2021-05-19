@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Jobs-72 @yield('title') - Trouvez le job qu'il vous faut</title>
-    <meta name="Description" content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+    <meta name="Description"
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
     <meta name="affiliate" content="jobs" />
 
     <!-- Primary Meta Tags -->
@@ -23,8 +24,7 @@
     <meta property="og:title" content="Jobs-72 @yield('title') - Trouvez le job qu'il vous faut">
     <meta property="og:description"
         content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
-    <meta property="og:image"
-        content="https://jobs-72.com/images/entreprises.jpg">
+    <meta property="og:image" content="https://jobs-72.com/images/entreprises.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
@@ -32,9 +32,8 @@
     <meta property="twitter:title" content="Jobs-72 @yield('title') - Trouvez le job qu'il vous faut">
     <meta property="twitter:description"
         content="Trouvez le job qu'il vous faut sur le site d'emploi Monster. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
-    <meta property="twitter:image"
-        content="https://jobs-72.com/images/entreprises.jpg">
-    <meta name="csrf-token" content="{{ csrf_token() }}" >    
+    <meta property="twitter:image" content="https://jobs-72.com/images/entreprises.jpg">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
     <link rel="icon" href="{{ asset('favicon.png') }}" />
@@ -51,8 +50,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    {{-- CKEditor --}}
+    <!-- CKEditor -->
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+
+    <!-- themify icon -->
+    <link rel="stylesheet" href="{{ asset('css/plugins/themify-icons/themify-icons.css') }}">
 </head>
 
 <body>
@@ -73,8 +75,8 @@
         @include('components.footer')
     </div>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 
 </html>

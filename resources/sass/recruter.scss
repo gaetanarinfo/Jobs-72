@@ -1,0 +1,48 @@
+.bg-2 {
+    background: url('../../public/images/elipse-bg.png') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.about {
+    .about-block {
+        .about-item {
+            background: #fff;
+            box-shadow: 0px 20px 30px 0px rgb(0 0 0 / 5%);
+            display: flex;
+            padding: 30px;
+            &.active {
+                background: rgb(22, 119, 155);
+                .icon {
+                    i {
+                        color: rgb(221, 221, 221);
+                    }
+                }
+                .content {
+                    h5,
+                    p {
+                        color: rgb(221, 221, 221);
+                    }
+                }
+            }
+            .icon {
+                width: 50px;
+                i {
+                    font-size: 48px;
+                    color: rgb(22, 119, 155);
+                }
+            }
+            .content {
+                margin-left: 30px;
+                h5 {
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    margin-bottom: 15px;
+                }
+            }
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

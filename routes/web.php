@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'], ['middleware' => ['auth', 'active_user']]);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'], ['middleware' => ['auth', 'active_user']])->name('home');
 
 Auth::routes(['verify' => true]);
 
@@ -37,6 +37,8 @@ Route::get('/article/{id}', [App\Http\Controllers\NewsController::class, 'show']
 Route::get('/v/{city}', [App\Http\Controllers\JobsController::class, 'show_city'])->name('order_city');
 
 Route::post('/teletravail', [App\Http\Controllers\SearchController::class, 'order_tel'])->name('order_tel');
+
+Route::post('/devis', [App\Http\Controllers\DevisController::class, 'index'])->name('devis');
 
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
@@ -63,7 +65,7 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
 
     Route::post('/emplois/apply/{id}/{author}', [App\Http\Controllers\JobsController::class, 'apply'])->middleware('verified');
 
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware('verified');
+    Route::get('/administration', [App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware('verified');
 
     Route::get('/admin/news/create', [App\Http\Controllers\AdminController::class, 'news_create'])->name('news_create')->middleware('verified');
 

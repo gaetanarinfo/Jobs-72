@@ -102,5 +102,6 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/jobs_tel.js') }}"></script>
 
 @endsection

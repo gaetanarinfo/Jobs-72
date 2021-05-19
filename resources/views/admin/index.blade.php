@@ -64,6 +64,8 @@
                                         <li class="nav-item"><a href="" id="usersBtn" class="nav-link">Les
                                                 utilisateurs</a>
                                         </li>
+                                        <li class="nav-item"><a href="" id="devisBtn" class="nav-link">Devis</a>
+                                        </li>
                                     </ul>
 
                                     <div id="news" class="pt-3">
@@ -203,24 +205,6 @@
                                     </div>
 
                                     <div id="users" class="pt-3" style="display: none;">
-
-                                        @if ($message = Session::get('success'))
-                                            <div class="col-md-4 text-center" style="margin: 0 auto;">
-                                                <div class="alert alert-success alert-block">
-                                                    <i class="fas fa-check mr-1 text-success"></i>
-                                                    <strong>{{ $message }}</strong>
-                                                </div>
-                                            </div>
-                                        @endif
-                                        @if ($message = Session::get('error'))
-                                            <div class="col-md-4 text-center" style="margin: 0 auto;">
-                                                <div class="alert alert-danger alert-block">
-                                                    <i class="fas fa-times mr-1 text-danger"></i>
-                                                    <strong>{{ $message }}</strong>
-                                                </div>
-                                            </div>
-                                        @endif
-
                                         <div id="tab-2" class="tab-pane" style="pointer-events: all;">
                                             <div class="row table-responsive">
 
@@ -321,10 +305,10 @@
                                                                     @endif
 
                                                                     @if ($users->roles != 'ROLES_ADMIN')
-                                                                    <a href="{{ route('remove_users', [$users->id]) }}"
-                                                                        class="btn btn-danger btn-sm px-3 mr-1">
-                                                                        <i class="fas fa-times"></i>
-                                                                    </a>
+                                                                        <a href="{{ route('remove_users', [$users->id]) }}"
+                                                                            class="btn btn-danger btn-sm px-3 mr-1">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </a>
                                                                     @endif
                                                                 </td>
                                                             </tr>
@@ -339,6 +323,66 @@
                                         </div>
                                     </div>
 
+                                    <div id="devis" class="pt-3" style="display: none;">
+                                        <div id="tab-2" class="tab-pane" style="pointer-events: all;">
+                                            <div class="row table-responsive">
+
+                                                <div class="col-md-12 m-auto text-center">
+                                                    @foreach ($devisAll as $devis)
+                                                        <a class="btn btn-secondary mr-2" data-mdb-toggle="collapse"
+                                                            href="#devis_{{ $devis->id }}" role="button"
+                                                            aria-expanded="false"
+                                                            aria-controls="devis_{{ $devis->id }}">
+                                                            Devis n°{{ $devis->id }} - {{ $devis->society }} -
+                                                            {{ $devis->name }}
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="col-md-12 m-auto text-center">
+                                                    @foreach ($devisAll as $devis)
+                                                        <div class="collapse mt-3" id="devis_{{ $devis->id }}">
+                                                            <div class="col-md-4 m-auto">
+                                                                <ul class="list-group">
+                                                                    <li class="list-group-item"><b>Société :</b>
+                                                                        {{ $devis->society }}</li>
+                                                                    <li class="list-group-item"><b>Siret ou Siren:</b>
+                                                                        {{ $devis->socialD }}</li>
+                                                                    <li class="list-group-item"><b>Nom :</b> {{ $devis->name }}
+                                                                    </li>
+                                                                    <li class="list-group-item"><b>Email :</b>
+                                                                        {{ $devis->email }}</li>
+                                                                    <li class="list-group-item"><b>Nombre de salarié :</b>
+                                                                        {{ $devis->salarie }}</li>
+                                                                    <li class="list-group-item"><b>Nombre de poste :</b>
+                                                                        {{ $devis->typePoste }}</li>
+                                                                    <li class="list-group-item"><b>Adresse :</b>
+                                                                        {{ $devis->adress }}</li>
+                                                                    <li class="list-group-item"><b>Ville :</b>
+                                                                        {{ $devis->city }}</li>
+                                                                    <li class="list-group-item"><b>Code postal :</b>
+                                                                        {{ $devis->cp }}</li>
+                                                                    <li class="list-group-item"><b>Pays :</b> {{ $devis->pays }}
+                                                                    </li>
+                                                                    <li class="list-group-item"><b>Content :</b>
+                                                                        <br/>{{ $devis->content }}</li>
+                                                                    <li class="list-group-item"><b>Document :</b>
+                                                                        <a href="{{ asset('admin/documents') }}/{{ $devis->doc }}" target="_blank">{{ $devis->doc }}</a></li>
+                                                                    <li class="list-group-item"><b>Date de création :</b>
+                                                                        {{ date('d/m/Y à H:i', strtotime($devis->created_at)) }}
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                <div class="d-flex justify-content-center mt-3">
+                                                    {!! $devisAll->links() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -353,8 +397,10 @@
     <script type="text/javascript">
         var newsBtn = document.getElementById('newsBtn'),
             usersBtn = document.getElementById('usersBtn'),
+            devisBtn = document.getElementById('devisBtn'),
             displayNews = document.getElementById('news'),
-            displayUsers = document.getElementById('users');
+            displayUsers = document.getElementById('users'),
+            displayDevis = document.getElementById('devis');
 
         newsBtn.addEventListener('click', function(e) {
 
@@ -362,9 +408,11 @@
 
             newsBtn.classList.add('active');
             usersBtn.classList.remove('active');
+            devisBtn.classList.remove('active');
 
             displayNews.style.display = 'block';
             displayUsers.style.display = 'none';
+            displayDevis.style.display = 'none';
 
             return false;
 
@@ -376,9 +424,27 @@
 
             newsBtn.classList.remove('active');
             usersBtn.classList.add('active');
+            devisBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'block';
+            displayDevis.style.display = 'none';
+
+            return false;
+
+        });
+
+        devisBtn.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            newsBtn.classList.remove('active');
+            usersBtn.classList.remove('active');
+            devisBtn.classList.add('active');
+
+            displayNews.style.display = 'none';
+            displayUsers.style.display = 'none';
+            displayDevis.style.display = 'block';
 
             return false;
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsComment;
 use App\Models\User;
+use App\Models\Devis;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,11 +47,16 @@ class AdminController extends Controller
 
         $usersAll = User::select('users.*')
             ->orderBy('created_at', 'DESC')
-            ->paginate(12);    
+            ->paginate(12);  
+            
+        $devisAll = Devis::select('devis.*')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(4);    
 
         return view('admin.index', [
             'newsAll' => $newsAll,
-            'usersAll' => $usersAll
+            'usersAll' => $usersAll,
+            'devisAll' => $devisAll
         ]);
     }
 
