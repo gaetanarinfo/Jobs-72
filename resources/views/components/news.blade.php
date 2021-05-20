@@ -1,4 +1,4 @@
-    <div class="container mt-5">
+    <div class="container mt-5 fadeOn">
         <!--Section: Content-->
         <section class="text-center">
             <h4 class="mb-3"><strong>Actualités du jour</strong></h4>

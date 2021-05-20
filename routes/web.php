@@ -30,6 +30,8 @@ Route::get('/search/{key}', [App\Http\Controllers\JobsController::class, 'show_k
 
 Route::get('/offres-emploi', [App\Http\Controllers\JobsAllController::class, 'index']);
 
+Route::get('/actualites', [App\Http\Controllers\NewsController::class, 'show_all'])->name('actualites');
+
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
 Route::get('/article/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news');
@@ -39,6 +41,8 @@ Route::get('/v/{city}', [App\Http\Controllers\JobsController::class, 'show_city'
 Route::post('/teletravail', [App\Http\Controllers\SearchController::class, 'order_tel'])->name('order_tel');
 
 Route::post('/devis', [App\Http\Controllers\DevisController::class, 'index'])->name('devis');
+
+Route::name('language')->get('language/{lang}', [App\Http\Controllers\HomeController::class, 'language']);
 
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
@@ -67,19 +71,19 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
 
     Route::get('/administration', [App\Http\Controllers\AdminController::class, 'index'])->name('admin')->middleware('verified');
 
-    Route::get('/admin/news/create', [App\Http\Controllers\AdminController::class, 'news_create'])->name('news_create')->middleware('verified');
+    Route::get('/administration/news/create', [App\Http\Controllers\AdminController::class, 'news_create'])->name('news_create')->middleware('verified');
 
-    Route::post('/admin/news/create', [App\Http\Controllers\AdminController::class, 'news_create_post'])->name('news_create_post')->middleware('verified');
+    Route::post('/administration/news/create', [App\Http\Controllers\AdminController::class, 'news_create_post'])->name('news_create_post')->middleware('verified');
 
-    Route::get('/admin/news/validate/{id}', [App\Http\Controllers\AdminController::class, 'news_validate'])->name('news_validate')->middleware('verified');
+    Route::get('/administration/news/validate/{id}', [App\Http\Controllers\AdminController::class, 'news_validate'])->name('news_validate')->middleware('verified');
 
-    Route::get('/admin/news/draft/{id}', [App\Http\Controllers\AdminController::class, 'news_invalidate'])->name('news_invalidate')->middleware('verified');
+    Route::get('/administration/news/draft/{id}', [App\Http\Controllers\AdminController::class, 'news_invalidate'])->name('news_invalidate')->middleware('verified');
 
-    Route::get('/admin/news/update/{id}', [App\Http\Controllers\AdminController::class, 'news_update'])->name('news_update')->middleware('verified');
+    Route::get('/administration/news/update/{id}', [App\Http\Controllers\AdminController::class, 'news_update'])->name('news_update')->middleware('verified');
 
-    Route::post('/admin/news/update/confirm/{id}', [App\Http\Controllers\AdminController::class, 'news_update_post'])->name('news_update_post')->middleware('verified');
+    Route::post('/administration/news/update/confirm/{id}', [App\Http\Controllers\AdminController::class, 'news_update_post'])->name('news_update_post')->middleware('verified');
 
-    Route::get('/admin/news/delete/{id}', [App\Http\Controllers\AdminController::class, 'news_delete'])->name('news_delete')->middleware('verified');
+    Route::get('/administration/news/delete/{id}', [App\Http\Controllers\AdminController::class, 'news_delete'])->name('news_delete')->middleware('verified');
 
     Route::get('/article/like/{news_id}/{user_id}', [App\Http\Controllers\NewsController::class, 'likes'])->name('like_news')->middleware('verified');
 
@@ -115,9 +119,13 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
 
     Route::get('/recruter/apply/refused/{id}', [App\Http\Controllers\RecruterController::class, 'refused_apply'])->middleware('verified');
 
-    Route::get('/admin/users/validate/{id}', [App\Http\Controllers\AdminController::class, 'users_validate'])->name('users_validate')->middleware('verified');
+    Route::get('/administration/users/validate/{id}', [App\Http\Controllers\AdminController::class, 'users_validate'])->name('users_validate')->middleware('verified');
 
-    Route::get('/admin/users/invalidate/{id}', [App\Http\Controllers\AdminController::class, 'users_invalidate'])->name('users_invalidate')->middleware('verified');
+    Route::get('/administration/users/invalidate/{id}', [App\Http\Controllers\AdminController::class, 'users_invalidate'])->name('users_invalidate')->middleware('verified');
 
-    Route::get('/admin/users/delete/{id}', [App\Http\Controllers\AdminController::class, 'remove_users'])->name('remove_users')->middleware('verified');
+    Route::get('/administration/users/delete/{id}', [App\Http\Controllers\AdminController::class, 'remove_users'])->name('remove_users')->middleware('verified');
+
+    Route::get('/administration/devis/delete/{id}', [App\Http\Controllers\DevisController::class, 'delete_devis'])->name('delete_devis')->middleware('verified');
+
+    Route::get('/administration/devis/reply/{id}', [App\Http\Controllers\DevisController::class, 'reply_devis'])->name('reply_devis')->middleware('verified');
 });

@@ -200,7 +200,7 @@ class JobsController extends Controller
         ->where('jobs.title', 'like', '%' . $key . '%')
         ->paginate(15);
 
-        $jobsCityCount = Jobs::select('jobs.*')
+        $jobsKeyCount = Jobs::select('jobs.*')
         ->where('jobs.active', '=', 1)
         ->where('jobs.title', 'like', '%' . $key . '%')
         ->count();
@@ -209,7 +209,7 @@ class JobsController extends Controller
         return view('jobs-key', [
             'jobsKey' => $jobsKey,
             'key' => $key,
-            'jobsCityCount' => $jobsCityCount
+            'jobsKeyCount' => $jobsKeyCount
         ]);
 
     }

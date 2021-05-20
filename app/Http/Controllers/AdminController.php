@@ -69,7 +69,7 @@ class AdminController extends Controller
 
         DB::table('news')->where('id', '=', $id)->update(array('active' => 1));
 
-        return redirect('admin')->with('success','Votre article à été mise en ligne');
+        return redirect('administration')->with('success','Votre article à été mise en ligne');
 
     }
 
@@ -82,7 +82,7 @@ class AdminController extends Controller
 
         DB::table('news')->where('id', '=', $id)->update(array('active' => 0));
 
-        return redirect('admin')->with('success','Votre article est désormais invisible');
+        return redirect('administration')->with('success','Votre article est désormais invisible');
 
     }
 
@@ -104,7 +104,7 @@ class AdminController extends Controller
 
         DB::table('news')->where('id', '=', $id)->delete();
 
-        return redirect('admin')->with('success','Votre article à été supprimer');
+        return redirect('administration')->with('success','Votre article à été supprimer');
 
     }
 
@@ -149,7 +149,7 @@ class AdminController extends Controller
             'active' => $request->active
         ));
 
-        return redirect('admin')->with('success','Votre article à été modifier');
+        return redirect('administration')->with('success','Votre article à été modifier');
     }
 
     /**
@@ -197,7 +197,7 @@ class AdminController extends Controller
                 'created_at' => Carbon::now('Europe/Paris')
             ]);
 
-            return redirect('admin')->with('success','Votre article à été crée');
+            return redirect('administration')->with('success','Votre article à été crée');
 
     }
 
@@ -211,7 +211,7 @@ class AdminController extends Controller
 
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => null));
 
-        return redirect('admin')->with('success','L\'ulisateur à été débanni');
+        return redirect('administration')->with('success','L\'ulisateur à été débanni');
 
     }
 
@@ -224,7 +224,7 @@ class AdminController extends Controller
 
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => Carbon::now('Europe/Paris')));
 
-        return redirect('admin')->with('success','L\'ulisateur à été banni');
+        return redirect('administration')->with('success','L\'ulisateur à été banni');
 
     }
 
@@ -249,10 +249,10 @@ class AdminController extends Controller
 
             DB::table('users')->where('id', '=', $id)->delete();
 
-            return redirect('admin')->with('success','L\'utilisateur à été supprimé');
+            return redirect('administration')->with('success','L\'utilisateur à été supprimé');
 
         }else{
-            return redirect('admin')->with('error','L\'utilisateur n\'à pas été supprimé');
+            return redirect('administration')->with('error','L\'utilisateur n\'à pas été supprimé');
         }
 
     }

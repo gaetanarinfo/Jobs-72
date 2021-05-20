@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use File;
 use Illuminate\Http\Request;
+use Mail;
 
 class DevisController extends Controller
 {
@@ -94,5 +95,48 @@ class DevisController extends Controller
         }
 
         return redirect('/')->with('success','Votre devis à été envoyer.');
+    }
+
+     /**
+     * Show the application dashboard.
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function delete_devis($id){
+
+        $devis = DB::table('devis')->where('id', '=', $id)->first();
+
+        if($devis->doc != null)
+        {
+            $destinationPath = public_path('admin/document/');
+            File::delete($destinationPath.$devis->doc);
+        }
+
+        DB::table('devis')->where('id', '=', $id)->delete();
+
+        return redirect('administration')->with('success','Le devis de ' . $devis->name .' n° ' . $devis->id . ' à été supprimer');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function reply_devis(Request $request){
+
+        $devisInfo = DB::table('devis')->where('id', '=', $request->route('id'))->first();
+
+        //  Send mail to admin
+        Mail::send('vendor.notifications.devis', ['name' => $devisInfo->name], function($message) use ($request){
+            $devis = DB::table('devis')->where('id', '=', $request->route('id'))->first();
+            $message->to($devis->email, $devis->name)
+            ->subject('Réponse concernant votre devis n°' . $devis->id . ''); 
+        });
+
+        DB::table('devis')->where('id', '=', $request->route('id'))->update(array('status' => 1));
+
+        return redirect('administration')->with('success','Vous avez répondu au devis de ' . $devisInfo->name .' n° ' . $devisInfo->id . '.');
+
     }
 }

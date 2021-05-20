@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/input-file.css') }}">
 
-<section class="about section bg-2" id="about">
+<section class="about section bg-2 fadeOn" id="about">
     <div class="container p-4">
         <div class="row">
             <div class="col-lg-6 align-self-center text-center">

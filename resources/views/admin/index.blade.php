@@ -64,7 +64,7 @@
                                         <li class="nav-item"><a href="" id="usersBtn" class="nav-link">Les
                                                 utilisateurs</a>
                                         </li>
-                                        <li class="nav-item"><a href="" id="devisBtn" class="nav-link">Devis</a>
+                                        <li class="nav-item"><a href="" id="devisBtn" class="nav-link">Demande de devis</a>
                                         </li>
                                     </ul>
 
@@ -344,11 +344,19 @@
                                                         <div class="collapse mt-3" id="devis_{{ $devis->id }}">
                                                             <div class="col-md-4 m-auto">
                                                                 <ul class="list-group">
+                                                                    <li class="list-group-item"><b>Status du devis :</b>
+                                                                        @if ($devis->status == 0)<span
+                                                                                class="badge bg-warning">Pas encore
+                                                                            validé</span>@else<span
+                                                                                class="badge bg-success">Devis validé</span>
+                                                                        @endif
+                                                                    </li>
                                                                     <li class="list-group-item"><b>Société :</b>
                                                                         {{ $devis->society }}</li>
                                                                     <li class="list-group-item"><b>Siret ou Siren:</b>
                                                                         {{ $devis->socialD }}</li>
-                                                                    <li class="list-group-item"><b>Nom :</b> {{ $devis->name }}
+                                                                    <li class="list-group-item"><b>Nom :</b>
+                                                                        {{ $devis->name }}
                                                                     </li>
                                                                     <li class="list-group-item"><b>Email :</b>
                                                                         {{ $devis->email }}</li>
@@ -362,16 +370,37 @@
                                                                         {{ $devis->city }}</li>
                                                                     <li class="list-group-item"><b>Code postal :</b>
                                                                         {{ $devis->cp }}</li>
-                                                                    <li class="list-group-item"><b>Pays :</b> {{ $devis->pays }}
+                                                                    <li class="list-group-item"><b>Pays :</b>
+                                                                        {{ $devis->pays }}
                                                                     </li>
                                                                     <li class="list-group-item"><b>Content :</b>
-                                                                        <br/>{{ $devis->content }}</li>
+                                                                        <br />{{ $devis->content }}
+                                                                    </li>
                                                                     <li class="list-group-item"><b>Document :</b>
-                                                                        <a href="{{ asset('admin/documents') }}/{{ $devis->doc }}" target="_blank">{{ $devis->doc }}</a></li>
+                                                                        <a href="{{ asset('admin/documents') }}/{{ $devis->doc }}"
+                                                                            target="_blank">{{ $devis->doc }}</a>
+                                                                    </li>
                                                                     <li class="list-group-item"><b>Date de création :</b>
                                                                         {{ date('d/m/Y à H:i', strtotime($devis->created_at)) }}
                                                                     </li>
                                                                 </ul>
+
+                                                                <div class="mt-3">
+                                                                    @if ($devis->status == 0)
+                                                                        <a href="{{ route('reply_devis', $devis->id) }}"
+                                                                            class="btn btn-success mr-2"><i
+                                                                                class="fas fa-reply mr-2"></i>Accepter le
+                                                                            devis</a>
+                                                                    @else
+                                                                        <a href="mailto:{{ $devis->email }}"
+                                                                            class="btn btn-info mr-2"><i
+                                                                                class="fas fa-reply mr-2"></i>Envoyer un email</a>
+                                                                    @endif
+                                                                    <a href="{{ route('delete_devis', $devis->id) }}"
+                                                                        class="btn btn-danger"><i
+                                                                            class="fas fa-trash mr-2"></i>Supprimer le
+                                                                        devis</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     @endforeach

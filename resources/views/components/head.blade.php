@@ -1,4 +1,4 @@
-<div style="background-color: rgb(35, 9, 57); padding: 5rem 5rem 8rem 5rem !important;">
+<div style="background-color: rgb(35, 9, 57); padding: 5rem 2rem 8rem 2rem !important;">
     <div class="container">
         <div class="row justify-content-center">
             <h3 class="text-left mt-4 mb-0 text-white" style="margin-left: 1em;">Trouvez le job qui vous convient

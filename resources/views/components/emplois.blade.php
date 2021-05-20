@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 fadeOn">
 
     <h4 class="mb-3 text-center"><strong>Offres d'emploi</strong></h4>
 

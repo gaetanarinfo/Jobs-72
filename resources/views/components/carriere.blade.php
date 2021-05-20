@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
 
-<div class="container mt-5">
+<div class="container mt-5 fadeOn">
     <!--Section: Content-->
     <section class="text-center">
         <h4 class="mb-4"><strong>TOP Conseils Carrière</strong></h4>
