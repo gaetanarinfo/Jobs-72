@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '- Mot de passe oublié')
+@section('title', trans('- Mot de passe oublié'))
 
 @section('content')
 
@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-12 mb-3 text-center">
-            <img src="../images/change-password.png" width="200px" alt="user"/>
+            <img src="../../images/change-password.png" width="200px" alt="user"/>
         </div>
 
         <div class="col-md-8">
@@ -24,7 +24,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
@@ -45,14 +45,14 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <i class="fas fa-times text-danger mr-1"></i> <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirer le mot de passe') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Comfirmer le mot de passe') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

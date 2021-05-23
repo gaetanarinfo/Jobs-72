@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '- Confirmez le mot de passe')
+@section('title', trans('- Confirmez le mot de passe'))
 
 @section('content')
 
@@ -10,7 +10,7 @@
     <div class="row justify-content-center">
 
         <div class="col-md-12 mb-3 text-center">
-            <img src="../images/change-password.png" width="200px" alt="user"/>
+            <img src="../../images/change-password.png" width="200px" alt="user"/>
         </div>
 
         <div class="col-md-8">
@@ -31,7 +31,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <i class="fas fa-times text-danger mr-1"></i> <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>

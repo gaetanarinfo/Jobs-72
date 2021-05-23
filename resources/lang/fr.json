@@ -722,5 +722,12 @@
     "Username": "Nom d'utilisateur",
     "Confirm password": "Comfirmer le mot de passe",
     "General Terms of Use": "Conditions Général D'utilisation",
-    "Confirm registration": "Valider l'inscription"
+    "Confirm registration": "Valider l'inscription",
+    "- Forgot your password": "- Mot de passe oublié",
+    "Forgot your password": "Mot de passe oublié",
+    "Send password reset link": "Envoyer le lien de réinitialisation du mot de passe",
+    "- Confirm the password": "- Confirmez le mot de passe",
+    "Confirm the password": "Confirmez le mot de passe",
+    "Please confirm your password before continuing": "Veuillez confirmer votre mot de passe avant de continuer",
+    "Reset password": "Réinitialiser le mot de passe"
 }

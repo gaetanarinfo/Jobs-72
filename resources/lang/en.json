@@ -152,5 +152,12 @@
     "Nom d'utilisateur": "Username",
     "Comfirmer le mot de passe": "Confirm password",
     "Conditions Général D'utilisation": "General Terms of Use",
-    "Valider l'inscription": "Confirm registration"
+    "Valider l'inscription": "Confirm registration",
+    "- Mot de passe oublié": "- Forgot your password",
+    "Mot de passe oublié": "Forgot your password",
+    "Envoyer le lien de réinitialisation du mot de passe": "Send password reset link",
+    "- Confirmez le mot de passe": "- Confirm the password",
+    "Confirmez le mot de passe": "Confirm the password",
+    "Veuillez confirmer votre mot de passe avant de continuer": "Please confirm your password before continuing",
+    "Réinitialiser le mot de passe": "Reset password"
 }
