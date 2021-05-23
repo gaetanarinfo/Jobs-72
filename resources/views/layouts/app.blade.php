@@ -55,6 +55,20 @@
 
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/plugins/themify-icons/themify-icons.css') }}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLGJ8YKWG7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-SLGJ8YKWG7');
+
+    </script>
 </head>
 
 <body>

@@ -31,12 +31,33 @@
                 <div class="card">
                     <div class="card-header">{{ __('Connectez-vous avec Jobs-72') }}</div>
 
+                    <div class="container text-center">
+                        <h5 class="mt-3 mb-3">Se connecter / S'enregistrer avec un compte social</h5>
+                        <p>
+                            <!-- Lien de redirection vers Google -->
+                            <a href="{{ route('socialite.redirect', 'google') }}"
+                                title="Connexion/Inscription avec Google" class="btn btn-danger mr-2">Continuer avec
+                                Google</a>
+
+                            <!-- Lien de redirection vers Facebook -->
+                            <a href="{{ route('socialite.redirect', 'facebook') }}"
+                                title="Connexion/Inscription avec Facebook" class="btn btn-info mr-2">Continuer avec
+                                Facebook</a>
+
+                            <!-- Lien de redirection vers Github -->
+                            <a href="{{ route('socialite.redirect', 'github') }}"
+                                title="Connexion/Inscription avec Github" class="btn btn-secondary">Continuer avec
+                                Github</a>
+                        </p>
+                    </div>
+
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Adresse e-mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
