@@ -139,4 +139,9 @@ class NewsController extends Controller
         }
 
     }
+
+    public function show_all()
+    {
+        return view('news-all');
+    }
 }

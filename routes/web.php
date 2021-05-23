@@ -129,3 +129,24 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
 
     Route::get('/administration/devis/reply/{id}', [App\Http\Controllers\DevisController::class, 'reply_devis'])->name('reply_devis')->middleware('verified');
 });
+
+# Socialite URLs
+
+// La page où on présente les liens de redirection vers les providers
+Route::get("login-register", [App\Http\Controllers\SocialiteController::class, 'loginRegister']);
+
+// La redirection vers le provider
+Route::get("redirect/{provider}", [App\Http\Controllers\SocialiteController::class, 'redirect'])->name('socialite.redirect');
+
+// Le callback du provider
+Route::get("callback/{provider}", [App\Http\Controllers\SocialiteController::class, 'callback'])->name('socialite.callback');
+
+// Error 404
+Route::fallback(function() {
+    return view('404');
+ });
+
+ // Error 500
+Route::fallback(function() {
+    return view('500');
+ });
