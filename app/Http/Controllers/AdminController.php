@@ -240,7 +240,7 @@ class AdminController extends Controller
         if($users->roles != 'ROLES_ADMIN')
         {
 
-            if($users->avatar != 'default.jpg')
+            if($users->avatar != 'images/avatar/default.jpg')
             {
                 $destinationPath = public_path('images/avatar/');
                 File::delete($destinationPath.$users->avatar);

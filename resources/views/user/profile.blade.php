@@ -132,7 +132,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="../images/avatar/{{ Auth::user()->avatar }}" width="140px"
+                                                    <img src="{{ Auth::user()->avatar }}" width="140px"
                                                         alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -702,7 +702,7 @@
                                                 {!! $saveJobs->links() !!}
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                         
                                 </div>
                             </div>
                         </div>
@@ -726,7 +726,7 @@
 
                                     <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                            document.getElementById('logout-form').submit();"
+                                                                                                                                    document.getElementById('logout-form').submit();"
                                         class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>
@@ -813,6 +813,7 @@
             cvBtn.classList.remove('active');
             viewBtn.classList.remove('active');
             jobsBtn.classList.remove('active');
+
 
             displaySetting.style.display = 'block';
             displayCv.style.display = 'none';

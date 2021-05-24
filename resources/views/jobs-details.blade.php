@@ -164,7 +164,7 @@
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="../../images/avatar/@foreach(user($jobs->author) as
+                                        <img src="@foreach(user($jobs->author) as
                                         $user){{ $user->avatar }}@endforeach" width="100px"
                                         height="100px" alt="">
                                     </div>

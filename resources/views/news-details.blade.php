@@ -79,7 +79,7 @@
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="../../images/avatar/@foreach(user($news->author) as
+                                        <img src="@foreach(user($news->author) as
                                         $user){{ $user->avatar }}@endforeach" width="100px"
                                         height="100px" alt="@foreach(user($news->author) as
                                         $user){{ $user->username }}@endforeach">
@@ -143,7 +143,7 @@
                                         <div class="comment-content d-flex">
 
                                             <div class="comment-author">
-                                                <img src="../../images/avatar/@foreach(user($comments->author) as
+                                                <img src="@foreach(user($comments->author) as
                                                 $user){{ $user->avatar }}@endforeach" alt="@foreach(user($comments->author) as
                                                 $user){{ $user->username }}@endforeach" width="70px"
                                         height="70px">

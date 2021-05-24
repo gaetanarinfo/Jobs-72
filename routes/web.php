@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\GitHubController;
+use App\Http\Controllers\Auth\TwitterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,23 +133,14 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/administration/devis/reply/{id}', [App\Http\Controllers\DevisController::class, 'reply_devis'])->name('reply_devis')->middleware('verified');
 });
 
-# Socialite URLs
+// Google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-// La page où on présente les liens de redirection vers les providers
-Route::get("login-register", [App\Http\Controllers\SocialiteController::class, 'loginRegister']);
+// Github
+Route::get('auth/github', [GitHubController::class, 'redirectToGitHub']);
+Route::get('auth/github/callback', [GitHubController::class, 'handleGitHubCallback']);
 
-// La redirection vers le provider
-Route::get("redirect/{provider}", [App\Http\Controllers\SocialiteController::class, 'redirect'])->name('socialite.redirect');
-
-// Le callback du provider
-Route::get("callback/{provider}", [App\Http\Controllers\SocialiteController::class, 'callback'])->name('socialite.callback');
-
-// Error 404
-Route::fallback(function() {
-    return view('404');
- });
-
- // Error 500
-Route::fallback(function() {
-    return view('500');
- });
+// Facebook
+Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
+Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);

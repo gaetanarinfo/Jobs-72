@@ -35,16 +35,16 @@
                         <h5 class="mt-3 mb-3">{{ __('Se connecter / S\'enregistrer avec un compte social') }}</h5>
                         <p>
                             <!-- Lien de redirection vers Google -->
-                            <a href="{{ route('socialite.redirect', 'google') }}"
-                                title="{{ __('Connexion/Inscription avec Google') }}" class="btn btn-danger mr-2">{{ __('Continuer avec Google') }}</a>
+                            <a href="{{ url('auth/google') }}"
+                                title="{{ __('Connexion/Inscription avec Google') }}" class="btn btn-danger mr-2"><i class="fab fa-google mr-2"></i>{{ __('Continuer avec Google') }}</a>
 
-                            <!-- Lien de redirection vers Facebook -->
-                            <a href="{{ route('socialite.redirect', 'facebook') }}"
-                                title="{{ __('Connexion/Inscription avec Facebook') }}" class="btn btn-info mr-2">{{ __('Continuer avec Facebook') }}</a>
+                            <!-- Lien de redirection vers GitHub -->
+                            <a href="{{ url('auth/github') }}"
+                            title="{{ __('Connexion/Inscription avec GitHub') }}" class="btn btn-secondary mr-2"><i class="fab fa-github mr-2"></i>{{ __('Continuer avec GitHub') }}</a>
 
-                            <!-- Lien de redirection vers Github -->
-                            <a href="{{ route('socialite.redirect', 'github') }}"
-                                title="{{ __('Connexion/Inscription avec GitHub') }}" class="btn btn-secondary">{{ __('Continuer avec GitHub') }}</a>
+                            <!-- Lien de redirection vers Twitter -->
+                            <a href="{{ url('auth/twitter') }}"
+                            title="{{ __('Connexion/Inscription avec Twitter') }}" class="btn btn-info mr-2"><i class="fab fa-twitter mr-2"></i>{{ __('Continuer avec Twitter') }}</a>
                         </p>
                     </div>
 

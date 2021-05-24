@@ -11,6 +11,7 @@ use App\User\UsersVisibilities;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,8 +20,14 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'username',
+        'lastname',
+        'firstname',
+        'avatar',
+        'email_verified_at',
+        'biography',
         'email',
         'password',
+        'google_id'
     ];
 
     /**

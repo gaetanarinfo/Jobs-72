@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Jobs;
+use App\Models\Sessions;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Image;
 use File;
 use App\Models\JobsApplies;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
@@ -41,11 +43,16 @@ class ProfileController extends Controller
 
         $saveJobs2 = JobsApplies::select('*')
             ->where('jobs_applies.user_id', '=', $user->id)
-            ->paginate(6);      
-
+            ->paginate(6);     
+            
+        $sessions = Sessions::select('*')
+            ->where('sessions.user_id', '=', $user->id)
+            ->paginate(6);        
+        
         return view('user.profile', [
             'saveJobs' => $saveJobs,
-            'saveJobs2' => $saveJobs2
+            'saveJobs2' => $saveJobs2,
+            'sessions' => $sessions
         ]);
     }
 
@@ -53,7 +60,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        if($user->avatar != 'default.jpg')
+        if($user->avatar != 'images/avatar/default.jpg')
         {
             $destinationPath = public_path('images/avatar/');
             File::delete($destinationPath.$user->avatar);
@@ -68,7 +75,7 @@ class ProfileController extends Controller
     		$filename = time() . '.' . $avatar->getClientOriginalExtension();
     		Image::make($avatar)->resize(140, 140)->save( public_path('/images/avatar/' . $filename ) );
 
-    		$user->avatar = $filename;
+    		$user->avatar = 'images/avatar/' . $filename;
     		$user->save();
     	}else{
             return back()->with('error','Désoler, une erreur est survenue.');
@@ -197,7 +204,7 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        if($user->avatar != 'default.jpg')
+        if($user->avatar != 'images/avatar/default.jpg')
         {
             $destinationPath = public_path('images/avatar/');
             File::delete($destinationPath.$user->avatar);
