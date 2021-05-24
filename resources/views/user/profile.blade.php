@@ -109,12 +109,16 @@
                 <div class="card p-3">
                     <div class="e-navlist e-navlist--active-bg">
                         <ul class="nav">
-                            <li class="nav-item"><a class="nav-link px-2 active" href="{{ url('profile') }}"><i
-                                        class="fas fa-fw fa-user mr-1 text-secondary"></i><span>Profil</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2" href=""><i
+                            <li class="nav-item"><a class="nav-link px-2" href="{{ url('profile') }}"><i
+                                        class="fas fa-fw fa-user mr-1 text-secondary"></i><span>Voir mon profil</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link px-2" href="{{ url('offres-emploi') }}"><i
                                         class="fas fa-fw fa-flag mr-1 text-info"></i><span>Offres d'emploi</span></a></li>
-                            <li class="nav-item"><a class="nav-link px-2" href=""><i
+                            <li class="nav-item"><a class="nav-link px-2" href="{{ url('/#career') }}"><i
                                         class="fas fa-fw fa-cog mr-1 text-warning"></i><span>Conseils carrière</span></a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link px-2" href="{{ route('actualites') }}"><i
+                                        class="far fa-newspaper mr-1 text-success"></i><span>Nos actualités</span></a>
                             </li>
                         </ul>
                     </div>
@@ -132,7 +136,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="{{ Auth::user()->avatar }}" width="140px"
+                                                    <img src="{{ asset(Auth::user()->avatar) }}" width="140px"
                                                         alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -172,6 +176,8 @@
                                         <li class="nav-item"><a href="" id="viewBtn" class="nav-link">Visibilité</a></li>
                                         <li class="nav-item"><a href="" id="jobsBtn" class="nav-link">Mes offres
                                                 postulées</a></li>
+                                        <li class="nav-item"><a href="" id="contactBtn" class="nav-link">Mon support</a>
+                                        </li>
                                     </ul>
 
                                     <div id="setting" class="pt-3">
@@ -257,6 +263,71 @@
                                                                         name="email" value="{{ Auth::user()->email }}">
                                                                 </div>
                                                             </div>
+                                                        </div>
+
+                                                        <div class="row  mt-2 mb-2">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label>Compte Facebook</label>
+                                                                    @if (Auth::user()->show_facebook == 0)<i
+                                                                            class="far fa-eye-slash"
+                                                                            data-mdb-toggle="tooltip"
+                                                                        title="Non Visible"></i>@else<i
+                                                                            class="fas fa-eye ml-2"
+                                                                            data-mdb-toggle="tooltip" title="Visible"></i>
+                                                                    @endif
+                                                                    <input class="form-control mt-2" type="text"
+                                                                        name="facebook"
+                                                                        value="{{ Auth::user()->facebook }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label>Compte Twitter</label>
+                                                                    @if (Auth::user()->show_twitter == 0)<i
+                                                                            class="far fa-eye-slash"
+                                                                            data-mdb-toggle="tooltip"
+                                                                        title="Non Visible"></i>@else<i
+                                                                            class="fas fa-eye ml-2"
+                                                                            data-mdb-toggle="tooltip" title="Visible"></i>
+                                                                    @endif
+                                                                    <input class="form-control mt-2" type="text"
+                                                                        name="twitter"
+                                                                        value="{{ Auth::user()->twitter }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row  mt-2 mb-2">
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label>Compte Linkedin</label>
+                                                                    @if (Auth::user()->show_linkedin == 0)<i
+                                                                            class="far fa-eye-slash"
+                                                                            data-mdb-toggle="tooltip"
+                                                                        title="Non Visible"></i>@else<i
+                                                                            class="fas fa-eye ml-2"
+                                                                            data-mdb-toggle="tooltip" title="Visible"></i>
+                                                                    @endif
+                                                                    <input class="form-control mt-2" type="text"
+                                                                        name="linkedin"
+                                                                        value="{{ Auth::user()->linkedin }}">
+                                                                </div>
+                                                            </div>
+                                                            {{-- <div class="col">
+                                                                <div class="form-group">
+                                                                    <label>Compte Twitter</label>
+                                                                    @if (Auth::user()->show_twitter == 0)<i
+                                                                            class="far fa-eye-slash"
+                                                                            data-mdb-toggle="tooltip"
+                                                                        title="Non Visible"></i>@else<i
+                                                                            class="fas fa-eye ml-2"
+                                                                            data-mdb-toggle="tooltip" title="Visible"></i>
+                                                                    @endif
+                                                                    <input class="form-control mt-2" type="text"
+                                                                        name="twitter" value="{{ Auth::user()->twitter }}">
+                                                                </div>
+                                                            </div> --}}
                                                         </div>
 
                                                         <div class="row  mt-2 mb-2">
@@ -461,7 +532,7 @@
                                                 </div>
                                             @endif
 
-                                            <div id="tab-1" class="tab-pane active" style="pointer-events: all;">
+                                            <div id="tab-2" class="tab-pane active" style="pointer-events: all;">
                                                 <form class="form" method="POST" action="/profile-visibility">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <div class="row">
@@ -469,7 +540,7 @@
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public nom</label>
+                                                                        <label>Public nom</label>
                                                                         @if (Auth::user()->show_lastname == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -480,7 +551,8 @@
 
                                                                         <select name="show_lastname"
                                                                             class="custom-select sources mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_lastname }}">
                                                                                 @if (Auth::user()->show_lastname == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
@@ -495,7 +567,7 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public prénom</label>
+                                                                        <label>Public prénom</label>
                                                                         @if (Auth::user()->show_firstname == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -506,7 +578,8 @@
 
                                                                         <select name="show_firstname"
                                                                             class="form-control mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_firstname }}">
                                                                                 @if (Auth::user()->show_firstname == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
@@ -523,7 +596,7 @@
                                                             <div class="row  mt-2 mb-2">
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public téléphone</label>
+                                                                        <label>Public téléphone</label>
                                                                         @if (Auth::user()->show_phone == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -533,7 +606,8 @@
                                                                                 title="Visible"></i>@endif
 
                                                                         <select name="show_phone" class="form-control mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_phone }}">
                                                                                 @if (Auth::user()->show_phone == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
@@ -548,7 +622,7 @@
                                                                 </div>
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public email</label>
+                                                                        <label>Public email</label>
                                                                         @if (Auth::user()->show_email == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -558,7 +632,8 @@
                                                                                 title="Visible"></i>@endif
 
                                                                         <select name="show_email" class="form-control mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_email }}">
                                                                                 @if (Auth::user()->show_email == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
@@ -577,7 +652,7 @@
 
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public nom d'utilisateur</label>
+                                                                        <label>Public nom d'utilisateur</label>
                                                                         @if (Auth::user()->show_username == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -588,7 +663,8 @@
 
                                                                         <select name="show_username"
                                                                             class="form-control mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_username }}">
                                                                                 @if (Auth::user()->show_username == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
@@ -604,7 +680,7 @@
 
                                                                 <div class="col">
                                                                     <div class="form-group">
-                                                                        <label>Profil public cv</label>
+                                                                        <label>Public cv</label>
                                                                         @if (Auth::user()->show_cv == 0)<i
                                                                                 class="far fa-eye-slash"
                                                                                 data-mdb-toggle="tooltip"
@@ -614,8 +690,68 @@
                                                                                 title="Visible"></i>@endif
 
                                                                         <select name="show_cv" class="form-control mt-2">
-                                                                            <option selected disabled>
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_cv }}">
                                                                                 @if (Auth::user()->show_cv == 1)
+                                                                                Visible par les recruteurs @else Non
+                                                                                    visible par les recruteurs @endif
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non visible par les recruteurs
+                                                                            </option>
+                                                                            <option value="1">Visible par les recruteurs
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row  mt-2 mb-2">
+
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Public compte Facebook</label>
+                                                                        @if (Auth::user()->show_facebook == 0)<i
+                                                                                class="far fa-eye-slash"
+                                                                                data-mdb-toggle="tooltip"
+                                                                            title="Non Visible"></i>@else<i
+                                                                                class="fas fa-eye ml-2"
+                                                                                data-mdb-toggle="tooltip"
+                                                                                title="Visible"></i>@endif
+
+                                                                        <select name="show_facebook"
+                                                                            class="form-control mt-2">
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_facebook }}">
+                                                                                @if (Auth::user()->show_facebook == 1)
+                                                                                Visible par les recruteurs @else Non
+                                                                                    visible par les recruteurs @endif
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non visible par les recruteurs
+                                                                            </option>
+                                                                            <option value="1">Visible par les recruteurs
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Public compte Twitter</label>
+                                                                        @if (Auth::user()->show_twitter == 0)<i
+                                                                                class="far fa-eye-slash"
+                                                                                data-mdb-toggle="tooltip"
+                                                                            title="Non Visible"></i>@else<i
+                                                                                class="fas fa-eye ml-2"
+                                                                                data-mdb-toggle="tooltip"
+                                                                                title="Visible"></i>@endif
+
+                                                                        <select name="show_twitter"
+                                                                            class="form-control mt-2">
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_twitter }}">
+                                                                                @if (Auth::user()->show_twitter == 1)
                                                                                 Visible par les recruteurs @else Non
                                                                                     visible par les recruteurs @endif
                                                                             </option>
@@ -631,7 +767,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="row">
+                                                    <div class="row mt-2">
                                                         <div class="col d-flex justify-content-end">
                                                             <button class="btn btn-success"
                                                                 type="submit">Sauvegarder</button>
@@ -643,7 +779,7 @@
                                     </div>
 
                                     <div id="jobs" class="pt-3 mb-3" style="display: none;">
-                                        <div id="tab-1" class="tab-pane active" style="pointer-events: all;">
+                                        <div id="tab-3" class="tab-pane active" style="pointer-events: all;">
                                             @foreach ($saveJobs as $jobs)
                                                 @foreach ($saveJobs2 as $jobs2)
                                                     <div class="col-md-12">
@@ -702,7 +838,78 @@
                                                 {!! $saveJobs->links() !!}
                                             </div>
                                         </div>
-                                    </div>                         
+                                    </div>
+
+                                    <div id="contact" class="pt-3 mb-3" style="display: none;">
+                                        <div id="tab-5" class="tab-pane active"
+                                            style="pointer-events: all;max-width: 762px !important;">
+                                            <div class="row table-responsive">
+
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead class="text-center">
+                                                        <tr>
+                                                            <th scope="col">Numéro de support</th>
+                                                            <th scope="col">Date de création</th>
+                                                            <th scope="col">Nom d'utilisateur</th>
+                                                            <th scope="col">Adresse email</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-center" style="vertical-align: middle;">
+                                                        @foreach ($contactsAll as $contacts)
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="text-bold">
+                                                                        <a href="" data-mdb-toggle="modal"
+                                                                            data-mdb-target="#modalContact_view_{{ $contacts->support_id }}">{{ $contacts->support_id }}</a>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>
+                                                                        {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                    </span>
+                                                                </td>
+                                                                @foreach (userId($contacts->user_id) as $user)
+                                                                    <td>
+                                                                        {{ $user->username }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $user->email }}
+                                                                    </td>
+                                                                @endforeach
+                                                                <td>
+                                                                    @if ($contacts->status == 0)
+                                                                        <i class="fas fa-thumbtack mr-1 text-danger"></i>
+                                                                        Demande non résolu
+                                                                    @else
+                                                                        <i class="fas fa-thumbtack mr-1 text-success"></i>
+                                                                        Demande résolu
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    @if ($contacts->status == 0)
+                                                                        <a data-mdb-toggle="modal"
+                                                                            data-mdb-target="#modalContact_{{ $contacts->id }}"
+                                                                            class="btn btn-warning" href=""><i
+                                                                                class="fas fa-reply"></i></a>
+
+                                                                        <a class="btn btn-success"
+                                                                            href="{{ route('resolved_contact_user', $contacts->id) }}"><i
+                                                                                class="fas fa-check"></i></a>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="d-flex justify-content-center">
+                                                    {!! $contactsAll->links() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -726,7 +933,7 @@
 
                                     <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                    document.getElementById('logout-form').submit();"
+                                                                                                                                                                                                document.getElementById('logout-form').submit();"
                                         class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>
@@ -742,7 +949,8 @@
                             <div class="card-body">
                                 <h6 class="card-title font-weight-bold">Contactez-nous</h6>
                                 <p class="card-text">Obtenez une aide rapide et gratuite de nos assistants.</p>
-                                <button type="button" class="btn btn-warning">Nous contacter</button>
+                                <button data-mdb-toggle="modal" data-mdb-target="#modalContact" type="button"
+                                    class="btn btn-warning">Nous contacter</button>
                             </div>
                         </div>
                     </div>
@@ -778,6 +986,166 @@
         </div>
     </div>
 
+
+    <!-- Modal Contact -->
+    <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Demande de contact</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{ route('contact') }}" method="POST" enctype="multipart/form-data">
+
+                        @csrf
+
+                        <div class="form-outline mb-4">
+                            <textarea class="form-control" required @error('content') is-invalid @enderror name="content"
+                                rows="4"></textarea>
+                            <label class="form-label">Votre message</label>
+
+                            @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <input type="file" name="doc" @error('doc') is-invalid @enderror"
+                                accept=".pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*"
+                                id="doc" class="form-control" />
+
+                            @error('doc')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mb-4">Envoyer le message</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                        Fermer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Contact -->
+    @foreach ($contactsAll as $contacts)
+        <div class="modal fade" id="modalContact_view_{{ $contacts->support_id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Message du ticket n°{{ $contacts->support_id }}</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row d-flex justify-content-center mt-3">
+                            @foreach ($contactsAll as $contacts)
+                            <div class="col-md-8 col-lg-6 mb-2">
+                                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                    <div class="card-body p-3">
+                                        <div class="card mb-0">
+                                            <div class="card-body">
+                                                <p>{!! html_entity_decode($contacts->content) !!}</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
+                                                        alt="@foreach (userId($contacts->reply_id) as $user)
+                                                            {{ $user->username }} @endforeach" width="25" height="25" />
+                                                            <p class="small mb-0 ms-2">
+                                                                @foreach (userId($contacts->reply_id) as $user)
+                                                                    {{ $user->username }} @endforeach
+                                                            </p>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <p class="small text-muted mb-0">Le
+                                                            {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                            Fermer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+    <!-- Modal Contact -->
+    @foreach ($contactsAll as $contacts)
+        <div class="modal fade" id="modalContact_{{ $contacts->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Répondre au ticket n°{{ $contacts->support_id }}</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="{{ route('reply_contact_user', $contacts->id) }}" method="POST">
+
+                        <div class="modal-body">
+
+                            @csrf
+
+                            <div class="mb-4">
+                                <label class="form-label">Votre réponse</label>
+                                <textarea class="form-control" style="height: 250px;" required @error('content') is-invalid
+                                    @enderror name="content" rows="4"></textarea>
+
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                Fermer
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <script>
+        CKEDITOR.replace('content', {
+            language: 'fr',
+            uiColor: '#9AB8F3',
+            height: '250px'
+        });
+
+    </script>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -797,10 +1165,12 @@
             cvBtn = document.getElementById('cvBtn'),
             viewBtn = document.getElementById('viewBtn'),
             jobsBtn = document.getElementById('jobsBtn'),
+            contactBtn = document.getElementById('contactBtn'),
             displaySetting = document.getElementById('setting'),
             displayCv = document.getElementById('cv'),
             displayView = document.getElementById('view'),
             displayJobs = document.getElementById('jobs'),
+            displayContact = document.getElementById('contact'),
             tab1 = document.getElementById('tab-1'),
             tab2 = document.getElementById('tab-2'),
             tab2 = document.getElementById('tab-3');
@@ -813,12 +1183,13 @@
             cvBtn.classList.remove('active');
             viewBtn.classList.remove('active');
             jobsBtn.classList.remove('active');
-
+            contactBtn.classList.remove('active');
 
             displaySetting.style.display = 'block';
             displayCv.style.display = 'none';
             displayView.style.display = 'none';
             displayJobs.style.display = 'none';
+            displayContact.style.display = 'none';
 
             return false;
 
@@ -832,11 +1203,13 @@
             cvBtn.classList.add('active');
             viewBtn.classList.remove('active');
             jobsBtn.classList.remove('active');
+            contactBtn.classList.remove('active');
 
             displaySetting.style.display = 'none';
             displayCv.style.display = 'block';
             displayView.style.display = 'none';
             displayJobs.style.display = 'none';
+            displayContact.style.display = 'none';
 
             return false;
 
@@ -850,11 +1223,13 @@
             cvBtn.classList.remove('active');
             viewBtn.classList.add('active');
             jobsBtn.classList.remove('active');
+            contactBtn.classList.remove('active');
 
             displaySetting.style.display = 'none';
             displayCv.style.display = 'none';
             displayView.style.display = 'block';
             displayJobs.style.display = 'none';
+            displayContact.style.display = 'none';
 
             return false;
 
@@ -868,11 +1243,33 @@
             cvBtn.classList.remove('active');
             viewBtn.classList.remove('active');
             jobsBtn.classList.add('active');
+            contactBtn.classList.remove('active');
 
             displaySetting.style.display = 'none';
             displayCv.style.display = 'none';
             displayView.style.display = 'none';
             displayJobs.style.display = 'block';
+            displayContact.style.display = 'none';
+
+            return false;
+
+        });
+
+        contactBtn.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            settingBtn.classList.remove('active');
+            cvBtn.classList.remove('active');
+            viewBtn.classList.remove('active');
+            jobsBtn.classList.remove('active');
+            contactBtn.classList.add('active');
+
+            displaySetting.style.display = 'none';
+            displayCv.style.display = 'none';
+            displayView.style.display = 'none';
+            displayJobs.style.display = 'none';
+            displayContact.style.display = 'block';
 
             return false;
 

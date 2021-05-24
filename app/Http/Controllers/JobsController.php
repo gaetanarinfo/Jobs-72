@@ -36,7 +36,7 @@ class JobsController extends Controller
             {
                 $cat = DB::table('jobs')->where('id', $id)->first();
                 $latestJobs = Jobs::where('active', 1)->where('category', $cat->category)->orderBy('created_at', 'desc')->limit('3')->get();
-                $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->get();
+                $ipVue = DB::table('jobs_vues')->where('ip', request()->ip())->first();
                 $likeVue = DB::table('jobs_likes')->where('id', $id)->get();
 
                 $publicite = DB::table('jobs_pub')->first();
@@ -46,23 +46,29 @@ class JobsController extends Controller
                     $likeVue->ip = null;
                 }
 
-                if($ipVue->count() == 0)
+                if(Auth::user())
                 {
-                    /*
-                        Insert le nombre de vue
-                    */
-                    DB::table('jobs_vues')->insert([
-                        'jobs_id' => $id,
-                        'user_id' => Auth::user()->id,
-                        'ip' => request()->ip()
-                    ]);
 
-                    /*
-                        Met à jour le nombre de vue
-                    */
-                    DB::table('jobs')
-                    ->where('id', $id)->increment('vue');                       
-                }  
+                    if($ipVue->user_id != Auth::user()->id || $ipVue->jobs_id != $id)
+                    {
+                        
+                            /*
+                                Insert le nombre de vue
+                            */
+                            DB::table('jobs_vues')->insert([
+                                'jobs_id' => $id,
+                                'user_id' => Auth::user()->id,
+                                'ip' => request()->ip()
+                            ]);
+
+                            /*
+                                Met à jour le nombre de vue
+                            */
+                            DB::table('jobs')
+                            ->where('id', $id)->increment('vue');                       
+                    
+                    }    
+                }
 
                 return view('jobs-details', [
                     'jobs' => Jobs::findOrFail($id),

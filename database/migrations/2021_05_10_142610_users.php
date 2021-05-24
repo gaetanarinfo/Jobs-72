@@ -26,6 +26,9 @@ class Users extends Migration
             $table->string('roles')->default('ROLES_USER');
             $table->string('cv')->nullable();
             $table->integer('credits')->default(0)->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('linkedin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

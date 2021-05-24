@@ -56,6 +56,9 @@
     <!-- themify icon -->
     <link rel="stylesheet" href="{{ asset('css/plugins/themify-icons/themify-icons.css') }}">
 
+    <!-- Select2 -->
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLGJ8YKWG7"></script>
     <script>
@@ -91,6 +94,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
 
 </html>

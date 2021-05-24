@@ -16,3 +16,10 @@ function user($username) {
     
     return $user;
 }
+
+function userId($id) {
+
+    $user = User::where('id', '=', $id)->get();
+    
+    return $user;
+}

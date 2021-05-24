@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class JobsVues extends Migration
+class ContactsReplies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class JobsVues extends Migration
      */
     public function up()
     {
-        Schema::create('jobs_vues', function (Blueprint $table) {
+        Schema::create('contacts_replies', function (Blueprint $table) {
             $table->id();
-            $table->integer('jobs_id');
+            $table->string('support_id');
             $table->integer('user_id');
-            $table->string('ip');
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +29,6 @@ class JobsVues extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs_vues');
+        Schema::dropIfExists('contacts_replies');
     }
 }

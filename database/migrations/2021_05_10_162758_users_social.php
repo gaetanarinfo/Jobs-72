@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class JobsVues extends Migration
+class UsersSocial extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class JobsVues extends Migration
      */
     public function up()
     {
-        Schema::create('jobs_vues', function (Blueprint $table) {
-            $table->id();
-            $table->integer('jobs_id');
-            $table->integer('user_id');
-            $table->string('ip');
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('show_facebook')->default(1)->nullable();
+            $table->boolean('show_twitter')->default(1)->nullable();
+            $table->boolean('show_linkedin')->default(1)->nullable();
         });
     }
 
@@ -28,6 +27,6 @@ class JobsVues extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs_vues');
+        Schema::dropIfExists('users');
     }
 }

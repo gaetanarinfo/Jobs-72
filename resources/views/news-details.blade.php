@@ -79,7 +79,7 @@
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="@foreach(user($news->author) as
+                                        <img src="../@foreach(user($news->author) as
                                         $user){{ $user->avatar }}@endforeach" width="100px"
                                         height="100px" alt="@foreach(user($news->author) as
                                         $user){{ $user->username }}@endforeach">

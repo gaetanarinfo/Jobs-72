@@ -32,7 +32,7 @@ class NewsController extends Controller
             {
                 $cat = DB::table('news')->where('id', $id)->first();
                 $latestNews = News::where('active', 1)->where('category', $cat->category)->orderBy('created_at', 'desc')->limit('3')->get();
-                $ipVue = DB::table('news_vues')->where('ip', request()->ip())->get();
+                $ipVue = DB::table('news_vues')->where('ip', request()->ip())->first();
                 $likeVue = DB::table('news_likes')->where('id', $id)->get();
 
                 $publicite = DB::table('jobs_pub')->first();
@@ -42,23 +42,29 @@ class NewsController extends Controller
                     $likeVue->ip = null;
                 }
 
-                if($ipVue->count() == 0)
+                if(Auth::user())
                 {
-                    /*
-                        Insert le nombre de vue
-                    */
-                    DB::table('news_vues')->insert([
-                        'news_id' => $id,
-                        'user_id' => Auth::user()->id,
-                        'ip' => request()->ip()
-                    ]);
 
-                    /*
-                        Met à jour le nombre de vue
-                    */
-                    DB::table('news')
-                    ->where('id', $id)->increment('vue');                       
-                }  
+                    if($ipVue->user_id != Auth::user()->id || $ipVue->news_id != $id)
+                    {
+                        
+                        /*
+                            Insert le nombre de vue
+                        */
+                        DB::table('news_vues')->insert([
+                            'news_id' => $id,
+                            'user_id' => Auth::user()->id,
+                            'ip' => request()->ip()
+                        ]);
+
+                        /*
+                            Met à jour le nombre de vue
+                        */
+                        DB::table('news')
+                        ->where('id', $id)->increment('vue');                       
+                    
+                    }    
+                }
 
                 $commentAll = DB::table('news_comment')->where('news_id', $id)->orderBy('created_at', 'desc')->get();
                 $countComment = DB::table('news_comment')->where('news_id', $id)->count();
@@ -142,6 +148,11 @@ class NewsController extends Controller
 
     public function show_all()
     {
-        return view('news-all');
+
+        $newsAll = DB::table('news')->where('active', 1)->orderBy('created_at', 'desc')->paginate('12');
+
+        return view('news', [
+            'newsAll' => $newsAll
+        ]);
     }
 }

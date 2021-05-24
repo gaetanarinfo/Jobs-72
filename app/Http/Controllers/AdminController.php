@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\NewsComment;
 use App\Models\User;
+use App\Models\Contacts;
 use App\Models\Devis;
+use App\Models\ContactsReplies;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,10 +55,21 @@ class AdminController extends Controller
             ->orderBy('created_at', 'DESC')
             ->paginate(4);    
 
+        $contactAll = Contacts::select('contacts.*')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(4);    
+            
+        $contactAllreply = ContactsReplies::select('contacts_replies.*')
+            ->where('contacts_replies.user_id', '=', $user->id)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(6);   
+
         return view('admin.index', [
             'newsAll' => $newsAll,
             'usersAll' => $usersAll,
-            'devisAll' => $devisAll
+            'devisAll' => $devisAll,
+            'contactAll' => $contactAll,
+            'contactAllreply' => $contactAllreply
         ]);
     }
 
@@ -66,6 +79,11 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function news_validate($id){
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         DB::table('news')->where('id', '=', $id)->update(array('active' => 1));
 
@@ -80,6 +98,11 @@ class AdminController extends Controller
      */
     public function news_invalidate($id){
 
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('news')->where('id', '=', $id)->update(array('active' => 0));
 
         return redirect('administration')->with('success','Votre article est désormais invisible');
@@ -92,6 +115,11 @@ class AdminController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function news_delete($id){
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $news = DB::table('news')->where('id', '=', $id)->first();
 
@@ -116,6 +144,11 @@ class AdminController extends Controller
     public function news_update(Request $request, $id)
     {
 
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         $news = DB::table('news')->where('id', '=', $id)->first();
 
         return view('admin.update', [
@@ -130,6 +163,11 @@ class AdminController extends Controller
      */
     public function news_update_post(Request $request, $id)
     {
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $this->validate($request,[
             'title' => 'max:255|required',
@@ -159,6 +197,11 @@ class AdminController extends Controller
      */
     public function news_create(Request $request)
     {
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
         
         return view('admin.create');
 
@@ -171,6 +214,11 @@ class AdminController extends Controller
      */
     public function news_create_post(Request $request)
     {
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         $user = Auth::user();
     
             $this->validate($request,[
@@ -209,6 +257,11 @@ class AdminController extends Controller
      */
     public function users_validate($id){
 
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => null));
 
         return redirect('administration')->with('success','L\'ulisateur à été débanni');
@@ -222,6 +275,11 @@ class AdminController extends Controller
      */
     public function users_invalidate($id){
 
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => Carbon::now('Europe/Paris')));
 
         return redirect('administration')->with('success','L\'ulisateur à été banni');
@@ -233,7 +291,12 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function remove_users($id){
+    public function remove_users($id)
+    {
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $users = DB::table('users')->where('id', '=', $id)->first();
 

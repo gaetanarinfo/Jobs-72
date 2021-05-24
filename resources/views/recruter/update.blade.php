@@ -6,7 +6,7 @@
 
     @include('components.head')
 
-    <link rel="stylesheet" type="text/css" href="../../../css/input-file.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/input-file.css') }}">
 
     <div class="container">
         <div class="row">
@@ -30,8 +30,8 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="{{ Auth::user()->avatar }}"
-                                                        width="140px" alt="{{ Auth::user()->username }}">
+                                                    <img src="{{ asset(Auth::user()->avatar) }}" width="140px"
+                                                        alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
 
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-control @error('category') is-invalid @enderror"
+                                                                class="form-control js-select @error('category') is-invalid @enderror"
                                                                 name="category" value="{{ old('category') }}" required
                                                                 autocomplete="category">
                                                                 <option value="{{ $jobs->category }}" selected>
@@ -201,7 +201,7 @@
 
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-control @error('active') is-invalid @enderror"
+                                                                class="form-control js-select @error('active') is-invalid @enderror"
                                                                 name="active" value="{{ old('active') }}" required
                                                                 autocomplete="active">
                                                                 <option value="@if ($jobs->active ==
@@ -326,7 +326,7 @@
 
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-control @error('teletravail') is-invalid @enderror"
+                                                                class="form-control js-select @error('teletravail') is-invalid @enderror"
                                                                 name="teletravail" value="{{ old('teletravail') }}"
                                                                 required autocomplete="teletravail">
                                                                 <option value="@if ($jobs->teletravail
@@ -373,7 +373,7 @@
                                                         <div class="col-md-6">
 
                                                             <select
-                                                                class="form-control @error('experience_exiger') is-invalid @enderror"
+                                                                class="form-control js-select @error('experience_exiger') is-invalid @enderror"
                                                                 name="experience_exiger"
                                                                 value="{{ old('experience_exiger') }}" required
                                                                 autocomplete="experience_exiger">
@@ -434,13 +434,18 @@
 
     </script>
 
-    {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#content'))
-            .catch(error => {
-                console.error(error);
-            });
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    </script> --}}
+    <!-- Select 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.js-select').select2();
+        });
+
+    </script>
 
 @endsection

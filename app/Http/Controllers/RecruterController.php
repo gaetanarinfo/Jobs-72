@@ -116,6 +116,11 @@ class RecruterController extends Controller
      */
     public function create(Request $request)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         $user = Auth::user();
         $jobsAllCount = Jobs::select('jobs.*')
             ->where('jobs.author', '=', $user->username)
@@ -132,8 +137,6 @@ class RecruterController extends Controller
                 'status' => 'required',
                 'type' => 'required',
                 'salaire' => 'required',
-                'avantages' => 'required',
-                'horaires' => 'required',
                 'experience' => 'required',
                 'experience_exiger' => 'required'
         
@@ -163,18 +166,22 @@ class RecruterController extends Controller
                 'created_at' => Carbon::now('Europe/Paris')
             ]);
 
-            if($jobsAllCount < 1 || $user->credits > 1)
+            if($jobsAllCount < 1)
             {
-                DB::table('users')->decrement('credits', 2);
+            }else{
+                if($user->credits > 1)
+                    {
+                    DB::table('users')->decrement('credits', 2);
 
-                DB::table('users_transactions')->insert([
-                    'user_id' => $user->id,
-                    'title' => "x1 offre d'emploi - 2 crédits à vie",
-                    'price' => 2,
-                    'transaction' => uniqid(),
-                    'status' => 1,
-                    'created_at' => Carbon::now('Europe/Paris')
-                ]);
+                    DB::table('users_transactions')->insert([
+                        'user_id' => $user->id,
+                        'title' => "x1 offre d'emploi - 2 crédits à vie",
+                        'price' => 2,
+                        'transaction' => uniqid(),
+                        'status' => 1,
+                        'created_at' => Carbon::now('Europe/Paris')
+                    ]);
+                }
             }
 
             return redirect('recruter')->with('success','Votre annonce à été mise en ligne');
@@ -190,6 +197,11 @@ class RecruterController extends Controller
      */
     public function show(Request $request)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+        
         $user = Auth::user();
         $jobsAllCount = Jobs::select('jobs.*')
         ->where('jobs.author', '=', $user->username)
@@ -210,7 +222,13 @@ class RecruterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function remove_jobs($id){
+    public function remove_jobs($id)
+    {
+
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $jobs = DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->first();
 
@@ -230,6 +248,11 @@ class RecruterController extends Controller
      */
     public function validate_jobs($id){
 
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->update(array('active' => 1));
 
         return redirect('recruter')->with('success','Votre offre à été mise en ligne');
@@ -241,7 +264,13 @@ class RecruterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function invalidate_jobs($id){
+    public function invalidate_jobs($id)
+    {
+
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->update(array('active' => 0));
 
@@ -256,6 +285,10 @@ class RecruterController extends Controller
      */
     public function update_jobs($id)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $jobs = DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->first();
 
@@ -271,6 +304,11 @@ class RecruterController extends Controller
      */
     public function update_jobs_post(Request $request, $id)
     {
+
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         $this->validate($request,[
             'title' => 'max:255|required',
@@ -315,7 +353,12 @@ class RecruterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function remove_credits($id){
+    public function remove_credits($id)
+    {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
 
         DB::table('users_transactions')->where('id', '=', $id)->where('user_id', '=', Auth::user()->id)->delete();
 
@@ -330,6 +373,11 @@ class RecruterController extends Controller
      */
     public function remove_apply($id)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('jobs_applies')->where('id', '=', $id)->delete();
 
         return redirect('recruter')->with('success','La candidature à été supprimer');
@@ -342,6 +390,11 @@ class RecruterController extends Controller
      */
     public function validate_apply($id)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
         DB::table('jobs_applies')->where('id', '=', $id)->update(array('status' => 2));
 
         return redirect('recruter')->with('success','La candidature à été validé');
@@ -354,6 +407,11 @@ class RecruterController extends Controller
      */
     public function refused_apply($id)
     {
+        if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+        
         DB::table('jobs_applies')->where('id', '=', $id)->update(array('status' => 1));
 
         return redirect('recruter')->with('error','La candidature à été refusé');

@@ -37,6 +37,10 @@ Route::get('/actualites', [App\Http\Controllers\NewsController::class, 'show_all
 
 Route::post('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
 
+Route::post('/search-news', [App\Http\Controllers\SearchNewsController::class, 'index'])->name('search_news');
+
+Route::post('/search-cat', [App\Http\Controllers\SearchNewsController::class, 'search_cat'])->name('search_cat');
+
 Route::get('/article/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news');
 
 Route::get('/v/{city}', [App\Http\Controllers\JobsController::class, 'show_city'])->name('order_city');
@@ -131,6 +135,19 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/administration/devis/delete/{id}', [App\Http\Controllers\DevisController::class, 'delete_devis'])->name('delete_devis')->middleware('verified');
 
     Route::get('/administration/devis/reply/{id}', [App\Http\Controllers\DevisController::class, 'reply_devis'])->name('reply_devis')->middleware('verified');
+
+    Route::get('/administration/contact/delete/{id}', [App\Http\Controllers\ContactController::class, 'delete_contact'])->name('delete_contact')->middleware('verified');
+
+    Route::get('/administration/contact/resolved/{id}', [App\Http\Controllers\ContactController::class, 'resolved_contact'])->name('resolved_contact')->middleware('verified');
+
+    Route::post('/administration/contact/reply/{id}', [App\Http\Controllers\ContactController::class, 'reply_contact'])->name('reply_contact')->middleware('verified');
+
+    Route::post('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact')->middleware('verified');
+
+    Route::post('/contact/reply/{id}', [App\Http\Controllers\ProfileController::class, 'reply_contact_user'])->name('reply_contact_user')->middleware('verified');
+
+    Route::get('/contact/resolved/{id}', [App\Http\Controllers\ProfileController::class, 'resolved_contact_user'])->name('resolved_contact_user')->middleware('verified');
+
 });
 
 // Google

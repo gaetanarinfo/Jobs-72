@@ -17,6 +17,7 @@ class News extends Migration
             $table->id();
             $table->string('author');
             $table->string('title')->unique();
+            $table->string('category');
             $table->string('smallContent');
             $table->text('content');
             $table->string('image')->default('default.jpg');

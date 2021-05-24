@@ -28,7 +28,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="{{ Auth::user()->avatar }}" width="140px"
+                                                    <img src="{{ asset(Auth::user()->avatar) }}" width="140px"
                                                         alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>

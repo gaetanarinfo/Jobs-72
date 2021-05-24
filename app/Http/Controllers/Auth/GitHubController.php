@@ -41,7 +41,7 @@ class GitHubController extends Controller
      
                 Auth::login($finduser);
     
-                return redirect('/profile');
+                return redirect('/profile')->with('success', 'Connexion réussi avec votre compte Github.');
      
             }else{
                     $newUser = User::create([

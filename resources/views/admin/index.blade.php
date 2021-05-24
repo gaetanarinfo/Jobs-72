@@ -28,7 +28,7 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="{{ Auth::user()->avatar }}" width="140px"
+                                                    <img src="{{ asset(Auth::user()->avatar) }}" width="140px"
                                                         alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
@@ -65,6 +65,9 @@
                                                 utilisateurs</a>
                                         </li>
                                         <li class="nav-item"><a href="" id="devisBtn" class="nav-link">Demande de devis</a>
+                                        </li>
+                                        <li class="nav-item"><a href="" id="contactBtn" class="nav-link">Demande de
+                                                contact</a>
                                         </li>
                                     </ul>
 
@@ -394,7 +397,8 @@
                                                                     @else
                                                                         <a href="mailto:{{ $devis->email }}"
                                                                             class="btn btn-info mr-2"><i
-                                                                                class="fas fa-reply mr-2"></i>Envoyer un email</a>
+                                                                                class="fas fa-reply mr-2"></i>Envoyer un
+                                                                            email</a>
                                                                     @endif
                                                                     <a href="{{ route('delete_devis', $devis->id) }}"
                                                                         class="btn btn-danger"><i
@@ -413,6 +417,79 @@
                                         </div>
                                     </div>
 
+                                    <div id="contact" class="pt-3" style="display: none;">
+                                        <div id="tab-2" class="tab-pane" style="pointer-events: all;">
+                                            <div class="row table-responsive">
+
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead class="text-center">
+                                                        <tr>
+                                                            <th scope="col">Numéro de support</th>
+                                                            <th scope="col">Date de création</th>
+                                                            <th scope="col">Nom d'utilisateur</th>
+                                                            <th scope="col">Adresse email</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-center" style="vertical-align: middle;">
+                                                        @foreach ($contactAll as $contacts)
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="text-bold">
+                                                                        <a href="" data-mdb-toggle="modal"
+                                                                            data-mdb-target="#modalContact_view_{{ $contacts->support_id }}">{{ $contacts->support_id }}</a>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <span>
+                                                                        {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                    </span>
+                                                                </td>
+                                                                @foreach (userId($contacts->user_id) as $user)
+                                                                    <td>
+                                                                        {{ $user->username }}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{ $user->email }}
+                                                                    </td>
+                                                                @endforeach
+                                                                <td>
+                                                                    @if ($contacts->status == 0)
+                                                                        <i class="fas fa-thumbtack mr-1 text-danger"></i>
+                                                                        Demande non résolu
+                                                                    @else
+                                                                        <i class="fas fa-thumbtack mr-1 text-success"></i>
+                                                                        Demande résolu
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    @if ($contacts->status == 0)
+                                                                        <a data-mdb-toggle="modal"
+                                                                            data-mdb-target="#modalContact_{{ $contacts->id }}"
+                                                                            class="btn btn-warning" href=""><i
+                                                                                class="fas fa-reply"></i></a>
+
+                                                                        <a class="btn btn-success"
+                                                                            href="{{ route('resolved_contact', $contacts->id) }}"><i
+                                                                                class="fas fa-check"></i></a>
+                                                                    @endif
+                                                                    <a class="btn btn-danger"
+                                                                        href="{{ route('delete_contact', $contacts->id) }}"><i
+                                                                            class="fas fa-trash"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="d-flex justify-content-center">
+                                                    {!! $contactAll->links() !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -423,13 +500,112 @@
         </div>
     </div>
 
+    <!-- Modal Contact -->
+    @foreach ($contactAll as $contacts)
+        <div class="modal fade" id="modalContact_{{ $contacts->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Répondre au ticket n°{{ $contacts->support_id }}</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form action="{{ route('reply_contact', $contacts->id) }}" method="POST">
+
+                        <div class="modal-body">
+
+                            @csrf
+
+                            <div class="mb-4">
+                                <label class="form-label">Votre réponse</label>
+                                <textarea class="form-control" style="height: 250px;" required @error('content') is-invalid
+                                    @enderror name="content" rows="4"></textarea>
+
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                                Fermer
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <!-- Modal Contact -->
+    @foreach ($contactAllreply as $contacts)
+        <div class="modal fade" id="modalContact_view_{{ $contacts->support_id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Message du ticket n°{{ $contacts->support_id }}</h5>
+                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row d-flex justify-content-center mt-3">
+                            @foreach ($contactAllreply as $contacts)
+                            <div class="col-md-8 col-lg-6 mb-2">
+                                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                    <div class="card-body p-3">
+                                        <div class="card mb-0">
+                                            <div class="card-body">
+                                                <p>{!! html_entity_decode($contacts->content) !!}</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
+                                                        alt="@foreach (userId($contacts->reply_id) as $user)
+                                                            {{ $user->username }} @endforeach" width="25" height="25" />
+                                                            <p class="small mb-0 ms-2">
+                                                                @foreach (userId($contacts->reply_id) as $user)
+                                                                    {{ $user->username }} @endforeach
+                                                            </p>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <p class="small text-muted mb-0">Le
+                                                            {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                            Fermer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     <script type="text/javascript">
         var newsBtn = document.getElementById('newsBtn'),
             usersBtn = document.getElementById('usersBtn'),
             devisBtn = document.getElementById('devisBtn'),
+            contactBtn = document.getElementById('contactBtn'),
             displayNews = document.getElementById('news'),
             displayUsers = document.getElementById('users'),
-            displayDevis = document.getElementById('devis');
+            displayDevis = document.getElementById('devis'),
+            displayContact = document.getElementById('contact');
 
         newsBtn.addEventListener('click', function(e) {
 
@@ -438,10 +614,12 @@
             newsBtn.classList.add('active');
             usersBtn.classList.remove('active');
             devisBtn.classList.remove('active');
+            contactBtn.classList.remove('active');
 
             displayNews.style.display = 'block';
             displayUsers.style.display = 'none';
             displayDevis.style.display = 'none';
+            displayContact.style.display = 'none';
 
             return false;
 
@@ -454,10 +632,12 @@
             newsBtn.classList.remove('active');
             usersBtn.classList.add('active');
             devisBtn.classList.remove('active');
+            contactBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'block';
             displayDevis.style.display = 'none';
+            displayContact.style.display = 'none';
 
             return false;
 
@@ -470,10 +650,30 @@
             newsBtn.classList.remove('active');
             usersBtn.classList.remove('active');
             devisBtn.classList.add('active');
+            contactBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'none';
             displayDevis.style.display = 'block';
+            displayContact.style.display = 'none';
+
+            return false;
+
+        });
+
+        contactBtn.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            newsBtn.classList.remove('active');
+            usersBtn.classList.remove('active');
+            devisBtn.classList.remove('active');
+            contactBtn.classList.add('active');
+
+            displayNews.style.display = 'none';
+            displayUsers.style.display = 'none';
+            displayDevis.style.display = 'none';
+            displayContact.style.display = 'block';
 
             return false;
 

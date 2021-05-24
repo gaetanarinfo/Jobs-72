@@ -6,7 +6,7 @@
 
     @include('components.head')
 
-    <link rel="stylesheet" type="text/css" href="../../css/input-file.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/input-file.css') }}">
 
     <div class="container">
         <div class="row">
@@ -30,8 +30,8 @@
                                             <div class="mx-auto" style="width: 140px;">
                                                 <div class="d-flex justify-content-center align-items-center rounded"
                                                     style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                    <img src="{{ Auth::user()->avatar }}"
-                                                        width="140px" alt="{{ Auth::user()->username }}">
+                                                    <img src="{{ asset(Auth::user()->avatar) }}" width="140px"
+                                                        alt="{{ Auth::user()->username }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -94,10 +94,10 @@
 
                                                         <div class="col-md-6">
                                                             <select
-                                                                class="form-control @error('category') is-invalid @enderror"
+                                                                class="form-control js-select @error('category') is-invalid @enderror"
                                                                 name="category" value="{{ old('category') }}" required
                                                                 autocomplete="category">
-                                                                <option selected disabled>Sélectionner une catégorie
+                                                                <option selected value="">Sélectionner une catégorie
                                                                 </option>
                                                                 <option>--------------</option>
                                                                 <option value="Ressources-Humaines">Ressources Humaines
@@ -372,11 +372,10 @@
                                                         <div class="col-md-6">
                                                             <input class="form-check-input" type="checkbox" value="1"
                                                                 @error('teletravail') is-invalid @enderror"
-                                                                name="teletravail"
-                                                                value="{{ old('teletravail') }}" />
+                                                                name="teletravail" value="{{ old('teletravail') }}" />
                                                             <label class="form-check-label" for="teletravail">
                                                                 Oui
-                                                            </label>    
+                                                            </label>
 
                                                             @error('teletravail')
                                                                 <span class="invalid-feedback" role="alert">
@@ -554,5 +553,20 @@
         };
 
     </script>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Select 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.js-select').select2();
+        });
+
+    </script>
+
 
 @endsection
