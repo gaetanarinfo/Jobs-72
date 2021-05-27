@@ -2,6 +2,15 @@
 
     <h4 class="mb-4 text-center"><strong>Trouver un emploi en France</strong></h4>
 
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{{ asset('images/france.png') }}" class="clignote" alt="france" width="120px"
+                    height="120px" />
+            </div>
+        </div>
+    </div>
+
     <div style="display: block;text-align: center;margin: 0 auto;">
         <div class="d-inline-block">
             <button class="btn btn-warning dropdown-toggle mr-2" type="button" id="cat1" data-mdb-toggle="dropdown"
@@ -163,17 +172,6 @@
                 <li name="dropdown-item-emploi perpignan"><a class="dropdown-item"
                         href="{{ route('order_city', 'perpignan') }}"
                         data-name="dropdown-item-emploi perpignan">Emploi Perpignan</a></li>
-            </ul>
-        </div>
-        <div class="d-inline-block">
-            <button class="btn btn-warning dropdown-toggle mr-2" type="button" id="cat4" data-mdb-toggle="dropdown"
-                aria-expanded="false">
-                Recherches fréquentes
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cat4">
-                <li><a class="dropdown-item" href="#">Menu item</a></li>
-                <li><a class="dropdown-item" href="#">Menu item</a></li>
-                <li><a class="dropdown-item" href="#">Menu item</a></li>
             </ul>
         </div>
     </div>

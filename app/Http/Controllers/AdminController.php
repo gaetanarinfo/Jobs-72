@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Careers;
 use App\Models\News;
 use App\Models\NewsComment;
 use App\Models\User;
@@ -57,19 +58,24 @@ class AdminController extends Controller
 
         $contactAll = Contacts::select('contacts.*')
             ->orderBy('created_at', 'DESC')
-            ->paginate(4);    
+            ->paginate(12);    
             
         $contactAllreply = ContactsReplies::select('contacts_replies.*')
             ->where('contacts_replies.user_id', '=', $user->id)
             ->orderBy('created_at', 'DESC')
             ->paginate(6);   
 
+        $careerAll = Careers::select('careers.*')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(12); 
+
         return view('admin.index', [
             'newsAll' => $newsAll,
             'usersAll' => $usersAll,
             'devisAll' => $devisAll,
             'contactAll' => $contactAll,
-            'contactAllreply' => $contactAllreply
+            'contactAllreply' => $contactAllreply,
+            'careerAll' => $careerAll
         ]);
     }
 
@@ -317,6 +323,63 @@ class AdminController extends Controller
         }else{
             return redirect('administration')->with('error','L\'utilisateur n\'à pas été supprimé');
         }
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_create(Request $request)
+    {
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+        
+        return view('admin.create-career');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_create_post(Request $request)
+    {
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        $user = Auth::user();
+    
+            $this->validate($request,[
+                'title' => 'max:255',
+                'category' => 'required',
+                'content' => 'required',
+                'image' => 'required',
+                'active' => 'required'
+            ]);
+
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->save( public_path('/images/career/news/' . $filename ) );
+
+            DB::table('careers')->insert([
+                'author' => $user->username,
+                'title' => $request->title,
+                'category' => $request->category,
+                'content' => $request->content,
+                'image' => $filename,
+                'active' => $request->active,
+                'created_at' => Carbon::now('Europe/Paris')
+            ]);
+
+            return redirect('administration')->with('success','Votre carrière à été crée');
 
     }
 

@@ -11,12 +11,12 @@
         <!-- Left elements -->
 
         <!-- Mobile -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navBarToggle"
+            aria-controls="navBarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse mt-2" id="navBarToggle">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="/" title="Accueil">
                         <span><i class="fas fa-home fa-lg text-success mr-2"></i> Accueil</span>
@@ -60,7 +60,7 @@
         </div>
 
         <!-- Right elements -->
-        <ul class="navbar-nav flex-row">
+        <ul class="navbar-nav flex-row mt-2">
 
             <ul class="navbar-nav">
                 <!-- Icon dropdown -->

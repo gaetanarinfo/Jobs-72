@@ -8,7 +8,8 @@
                     class="fab fa-facebook-f"></i></a>
 
             <!-- Twitter -->
-            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
+                    class="fab fa-twitter"></i></a>
 
             <!-- Instagram -->
             <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
@@ -23,26 +24,26 @@
 
         <!-- Section: Form -->
         <section class="">
-                <!--Grid row-->
-                <div class="row d-flex justify-content-center">
-                    <!--Grid column-->
-                    <div class="col-auto">
-                        <p class="pt-2">
-                            <strong>Inscrivez-vous à notre newsletter</strong>
-                        </p>
-                    </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-                    <div class="col-auto">
-                        <!-- Submit button -->
-                        <a href="{{ url('/newsletter') }}" class="btn btn-outline-success mb-4 text-white">
-                            S'abonner
-                        </a>
-                    </div>
-                    <!--Grid column-->
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-auto">
+                    <p class="pt-2">
+                        <strong>Inscrivez-vous à notre newsletter</strong>
+                    </p>
                 </div>
-                <!--Grid row-->
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-auto">
+                    <!-- Submit button -->
+                    <a href="{{ url('/newsletter') }}" class="btn btn-outline-success mb-4 text-white">
+                        S'abonner
+                    </a>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
             </form>
         </section>
         <!-- Section: Form -->
@@ -73,16 +74,13 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-white">Toutes les offres</a>
+                            <a href="{{ url('offres-emploi') }}" class="text-white">Toutes les offres</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Conseils Carrière</a>
+                            <a href="#career" class="text-white">Conseils Carrière</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Profils d'entreprises</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Aide</a>
+                            <a href="{{ route('login') }}" class="text-white">Mon espace</a>
                         </li>
                     </ul>
                 </div>
@@ -94,20 +92,11 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-white">Nos produits</a>
+                            <a href="#recruter" class="text-white">Nos produits</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Sur mesure</a>
+                            <a href="{{ route('login') }}" class="text-white">Espace recruteur</a>
                         </li>
-                        <li>
-                            <a href="#!" class="text-white">Nos Tarifs</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-white">Infos RH</a>
-                        </li>
-                        <li>
-                          <a href="#!" class="text-white">Aide</a>
-                      </li>
                     </ul>
                 </div>
                 <!--Grid column-->
@@ -118,16 +107,21 @@
 
                     <ul class="list-unstyled mb-0">
                         <li>
-                            <a href="#!" class="text-white">Mentions légales</a>
+                            <a href="" data-mdb-toggle="modal" data-mdb-target="#mention" title="Mentions légales"
+                                class="text-white">Mentions légales</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Conditions d’utilisation</a>
+                            <a href="" data-mdb-toggle="modal" data-mdb-target="#cgu"
+                                title="Conditions générale d’utilisation" class="text-white">Conditions générale
+                                d’utilisation</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Conditions générale de vente</a>
+                            <a href="" data-mdb-toggle="modal" data-mdb-target="#cgv"
+                                title="Conditions générale de vente" class="text-white">Conditions générale de vente</a>
                         </li>
                         <li>
-                            <a href="#!" class="text-white">Données personnelles</a>
+                            <a href="" data-mdb-toggle="modal" data-mdb-target="#dp" title="Données personnelles"
+                                class="text-white">Données personnelles</a>
                         </li>
                     </ul>
                 </div>

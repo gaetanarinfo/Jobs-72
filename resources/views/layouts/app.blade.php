@@ -88,6 +88,8 @@
         </main>
         <!-- Body -->
 
+        @include('components.modals')
+
         <!-- Footer -->
         @include('components.footer')
     </div>

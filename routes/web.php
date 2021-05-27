@@ -51,6 +51,8 @@ Route::post('/devis', [App\Http\Controllers\DevisController::class, 'index'])->n
 
 Route::name('language')->get('language/{lang}', [App\Http\Controllers\HomeController::class, 'language']);
 
+Route::get('/conseil-carriere/article/{id}/{slug?}', [App\Http\Controllers\CareerController::class, 'show'])->name('career');
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
 
@@ -148,6 +150,9 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
 
     Route::get('/contact/resolved/{id}', [App\Http\Controllers\ProfileController::class, 'resolved_contact_user'])->name('resolved_contact_user')->middleware('verified');
 
+    Route::get('/administration/career/create', [App\Http\Controllers\AdminController::class, 'career_create'])->name('career_create')->middleware('verified');
+
+    Route::post('/administration/career/create', [App\Http\Controllers\AdminController::class, 'career_create_post'])->name('career_create_post')->middleware('verified');
 });
 
 // Google

@@ -69,6 +69,9 @@
                                         <li class="nav-item"><a href="" id="contactBtn" class="nav-link">Demande de
                                                 contact</a>
                                         </li>
+                                        <li class="nav-item"><a href="" id="careerBtn" class="nav-link">Gestion de
+                                                carrière</a>
+                                        </li>
                                     </ul>
 
                                     <div id="news" class="pt-3">
@@ -490,6 +493,93 @@
                                         </div>
                                     </div>
 
+                                    <div id="career" class="pt-3" style="display: none;">
+                                        <div id="tab-2" class="tab-pane" style="pointer-events: all;">
+                                            <div class="row table-responsive">
+
+                                                <table class="table table-hover text-nowrap">
+                                                    <thead class="text-center">
+                                                        <tr>
+                                                            <th scope="col">Titre</th>
+                                                            <th scope="col">Date de création</th>
+                                                            <th scope="col">Autheur</th>
+                                                            <th scope="col">Catégorie</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="text-center" style="vertical-align: middle;">
+                                                        @foreach ($careerAll as $careers)
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ route('career', $careers->id) }}"><span class="text-bold">
+                                                                        {{ $careers->title }}
+                                                                    </span>
+                                                                    </a>
+                                                                </td>
+                                                                <td>
+                                                                    <span>
+                                                                        {{ date('d/m/Y à H:i', strtotime($careers->created_at)) }}
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    {{ $careers->author }}
+                                                                </td>
+                                                                <td>
+                                                                    {{ $careers->category }}
+                                                                </td>
+                                                                <td>
+                                                                    <span>
+                                                                        @if ($careers->active == 1)<i
+                                                                            class="fas fa-check me-1 text-success"></i>@else
+                                                                            <i
+                                                                                class="far fa-hourglass text-warning me-1"></i>
+                                                                        @endif<span>
+                                                                            @if ($careers->active == 1) En ligne
+                                                                            @else Brouillon @endif
+                                                                        </span>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    @if ($careers->active != 1)
+                                                                        <a href="" class="btn btn-success btn-sm px-3 mr-1">
+                                                                            <i class="fas fa-check"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        <a href=""
+                                                                            class="btn btn-secondary btn-sm px-3 mr-1">
+                                                                            <i class="fas fa-hourglass"></i>
+                                                                        </a>
+                                                                    @endif
+
+                                                                    <a href="" class="btn btn-warning btn-sm px-3 mr-1">
+                                                                        <i class="fas fa-pencil-alt"></i>
+                                                                    </a>
+
+                                                                    <a href="" class="btn btn-danger btn-sm px-3">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="d-flex justify-content-center">
+                                                    {!! $careerAll->links() !!}
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col d-flex justify-content-end">
+                                                    <a href="{{ route('career_create') }}"
+                                                        class="btn btn-success ml-1">Crée
+                                                        une carrière</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -555,35 +645,36 @@
                     <div class="modal-body">
                         <div class="row d-flex justify-content-center mt-3">
                             @foreach ($contactAllreply as $contacts)
-                            <div class="col-md-8 col-lg-6 mb-2">
-                                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                                    <div class="card-body p-3">
-                                        <div class="card mb-0">
-                                            <div class="card-body">
-                                                <p>{!! html_entity_decode($contacts->content) !!}</p>
+                                <div class="col-md-8 col-lg-6 mb-2">
+                                    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                        <div class="card-body p-3">
+                                            <div class="card mb-0">
+                                                <div class="card-body">
+                                                    <p>{!! html_entity_decode($contacts->content) !!}</p>
 
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
-                                                        alt="@foreach (userId($contacts->reply_id) as $user)
-                                                            {{ $user->username }} @endforeach" width="25" height="25" />
-                                                            <p class="small mb-0 ms-2">
-                                                                @foreach (userId($contacts->reply_id) as $user)
-                                                                    {{ $user->username }} @endforeach
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
+                                                            alt="@foreach (userId($contacts->reply_id) as $user)
+                                                                {{ $user->username }} @endforeach" width="25" height="25"
+                                                                />
+                                                                <p class="small mb-0 ms-2">
+                                                                    @foreach (userId($contacts->reply_id) as $user)
+                                                                        {{ $user->username }} @endforeach
+                                                                </p>
+                                                        </div>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <p class="small text-muted mb-0">Le
+                                                                {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
                                                             </p>
-                                                    </div>
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <p class="small text-muted mb-0">Le
-                                                            {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
-                                                        </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -602,10 +693,12 @@
             usersBtn = document.getElementById('usersBtn'),
             devisBtn = document.getElementById('devisBtn'),
             contactBtn = document.getElementById('contactBtn'),
+            careerBtn = document.getElementById('careerBtn'),
             displayNews = document.getElementById('news'),
             displayUsers = document.getElementById('users'),
             displayDevis = document.getElementById('devis'),
-            displayContact = document.getElementById('contact');
+            displayContact = document.getElementById('contact'),
+            displayCareer = document.getElementById('career');
 
         newsBtn.addEventListener('click', function(e) {
 
@@ -615,11 +708,13 @@
             usersBtn.classList.remove('active');
             devisBtn.classList.remove('active');
             contactBtn.classList.remove('active');
+            careerBtn.classList.remove('active');
 
             displayNews.style.display = 'block';
             displayUsers.style.display = 'none';
             displayDevis.style.display = 'none';
             displayContact.style.display = 'none';
+            displayCareer.style.display = 'none';
 
             return false;
 
@@ -633,11 +728,13 @@
             usersBtn.classList.add('active');
             devisBtn.classList.remove('active');
             contactBtn.classList.remove('active');
+            careerBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'block';
             displayDevis.style.display = 'none';
             displayContact.style.display = 'none';
+            displayCareer.style.display = 'none';
 
             return false;
 
@@ -651,11 +748,13 @@
             usersBtn.classList.remove('active');
             devisBtn.classList.add('active');
             contactBtn.classList.remove('active');
+            careerBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'none';
             displayDevis.style.display = 'block';
             displayContact.style.display = 'none';
+            displayCareer.style.display = 'none';
 
             return false;
 
@@ -669,11 +768,33 @@
             usersBtn.classList.remove('active');
             devisBtn.classList.remove('active');
             contactBtn.classList.add('active');
+            careerBtn.classList.remove('active');
 
             displayNews.style.display = 'none';
             displayUsers.style.display = 'none';
             displayDevis.style.display = 'none';
             displayContact.style.display = 'block';
+            displayCareer.style.display = 'none';
+
+            return false;
+
+        });
+
+        careerBtn.addEventListener('click', function(e) {
+
+            e.preventDefault();
+
+            newsBtn.classList.remove('active');
+            usersBtn.classList.remove('active');
+            devisBtn.classList.remove('active');
+            contactBtn.classList.remove('active');
+            careerBtn.classList.add('active');
+
+            displayNews.style.display = 'none';
+            displayUsers.style.display = 'none';
+            displayDevis.style.display = 'none';
+            displayContact.style.display = 'none';
+            displayCareer.style.display = 'block';
 
             return false;
 
