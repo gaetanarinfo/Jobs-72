@@ -153,6 +153,17 @@ Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/administration/career/create', [App\Http\Controllers\AdminController::class, 'career_create'])->name('career_create')->middleware('verified');
 
     Route::post('/administration/career/create', [App\Http\Controllers\AdminController::class, 'career_create_post'])->name('career_create_post')->middleware('verified');
+
+    Route::get('/administration/career/update/{id}', [App\Http\Controllers\AdminController::class, 'career_update'])->name('career_update')->middleware('verified');
+
+    Route::post('/administration/career/update/confirm/{id}', [App\Http\Controllers\AdminController::class, 'career_update_post'])->name('career_update_post')->middleware('verified');
+
+    Route::get('/administration/career/delete/{id}', [App\Http\Controllers\AdminController::class, 'career_delete'])->name('career_delete')->middleware('verified');
+
+    Route::get('/administration/career/validate/{id}', [App\Http\Controllers\AdminController::class, 'career_validate'])->name('career_validate')->middleware('verified');
+
+    Route::get('/administration/career/draft/{id}', [App\Http\Controllers\AdminController::class, 'career_invalidate'])->name('career_invalidate')->middleware('verified');
+
 });
 
 // Google

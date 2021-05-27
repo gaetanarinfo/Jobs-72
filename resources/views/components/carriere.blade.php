@@ -27,7 +27,8 @@
                 relate la somme des expériences acquises. Pour Pauline Lahary, la fondatrice de my cv factory, le CV
                 représente désormais ce qu’est le candidat dans sa globalité. Et c’est ce CV qui attire l’œil des
                 entreprises.</p>
-            <a href="{{ route('career', [1, strtolower(str_replace(' ', '-', 'Les tendances CV du moment'))]) }}" class="btn btn-info">En savoir plus</a>
+            <a href="{{ route('career', [1, strtolower(str_replace('?', '', str_replace(' ', '-', 'Les tendances CV du moment')))]) }}"
+                class="btn btn-info">En savoir plus</a>
         </div>
 
         <div class="media-29101">
@@ -38,7 +39,8 @@
                 entretiens d'embauche en présentiel reportés. Et il est probable que les entreprises qui sont toujours à
                 la recherche de candidats passent à des entretiens vidéo via des outils comme Skype ou FaceTime...
             </p>
-            <a href="{{ route('career', 2) }}" class="btn btn-info">En savoir plus</a>
+            <a href="{{ route('career', [2, strtolower(str_replace('?', '', str_replace(' ', '-', '5 conseils pour réussir un entretien vidéo')))]) }}"
+                class="btn btn-info">En savoir plus</a>
         </div>
 
         <div class="media-29101">
@@ -49,7 +51,8 @@
                 » de son CV est quasi vide. Marie Hathroubi, Directrice Recrutement & Formation chez Hays nous explique
                 qu’heureusement, il existe d’autres façons de convaincre son futur employeur.
             </p>
-            <a href="{{ route('career', 3) }}" class="btn btn-info">En savoir plus</a>
+            <a href="{{ route('career', [3, strtolower(str_replace('?', '', str_replace(' ', '-', 'Convaincre quand on est jeune diplômé')))]) }}"
+                class="btn btn-info">En savoir plus</a>
         </div>
 
         <div class="media-29101">
@@ -59,7 +62,8 @@
             <p class="mt-0">Comment résumer ses expertises et compétences accumulées au fil des années ? L’exercice est
                 un challenge
                 qui demande une bonne dose de réflexion pour réaliser un CV synthétique et cohérent.</p>
-            <a href="{{ route('career', 4) }}" class="btn btn-info">En savoir plus</a>
+            <a href="{{ route('career', [4, strtolower(str_replace('?', '', str_replace(' ', '-', 'Senior CV par compétence ou expérience ?')))]) }}"
+                class="btn btn-info">En savoir plus</a>
         </div>
 
         <div class="media-29101">
@@ -71,7 +75,8 @@
                 du télétravail, une pratique inédite pour nombre d’entre eux. Si en 2018, seulement 3% des salariés
                 français télétravaillaient de façon encadrée, un sondage Odaxa du 9 avril révélait qu’à la fin mars,
                 24...</p>
-            <a href="{{ route('career', 5) }}" class="btn btn-info">En savoir plus</a>
+                <a href="{{ route('career', [5, strtolower(str_replace('?', '', str_replace(' ', '-', 'Comment bien gérer le télétravail ?')))]) }}"
+                class="btn btn-info">En savoir plus</a>
         </div>
 
     </div>

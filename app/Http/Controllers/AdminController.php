@@ -360,6 +360,7 @@ class AdminController extends Controller
             $this->validate($request,[
                 'title' => 'max:255',
                 'category' => 'required',
+                'smallContent' => 'required|max:255',
                 'content' => 'required',
                 'image' => 'required',
                 'active' => 'required'
@@ -373,6 +374,7 @@ class AdminController extends Controller
                 'author' => $user->username,
                 'title' => $request->title,
                 'category' => $request->category,
+                'smallContent' => $request->smallContent,
                 'content' => $request->content,
                 'image' => $filename,
                 'active' => $request->active,
@@ -380,6 +382,123 @@ class AdminController extends Controller
             ]);
 
             return redirect('administration')->with('success','Votre carrière à été crée');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_update(Request $request, $id)
+    {
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        $career = DB::table('careers')->where('id', '=', $id)->first();
+
+        return view('admin.update-career', [
+            'career' => $career
+        ]);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_update_post(Request $request, $id)
+    {
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        $this->validate($request,[
+            'title' => 'max:255|required',
+            'category' => 'required',
+            'smallContent' => 'max:160',
+            'content' => 'required',
+            'active' => 'required',
+        ]); 
+
+        DB::table('careers')->where('id', '=', $id)->update(array('updated_at' => Carbon::now('Europe/Paris')));
+        
+        DB::table('careers')->where('id', '=', $id)->update(array(
+            'title' => $request->title,
+            'category' => $request->category,
+            'smallContent' => $request->smallContent,
+            'content' => $request->content,
+            'active' => $request->active
+        ));
+
+        return redirect('administration')->with('success','Votre carrière à été modifier');
+    }
+
+    /**
+     * Show the application dashboard.
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_delete($id){
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        $careers = DB::table('careers')->where('id', '=', $id)->first();
+
+        if($careers->image != 'default.jpg')
+        {
+            $destinationPath = public_path('images/career/news/');
+            File::delete($destinationPath.$careers->image);
+
+        }
+
+        DB::table('careers')->where('id', '=', $id)->delete();
+
+        return redirect('administration')->with('success','Votre carrière à été supprimer');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_validate($id){
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        DB::table('careers')->where('id', '=', $id)->update(array('active' => 1));
+
+        return redirect('administration')->with('success','Votre carrière à été mise en ligne');
+
+    }
+
+    /**
+     * Show the application dashboard.
+     * @param  int  $id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function career_invalidate($id){
+
+        if(Auth::user()->roles != 'ROLES_ADMIN')
+        {
+            return back();
+        }
+
+        DB::table('careers')->where('id', '=', $id)->update(array('active' => 0));
+
+        return redirect('administration')->with('success','Votre carrière est désormais invisible');
 
     }
 

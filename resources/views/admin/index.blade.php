@@ -502,6 +502,7 @@
                                                         <tr>
                                                             <th scope="col">Titre</th>
                                                             <th scope="col">Date de création</th>
+                                                            <th scope="col">Date de modification</th>
                                                             <th scope="col">Autheur</th>
                                                             <th scope="col">Catégorie</th>
                                                             <th scope="col">Status</th>
@@ -512,9 +513,10 @@
                                                         @foreach ($careerAll as $careers)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{ route('career', $careers->id) }}"><span class="text-bold">
-                                                                        {{ $careers->title }}
-                                                                    </span>
+                                                                    <a href="{{ route('career', $careers->id) }}"><span
+                                                                            class="text-bold">
+                                                                            {{ $careers->title }}
+                                                                        </span>
                                                                     </a>
                                                                 </td>
                                                                 <td>
@@ -522,6 +524,20 @@
                                                                         {{ date('d/m/Y à H:i', strtotime($careers->created_at)) }}
                                                                     </span>
                                                                 </td>
+                                                                @if ($careers->updated_at != null)
+                                                                <td>
+                                                                    <span>
+                                                                        <i class="far fa-clock me-1"></i><span>Le
+                                                                            {{ date('d/m/Y à H:i', strtotime($careers->updated_at)) }}</span>
+                                                                    </span>
+                                                                </td>
+                                                            @else
+                                                                <td>
+                                                                    <span>
+                                                                        Carrière non modifié
+                                                                    </span>
+                                                                </td>
+                                                            @endif
                                                                 <td>
                                                                     {{ $careers->author }}
                                                                 </td>
@@ -542,21 +558,24 @@
                                                                 </td>
                                                                 <td>
                                                                     @if ($careers->active != 1)
-                                                                        <a href="" class="btn btn-success btn-sm px-3 mr-1">
+                                                                        <a href="{{ route('career_validate', [$careers->id]) }}"
+                                                                            class="btn btn-success btn-sm px-3 mr-1">
                                                                             <i class="fas fa-check"></i>
                                                                         </a>
                                                                     @else
-                                                                        <a href=""
+                                                                        <a href="{{ route('career_invalidate', [$careers->id]) }}"
                                                                             class="btn btn-secondary btn-sm px-3 mr-1">
                                                                             <i class="fas fa-hourglass"></i>
                                                                         </a>
                                                                     @endif
 
-                                                                    <a href="" class="btn btn-warning btn-sm px-3 mr-1">
+                                                                    <a href="{{ route('career_update', $careers->id) }}"
+                                                                        class="btn btn-warning btn-sm px-3 mr-1">
                                                                         <i class="fas fa-pencil-alt"></i>
                                                                     </a>
 
-                                                                    <a href="" class="btn btn-danger btn-sm px-3">
+                                                                    <a href="{{ route('career_delete', $careers->id) }}"
+                                                                        class="btn btn-danger btn-sm px-3">
                                                                         <i class="fas fa-trash"></i>
                                                                     </a>
                                                                 </td>

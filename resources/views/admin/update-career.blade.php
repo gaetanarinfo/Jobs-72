@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '- Crée une carrière')
+@section('title', '- Editer la carrière')
 
 @section('content')
 
@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mt-3 mb-3">
-                <h1>Crée une carrière</h1>
+                <h1>Editer la carrière - {{ $career->title }}</h1>
                 <hr />
             </div>
         </div>
@@ -67,7 +67,7 @@
 
                                             <div class="card-body">
                                                 <form method="POST" enctype="multipart/form-data"
-                                                    action="{{ route('career_create_post') }}">
+                                                    action="{{ route('news_update_post', $career->id) }}">
                                                     @csrf
 
                                                     <div class="form-group row">
@@ -77,7 +77,8 @@
                                                         <div class="col-md-6">
                                                             <input id="title" type="text"
                                                                 class="form-control @error('title') is-invalid @enderror"
-                                                                name="title" required autocomplete="title" autofocus>
+                                                                name="title" required autocomplete="title" autofocus
+                                                                value="{{ $career->title }}">
 
                                                             @error('title')
                                                                 <span class="invalid-feedback" role="alert">
@@ -96,6 +97,10 @@
                                                                 class="form-control js-select @error('category') is-invalid @enderror"
                                                                 name="category" value="{{ old('category') }}" required
                                                                 autocomplete="category">
+                                                                <option value="{{ $career->category }}" selected>
+                                                                    {{ $career->category }}
+                                                                </option>
+                                                                <option>--------------</option>
                                                                 <option value="CV et lettre de motivation">CV et lettre de motivation</option>
                                                                 <option value="Entretien d’embauche">Entretien d’embauche</option>
                                                                 <option value="Jeunes Diplômés">Jeunes Diplômés</option>
@@ -115,10 +120,11 @@
                                                         <label for="smallContent"
                                                             class="col-md-12 col-form-label text-md-right">{{ __('Courte description de la carrière') }}</label>
 
-                                                        <div class="col-md-12" style="height: 100%">
+                                                        <div class="col-md-12">
                                                             <textarea id="smallContent"
                                                                 class="form-control @error('smallContent') is-invalid @enderror"
-                                                                name="smallContent" required style="height: 250px;"></textarea>
+                                                                name="smallContent" required maxlength="160"
+                                                                style="height: 133px;">{{ $career->smallContent }}</textarea>
 
                                                             @error('smallContent')
                                                                 <span class="invalid-feedback" role="alert">
@@ -135,7 +141,8 @@
                                                         <div class="col-md-12" style="height: 100%">
                                                             <textarea id="content"
                                                                 class="form-control @error('content') is-invalid @enderror"
-                                                                name="content" required style="height: 250px;"></textarea>
+                                                                name="content" required
+                                                                style="height: 250px;">{{ $career->content }}</textarea>
 
                                                             @error('content')
                                                                 <span class="invalid-feedback" role="alert">
@@ -153,6 +160,12 @@
                                                             <select
                                                                 class="form-control js-select @error('active') is-invalid @enderror"
                                                                 name="active" value="{{ old('active') }}" required>
+                                                                <option value="@if ($career->active ==
+                                                                1) 1 @else 0 @endif" selected>
+                                                                    @if ($career->active == 1)Oui
+                                                                    @else Non @endif
+                                                                </option>
+                                                                <option>--------------</option>
                                                                 <option value="1">Oui</option>
                                                                 <option value="0">Non</option>
                                                             </select>
@@ -165,23 +178,6 @@
 
                                                         </div>
 
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="content"
-                                                            class="col-md-12 col-form-label text-md-right">{{ __('Image de la carrière') }}</label>
-
-                                                        <div class="col-md-12">
-                                                            <input type="file" name="image" required @error('image')
-                                                                is-invalid @enderror" accept="image/*" id="image"
-                                                                class="form-control" />
-
-                                                            @error('image')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
                                                     </div>
 
                                                     <div class="form-group row mb-0 mt-2">
