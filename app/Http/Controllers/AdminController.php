@@ -39,7 +39,7 @@ class AdminController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $user = Auth::user();
@@ -88,7 +88,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('news')->where('id', '=', $id)->update(array('active' => 1));
@@ -106,7 +106,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('news')->where('id', '=', $id)->update(array('active' => 0));
@@ -124,7 +124,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $news = DB::table('news')->where('id', '=', $id)->first();
@@ -152,7 +152,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $news = DB::table('news')->where('id', '=', $id)->first();
@@ -172,7 +172,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $this->validate($request,[
@@ -206,7 +206,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
         
         return view('admin.create');
@@ -222,7 +222,7 @@ class AdminController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $user = Auth::user();
@@ -265,7 +265,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => null));
@@ -283,7 +283,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('users')->where('id', '=', $id)->update(array('blocked_at' => Carbon::now('Europe/Paris')));
@@ -301,7 +301,7 @@ class AdminController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $users = DB::table('users')->where('id', '=', $id)->first();
@@ -336,7 +336,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
         
         return view('admin.create-career');
@@ -352,7 +352,7 @@ class AdminController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $user = Auth::user();
@@ -395,7 +395,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $career = DB::table('careers')->where('id', '=', $id)->first();
@@ -415,7 +415,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $this->validate($request,[
@@ -448,7 +448,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $careers = DB::table('careers')->where('id', '=', $id)->first();
@@ -475,7 +475,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('careers')->where('id', '=', $id)->update(array('active' => 1));
@@ -493,7 +493,7 @@ class AdminController extends Controller
 
         if(Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('careers')->where('id', '=', $id)->update(array('active' => 0));

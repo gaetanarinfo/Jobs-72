@@ -3,20 +3,13 @@
     <div class="container p-4">
         <!-- Section: Social media -->
         <section class="mb-4">
-            <!-- Facebook -->
-            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
-                    class="fab fa-facebook-f"></i></a>
 
             <!-- Twitter -->
-            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="https://twitter.com/OverGames72" role="button"><i
                     class="fab fa-twitter"></i></a>
 
-            <!-- Instagram -->
-            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
-                    class="fab fa-instagram"></i></a>
-
             <!-- Linkedin -->
-            <a class="btn btn-outline-white btn-floating m-1 text-white" href="#!" role="button"><i
+            <a class="btn btn-outline-white btn-floating m-1 text-white" href="https://www.linkedin.com/in/ga%C3%ABtan-seigneur-2b3357200/" role="button"><i
                     class="fab fa-linkedin-in"></i></a>
 
         </section>

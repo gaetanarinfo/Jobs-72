@@ -467,8 +467,8 @@
                                                                 <input class="form-check-input" type="checkbox" value="0"
                                                                     id="cgu-confirm" required />
                                                                 <label class="form-check-label" for="cgu-confirm">
-                                                                    <a
-                                                                        href="{{ url('cgu') }}">{{ __('Conditions Général D\'utilisation') }}</a>
+                                                                    <a href="" data-mdb-toggle="modal" data-mdb-target="#cgu"
+                                                                    title="Conditions générale d’utilisation">{{ __('Conditions Général D\'utilisation') }}</a>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -519,7 +519,7 @@
                     x++;
                     $(wrapper).append(
                         '<div><input type="text" name="avantages[' + x +
-                        ']" class="form-control"/><a href="#" class="delete">Supprimer</a><hr/></div>'
+                        ']" class="form-control"/><a  class="delete">Supprimer</a><hr/></div>'
                     ); //add input box
                 } else {
                     alert('Vous avez atteint la limite !')
@@ -548,7 +548,7 @@
                     x++;
                     $(wrapper).append(
                         '<div><input type="text" name="horaires[' + x +
-                        ']" class="form-control"/><a href="#" class="delete">Supprimer</a><hr/></div>'
+                        ']" class="form-control"/><a  class="delete">Supprimer</a><hr/></div>'
                     ); //add input box
                 } else {
                     alert('Vous avez atteint la limite !')

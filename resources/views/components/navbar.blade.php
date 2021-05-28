@@ -42,6 +42,11 @@
                         <span><i class="fas fa-user fa-lg text-secondary mr-2"></i> Mon profil</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mail" title="Contactez-nous">
+                        <span><i class="fas fa-paper-plane fa-lg text-secondary mr-2"></i> Contact</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a @if (Auth::user())  @if (Auth::user()->roles=='ROLES_RECRUTER' ||
@@ -66,12 +71,12 @@
                 <!-- Icon dropdown -->
                 <li class="nav-item dropdown">
                     @if (session('locale') == 'fr')
-                        <a class="nav-link dropdown-toggle pr-3" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle pr-3"  id="navbarDropdown" role="button"
                             data-mdb-toggle="dropdown" aria-expanded="false">
                             <i class="france flag m-0"></i>
                         </a>
                     @else
-                        <a class="nav-link dropdown-toggle pr-3" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle pr-3"  id="navbarDropdown" role="button"
                             data-mdb-toggle="dropdown" aria-expanded="false">
                             <i class="united kingdom flag m-0"></i>
                         </a>

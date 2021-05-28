@@ -37,7 +37,7 @@ class TransactionsController extends Controller
 
         if($user->roles != 'ROLES_RECRUTER' && $user->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
     }
 

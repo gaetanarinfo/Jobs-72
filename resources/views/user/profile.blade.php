@@ -112,6 +112,9 @@
                             <li class="nav-item"><a class="nav-link px-2" href="{{ url('profile') }}"><i
                                         class="fas fa-fw fa-user mr-1 text-secondary"></i><span>Voir mon profil</span></a>
                             </li>
+                            <li class="nav-item"><a class="nav-link px-2" href="{{ route('profile-public', Auth::user()->username) }}"><i
+                                        class="fas fa-user-secret mr-2 text-danger"></i><span>Profil public</span></a>
+                            </li>
                             <li class="nav-item"><a class="nav-link px-2" href="{{ url('offres-emploi') }}"><i
                                         class="fas fa-fw fa-flag mr-1 text-info"></i><span>Offres d'emploi</span></a></li>
                             <li class="nav-item"><a class="nav-link px-2" href="{{ url('/#career') }}"><i
@@ -338,8 +341,9 @@
                                                                             class="fas fa-eye ml-2"
                                                                             data-mdb-toggle="tooltip" title="Visible"></i>
                                                                     @endif
-                                                                    <input class="form-control mt-2" type="text"
-                                                                        name="web" placeholder="http:// ou https://" value="{{ Auth::user()->web }}">
+                                                                    <input class="form-control mt-2" type="text" name="web"
+                                                                        placeholder="http:// ou https://"
+                                                                        value="{{ Auth::user()->web }}">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -819,8 +823,7 @@
                                                                                 data-mdb-toggle="tooltip"
                                                                                 title="Visible"></i>@endif
 
-                                                                        <select name="show_web"
-                                                                            class="form-control mt-2">
+                                                                        <select name="show_web" class="form-control mt-2">
                                                                             <option selected
                                                                                 value="{{ Auth::user()->show_web }}">
                                                                                 @if (Auth::user()->show_web == 1)
@@ -861,7 +864,7 @@
                                                                 <strong
                                                                     class="d-inline-block mb-2 text-success">{{ $jobs->category }}</strong>
                                                                 <h3 class="mb-0">
-                                                                    <a class="text-dark" href="#">{{ $jobs->title }}</a>
+                                                                    <a class="text-dark" >{{ $jobs->title }}</a>
                                                                 </h3>
                                                                 <div class="mb-1 text-muted mt-1"><i
                                                                         class="fas fa-clock text-warning"
@@ -1006,7 +1009,7 @@
 
                                     <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                document.getElementById('logout-form').submit();"
+                                                                                                                                                                                                    document.getElementById('logout-form').submit();"
                                         class="btn btn-block btn-secondary">
                                         <i class="fas fa-sign-out-alt"></i>
                                         <span>Déconnexion</span>
@@ -1124,35 +1127,36 @@
                     <div class="modal-body">
                         <div class="row d-flex justify-content-center mt-3">
                             @foreach ($contactsAll as $contacts)
-                            <div class="col-md-8 col-lg-6 mb-2">
-                                <div class="card shadow-0 border" style="background-color: #f0f2f5;">
-                                    <div class="card-body p-3">
-                                        <div class="card mb-0">
-                                            <div class="card-body">
-                                                <p>{!! html_entity_decode($contacts->content) !!}</p>
+                                <div class="col-md-8 col-lg-6 mb-2">
+                                    <div class="card shadow-0 border" style="background-color: #f0f2f5;">
+                                        <div class="card-body p-3">
+                                            <div class="card mb-0">
+                                                <div class="card-body">
+                                                    <p>{!! html_entity_decode($contacts->content) !!}</p>
 
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
-                                                        alt="@foreach (userId($contacts->reply_id) as $user)
-                                                            {{ $user->username }} @endforeach" width="25" height="25" />
-                                                            <p class="small mb-0 ms-2">
-                                                                @foreach (userId($contacts->reply_id) as $user)
-                                                                    {{ $user->username }} @endforeach
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <img src="@foreach (userId($contacts->reply_id) as $user) {{ asset($user->avatar) }} @endforeach"
+                                                            alt="@foreach (userId($contacts->reply_id) as $user)
+                                                                {{ $user->username }} @endforeach" width="25" height="25"
+                                                                />
+                                                                <p class="small mb-0 ms-2">
+                                                                    @foreach (userId($contacts->reply_id) as $user)
+                                                                        {{ $user->username }} @endforeach
+                                                                </p>
+                                                        </div>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            <p class="small text-muted mb-0">Le
+                                                                {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
                                                             </p>
-                                                    </div>
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <p class="small text-muted mb-0">Le
-                                                            {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
-                                                        </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                     </div>

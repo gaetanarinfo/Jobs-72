@@ -63,9 +63,9 @@
                         <div class="post-details-content bg-white mb-30 p-30 box-shadow">
                             <div class="blog-content">
                                 <div class="post-meta">
-                                    <a href="#">Mise en ligne le
+                                    <a>Mise en ligne le
                                         {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</a>
-                                    <a href="#">{{ $news->category }}</a>
+                                    <a>{{ $news->category }}</a>
                                 </div>
                                 <h4 class="post-title">{{ $news->title }}</h4>
 
@@ -98,7 +98,7 @@
                                         $user){{ $user->username }}@endforeach">
                                     </div>
                                     <div class="post-author-desc">
-                                        <a href="#" class="author-name">
+                                        <a  class="author-name">
                                             @foreach (user($news->author) as $user)
                                                 {{ $user->lastname }} {{ $user->firstname }} @endforeach
                                         </a>
@@ -163,7 +163,7 @@
                                             </div>
 
                                             <div class="comment-meta">
-                                                <a href="#" class="comment-date">Le {{ date('d/m/Y à H:i', strtotime($comments->created_at)) }}</a>
+                                                <a  class="comment-date">Le {{ date('d/m/Y à H:i', strtotime($comments->created_at)) }}</a>
                                                 <h6>@foreach(user($comments->author) as $user){{ $user->lastname }} {{ $user->firstname }}@endforeach</h6>
                                                 <p>{{ $comments->content }}</p>
                                                 <div class="d-flex align-items-center">

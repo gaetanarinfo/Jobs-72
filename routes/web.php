@@ -57,6 +57,12 @@ Route::get('/conseil-carriere/{category}', [App\Http\Controllers\CareerControlle
 
 Route::get('/profile-public/{username}', [App\Http\Controllers\ProfilePublicController::class, 'index'])->name('profile-public');
 
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('registers');
+
+Route::get('/mail', [App\Http\Controllers\MailController::class, 'index'])->name('mail');
+
+Route::post('/mail-check', [App\Http\Controllers\MailController::class, 'create'])->name('mail-post');
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
 

@@ -59,13 +59,6 @@
                 </h5>
             </div>
             <div class="modal-body">
-                <div class="container mb-3 mt-0 text-center">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="{{ asset('images/5ef1c2c01cfbc200047e7400.png') }}" width="120px" />
-                        </div>
-                    </div>
-                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

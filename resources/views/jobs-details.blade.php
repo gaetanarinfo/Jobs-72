@@ -171,7 +171,7 @@
                                         height="100px" alt="">
                                     </div>
                                     <div class="post-author-desc">
-                                        <a href="#" class="author-name">
+                                        <a class="author-name">
                                             @foreach (user($jobs->author) as $user)
                                                 {{ $user->lastname }} {{ $user->firstname }} @endforeach
                                         </a>

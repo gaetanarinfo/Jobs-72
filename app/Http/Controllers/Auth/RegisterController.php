@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Form;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\Facades\Validator;
@@ -57,7 +58,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'cvdoc' => ['required', 'mimes:pdf', 'max:2048'],
+            'recruter' => []
         ]);
     }
 
@@ -67,13 +70,82 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function create(Request $request)
     {
-        return User::create([
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+        $this->validate($request,[
+            'username' => 'max:255|required|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|min:8|string|confirmed',
+            'cvdoc' => 'mimes:pdf|max:2048'
+        ]); 
+
+        $file = $request->file('cvdoc');
+
+        if($request->has('recruter') == true){
+            if($file != null)
+            {
+                $destinationPath = 'documents/cv';
+                $file->move($destinationPath,$file->getClientOriginalName());
+
+                User::create([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'email' => $request->email,
+                    'cv' => $file->getClientOriginalName(),
+                    'roles' => 'ROLES_RECRUTER'
+                ]);
+
+                return redirect('')->with('success','Votre compte à été crée.');
+
+            }else{
+
+                User::create([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'email' => $request->email,
+                    'roles' => 'ROLES_RECRUTER'
+                ]);
+
+                return redirect('')->with('success','Votre compte à été crée.');
+
+            }
+            
+        }else{
+            if($file != null)
+            {
+                $destinationPath = 'documents/cv';
+                $file->move($destinationPath,$file->getClientOriginalName());
+
+                User::create([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'email' => $request->email,
+                    'cv' => $file->getClientOriginalName(),
+                    'roles' => 'ROLES_USER'
+                ]);
+
+                return redirect('')->with('success','Votre compte à été crée.');
+            }else{
+
+                User::create([
+                    'username' => $request->username,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'email' => $request->email,
+                    'roles' => 'ROLES_USER'
+                ]);
+
+                return redirect('')->with('success','Votre compte à été crée.');
+
+            }
+        }
+
+        return redirect(route(''));
+
     }
 
 }

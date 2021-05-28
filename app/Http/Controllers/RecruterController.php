@@ -34,7 +34,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $user = Auth::user();
@@ -118,7 +118,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $user = Auth::user();
@@ -201,7 +201,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
         
         $user = Auth::user();
@@ -229,7 +229,7 @@ class RecruterController extends Controller
 
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $jobs = DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->first();
@@ -252,7 +252,7 @@ class RecruterController extends Controller
 
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->update(array('active' => 1));
@@ -271,7 +271,7 @@ class RecruterController extends Controller
 
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->update(array('active' => 0));
@@ -289,7 +289,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $jobs = DB::table('jobs')->where('id', '=', $id)->where('author', '=', Auth::user()->username)->first();
@@ -309,7 +309,7 @@ class RecruterController extends Controller
 
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         $this->validate($request,[
@@ -361,7 +361,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('users_transactions')->where('id', '=', $id)->where('user_id', '=', Auth::user()->id)->delete();
@@ -379,7 +379,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('jobs_applies')->where('id', '=', $id)->delete();
@@ -396,7 +396,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
 
         DB::table('jobs_applies')->where('id', '=', $id)->update(array('status' => 2));
@@ -413,7 +413,7 @@ class RecruterController extends Controller
     {
         if(Auth::user()->roles != 'ROLES_RECRUTER' && Auth::user()->roles != 'ROLES_ADMIN')
         {
-            return back();
+            return redirect(route('home'));
         }
         
         DB::table('jobs_applies')->where('id', '=', $id)->update(array('status' => 1));

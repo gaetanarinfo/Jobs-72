@@ -137,15 +137,9 @@
                                                         {{ $user->firstname }}@endif
                                                 </h4>
                                                 <p class="mb-0">
-                                                    @if ($user->show_email == 1)
-                                                        <i class="fas fa-envelope-square"></i> <b><a
-                                                                href="mailto:{{ $user->email }}">{{ $user->email }}</a></b>
-                                                    @endif
-                                                </p>
-                                                <p class="mb-0">
                                                     @if ($user->show_web == 1)
-                                                        <i class="fas fa-link"></i> <b><a
-                                                                href="{{ $user->web }}" title="Site internet de {{ $user->username }}">{{ $user->web }}</a></b>
+                                                        <i class="fas fa-link"></i> <b><a href="{{ $user->web }}"
+                                                                title="Site internet de {{ $user->username }}">{{ $user->web }}</a></b>
                                                     @endif
                                                 </p>
                                                 <div class="text-muted"><small>
@@ -157,16 +151,16 @@
                                                     </small></div>
                                                 <div class="mt-2">
                                                     @if ($user->show_facebook == 1)<a
-                                                            href="{{ $user->facebook }}" class="btn btn-info mr-2"><i
+                                                            href="{{ $user->facebook }}" target="_blank" class="btn btn-info mr-2"><i
                                                                 class="fab fa-facebook-f"></i></a>@endif
                                                     @if ($user->show_twitter == 1)<a
-                                                            href="{{ $user->twitter }}" class="btn btn-danger mr-2"><i
+                                                            href="{{ $user->twitter }}" target="_blank" class="btn btn-danger mr-2"><i
                                                                 class="fab fa-twitter"></i></a>@endif
                                                     @if ($user->show_linkedin == 1)<a
-                                                            href="{{ $user->linkedin }}" class="btn btn-warning mr-2"><i
+                                                            href="{{ $user->linkedin }}" target="_blank" class="btn btn-warning mr-2"><i
                                                                 class="fab fa-linkedin-in"></i></a>@endif
                                                     @if ($user->show_github == 1)<a
-                                                            href="{{ $user->github }}" class="btn btn-secondary mr-2"><i
+                                                            href="{{ $user->github }}" target="_blank" class="btn btn-secondary mr-2"><i
                                                                 class="fab fa-github"></i></a>@endif
                                                 </div>
                                             </div>
@@ -178,14 +172,20 @@
                                                     Utilisateur @elseif($user->roles == 'ROLES_ADMIN')
                                                     Administrateur @elseif($user->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
-                                                <div class="text-muted"><small>Inscrit le
+                                                <div class="text-muted mt-1"><small>Inscrit le
                                                         {{ date('d/m/Y à H:i', strtotime($user->created_at)) }}</small>
                                                 </div>
+                                                <p class="mt-1">
+                                                    @if ($user->show_email == 1)
+                                                        <a href="mailto:{{ $user->email }}"
+                                                            class="btn btn-secondary">Contacter ce candidat</a>
+                                                    @endif
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                     <ul class="nav nav-tabs" style="justify-content: center;">
-                                        <li class="nav-item active"><a href="" id="cvBtn" class="nav-link active">Le CV</a>
+                                        <li class="nav-item active"><a href="" id="cvBtn" class="nav-link active">Voir son CV</a>
                                         </li>
                                     </ul>
 
