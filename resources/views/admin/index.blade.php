@@ -513,7 +513,7 @@
                                                         @foreach ($careerAll as $careers)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{ route('career', $careers->id) }}"><span
+                                                                    <a href="{{ route('career', [$careers->id, strtolower(str_replace('?', '', str_replace(' ', '-', $careers->title)))]) }}"><span
                                                                             class="text-bold">
                                                                             {{ $careers->title }}
                                                                         </span>

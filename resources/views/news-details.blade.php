@@ -44,6 +44,19 @@
                         </div>
                     </div>
                 </div>
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" style="padding: 9px 5px 0px 5px;">
+                    <div class="container-fluid">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('actualites') }}">Actualités</a></li>
+                                <li class="breadcrumb-item active"><a>{{ $news->title }}</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </nav>
+
                 <div class="row justify-content-center">
 
                     <div class="col-12 col-xl-8">
@@ -239,7 +252,7 @@
                                     <li><a href="{{ url('emplois', ['Ressources-Humaines']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Ressources Humaines</span>
-                                            <span>{{ category('Ressources Humaines') }}</span></a></li>
+                                            <span>{{ category('Ressources-Humaines') }}</span></a></li>
 
                                     <li><a href="{{ url('emplois', ['Commercial']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>

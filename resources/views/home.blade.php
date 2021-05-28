@@ -21,6 +21,8 @@
         </div>
     @endif
 
+    @include('components.stepper')
+
     @include('components.news')
     <hr />
     @include('components.emplois')

@@ -20,15 +20,28 @@
                         </div>
                     </div>
                 </div>
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4" style="padding: 9px 5px 0px 5px;">
+                    <div class="container-fluid">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('career-category', [strtolower(str_replace('?', '', str_replace(' ', '-', $career->category)))]) }}">{{ $career->category }}</a></li>
+                                <li class="breadcrumb-item active"><a>{{ $career->title }}</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </nav>
+
                 <div class="row justify-content-center">
 
                     <div class="col-12 col-xl-8">
                         <div class="post-details-content bg-white mb-30 p-30 box-shadow">
                             <div class="blog-content">
                                 <div class="post-meta">
-                                    <a href="#">Mise en ligne le
+                                    <a>Mise en ligne le
                                         {{ date('d/m/Y à H:i', strtotime($career->created_at)) }}</a>
-                                    <a href="#">{{ $career->category }}</a>
+                                    <a href="{{ route('career-category', [strtolower(str_replace('?', '', str_replace(' ', '-', $career->category)))]) }}">{{ $career->category }}</a>
                                 </div>
                                 <h4 class="post-title">{{ $career->title }}</h4>
 
@@ -49,7 +62,8 @@
 
                                 <div class="post-author d-flex align-items-center">
                                     <div class="post-author-thumb">
-                                        <img src="../../../@foreach (user($career->author) as $user){{ $user->avatar }}@endforeach" width="100px"
+                                        <img src="../../../@foreach (user($career->author) as
+                                        $user){{ $user->avatar }} @endforeach" width="100px"
                                         height="100px" alt="@foreach (user($career->author) as $user){{ $user->username }}@endforeach">
                                     </div>
                                     <div class="post-author-desc">
@@ -98,7 +112,7 @@
                                     <li><a href="{{ url('emplois', ['Ressources-Humaines']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Ressources Humaines</span>
-                                            <span>{{ category('Ressources Humaines') }}</span></a></li>
+                                            <span>{{ category('Ressources-Humaines') }}</span></a></li>
 
                                     <li><a href="{{ url('emplois', ['Commercial']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>

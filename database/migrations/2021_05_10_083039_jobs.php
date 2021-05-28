@@ -35,6 +35,8 @@ class Jobs extends Migration
             $table->string('experience');
             $table->boolean('experience_exiger')->default(0);
 
+            $table->string('poste');
+
             $table->integer('vue')->default(0)->nullable();
             $table->integer('apply')->default(0)->nullable();
             $table->integer('likes')->default(0)->nullable();

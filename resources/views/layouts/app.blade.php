@@ -61,6 +61,11 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLGJ8YKWG7"></script>
+
+    <!-- Stepper -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+
     <script>
         window.dataLayer = window.dataLayer || [];
 

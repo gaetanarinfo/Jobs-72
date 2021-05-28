@@ -111,6 +111,8 @@ class ProfileController extends Controller
         'facebook' => 'max:255',
         'twitter' => 'max:255',
         'linkedin' => 'max:255',
+        'github' => 'max:255',
+        'web' => 'max:255',
         'biography' => 'max:160',
         'email' => 'required|email|max:255|unique:users,id,'.$user->id,
 
@@ -124,7 +126,9 @@ class ProfileController extends Controller
     $user->email = $request->email;   
     $user->facebook = $request->facebook; 
     $user->twitter = $request->twitter; 
-    $user->linkedin = $request->linkedin;      
+    $user->linkedin = $request->linkedin;  
+    $user->github = $request->github;    
+    $user->web = $request->web; 
     $user->biography = $request->biography;
 
     if($request->password){
@@ -179,9 +183,11 @@ class ProfileController extends Controller
         $user->show_facebook = $request->show_facebook;
         $user->show_twitter = $request->show_twitter;
         $user->show_linkedin = $request->show_linkedin;
+        $user->show_github = $request->show_github;
 
         $user->show_cv = $request->show_cv;
         $user->show_username = $request->show_username;
+        $user->show_web = $request->show_web;
 
         $user->save();
         return back()->with('success','Votre visibilité à été modifier.');

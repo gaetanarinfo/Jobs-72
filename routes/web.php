@@ -53,6 +53,10 @@ Route::name('language')->get('language/{lang}', [App\Http\Controllers\HomeContro
 
 Route::get('/conseil-carriere/article/{id}/{slug?}', [App\Http\Controllers\CareerController::class, 'show'])->name('career');
 
+Route::get('/conseil-carriere/{category}', [App\Http\Controllers\CareerController::class, 'index'])->name('career-category');
+
+Route::get('/profile-public/{username}', [App\Http\Controllers\ProfilePublicController::class, 'index'])->name('profile-public');
+
 Route::group(['middleware' => ['auth', 'active_user']], function() {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index']);
 

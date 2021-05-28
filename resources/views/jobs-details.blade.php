@@ -75,6 +75,8 @@
                                         <ul>
                                             <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i> Status :
                                                 {{ $jobs->status }}</li>
+                                                <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i> Contrat :
+                                                    {{ $jobs->poste }}</li>    
                                             <li><i class="fa fa-check-circle text-warning" aria-hidden="true"></i> Type
                                                 d'emploi :
                                                 {{ $jobs->type }}</li>
@@ -263,7 +265,7 @@
                                     <li><a href="{{ url('emplois', ['Ressources-Humaines']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>
                                                 Emploi Ressources Humaines</span>
-                                            <span>{{ category('Ressources Humaines') }}</span></a></li>
+                                            <span>{{ category('Ressources-Humaines') }}</span></a></li>
 
                                     <li><a href="{{ url('emplois', ['Commercial']) }}"><span><i
                                                     class="fas fa-angle-double-right" aria-hidden="true"></i>

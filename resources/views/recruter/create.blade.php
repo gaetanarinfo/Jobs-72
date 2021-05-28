@@ -89,7 +89,7 @@
                                                     </div>
 
                                                     <div class="form-group row">
-                                                        <label for="email"
+                                                        <label for="category"
                                                             class="col-md-6 col-form-label text-md-right">{{ __('Catégorie du poste') }}</label>
 
                                                         <div class="col-md-6">
@@ -132,6 +132,36 @@
                                                             </select>
 
                                                             @error('category')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="poste"
+                                                            class="col-md-6 col-form-label text-md-right">{{ __('Contrat du poste') }}</label>
+
+                                                        <div class="col-md-6">
+                                                            <select
+                                                                class="form-control js-select @error('poste') is-invalid @enderror"
+                                                                name="poste" value="{{ old('poste') }}" required
+                                                                autocomplete="poste">
+                                                                <option selected value="">Sélectionner un contrat
+                                                                </option>
+                                                                <option>--------------</option>
+                                                                <option value="CDD">CDD
+                                                                </option>
+                                                                <option value="CDI">CDI
+                                                                </option>
+                                                                <option value="STAGE">STAGE
+                                                                </option>
+                                                                <option value="INTERIMAIRE">INTÉRIMAIRE
+                                                                </option>
+                                                            </select>
+
+                                                            @error('poste')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>

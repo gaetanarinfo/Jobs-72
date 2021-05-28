@@ -138,7 +138,8 @@ class RecruterController extends Controller
                 'type' => 'required',
                 'salaire' => 'required',
                 'experience' => 'required',
-                'experience_exiger' => 'required'
+                'experience_exiger' => 'required',
+                'poste' => 'required'
         
             ]);
 
@@ -163,6 +164,7 @@ class RecruterController extends Controller
                 'teletravail' => $request->teletravail,
                 'experience' => $request->experience,
                 'experience_exiger' => $request->experience_exiger,
+                'poste' => $request->poste,
                 'created_at' => Carbon::now('Europe/Paris')
             ]);
 
@@ -323,7 +325,8 @@ class RecruterController extends Controller
             'avantages' => 'required',
             'horaires' => 'required',
             'experience' => 'required',
-            'experience_exiger' => 'required'
+            'experience_exiger' => 'required',
+            'poste' => 'required'
             
         ]);
         
@@ -341,7 +344,8 @@ class RecruterController extends Controller
             'horaires' => json_encode($request->horaires),
             'teletravail' => $request->teletravail,
             'experience' => $request->experience,
-            'experience_exiger' => $request->experience_exiger
+            'experience_exiger' => $request->experience_exiger,
+            'poste' => $request->poste
         ));
 
         return redirect('recruter')->with('success','Votre poste à été modifier');

@@ -56,9 +56,10 @@
                             </label>
                         </div>
                         <button id="btn_check_valid" type="submit"
-                            class="d-inline-block btn btn-success ripple-surface ripple-surface-dark"><i class="fas fa-check"></i></button>
-                        <a id="btn_check_reset"
-                            class="btn btn-danger ripple-surface ripple-surface-dark" style="display: none;"><i class="fas fa-times"></i></a>
+                            class="d-inline-block btn btn-success ripple-surface ripple-surface-dark"><i
+                                class="fas fa-check"></i></button>
+                        <a id="btn_check_reset" class="btn btn-danger ripple-surface ripple-surface-dark"
+                            style="display: none;"><i class="fas fa-times"></i></a>
                     </form>
                 </div>
             </div>
@@ -73,25 +74,37 @@
         <div class="row mb-2" id="tel_res2">
             @foreach ($jobsAll as $jobs)
                 <div class="col-md-6">
-                    <div class="card flex-md-row mb-4 box-shadow h-md-250" style="min-height: 390px;">
+                    <div class="card flex-md-row mb-4 box-shadow h-md-250">
                         <div class="card-body d-flex flex-column align-items-start">
                             <strong class="d-inline-block mb-2 text-success">{{ $jobs->category }}</strong>
-                            <h3 class="mb-0">
+                            <h3 class="mb-1">
                                 <a class="text-dark"
                                     href="{{ url('emplois', [$jobs->id, $jobs->author]) }}">{{ $jobs->title }}</a>
                             </h3>
                             <div class="mb-1 text-muted mt-1"><i class="fas fa-clock text-warning" aria-hidden="true"></i>
-                                Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</div>
+                                @if (now()->addDays(1)->addHours(2)->format('Y-m-d H:i:s') > $jobs->created_at)
+                                    Publié aujourd'hui
+                                @else
+                                    Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}
+                                @endif
+                            </div>
                             <div class="mb-1 text-muted"> <i class="fas fa-map-pin text-secondary"></i>
                                 <strong>{{ $jobs->localisation }}</strong>
+                            </div>
+                            <div class="mb-1">
+                                <span class="badge bg-info">
+                                    {{ $jobs->poste }}</span>
+                                <span class="badge bg-success">
+                                    {{ $jobs->type }}</span>
+                                @if (now()->addDays(7)->addHours(2)->format('Y-m-d H:i:s') > $jobs->created_at)
+                                    <span class="badge bg-danger"><i class="fab fa-hotjar text-white mr-1"></i>
+                                        NOUVEAU</span>
+                                @endif
                             </div>
                             <p class="card-text mb-auto">{{ $jobs->smallContent }}</p>
                             <a href="{{ url('emplois', [$jobs->id, $jobs->author]) }}"
                                 class="btn btn-outline-success ripple-surface ripple-surface-dark mt-2">Postuler</a>
                         </div>
-                        <img class="card-img-right flex-auto d-none d-md-block" alt="{{ $jobs->title }}"
-                            style="position: relative;width: 267px;top: 19px;left: -10px;height: 192px;"
-                            src="images/jobs/{{ $jobs->image }}">
                     </div>
                 </div>
             @endforeach

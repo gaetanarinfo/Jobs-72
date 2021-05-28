@@ -13,15 +13,33 @@ class CareerController extends Controller
     /**
      * Show the profile for a given user.
      *
+     * @param  string  $category
+     * @return \Illuminate\View\View
+     */
+    public function index($category)
+    {
+
+        $catSlug = strtoupper(str_replace('-', ' ', $category));
+
+        $careers = DB::table('careers')->where('active', 1)->where('category', $catSlug)->paginate(12);
+
+        return view('career', [
+                'careers' => $careers,
+                'category' => ucfirst(str_replace('-', ' ', $category))
+        ]);
+    }
+
+    /**
+     * Show the profile for a given user.
+     *
      * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\View\View
      */
     public function show($id, $slug)
     {
 
-        $titleSlug = strtolower(str_replace(' ', '-', $slug));
-
-        $cat2 = DB::table('careers')->where('id', $id)->get();
+        $cat2 = DB::table('careers')->where('active', 1)->where('id', $id)->get();
 
         if($cat2->count() == 0)
         {

@@ -17,6 +17,7 @@ class UsersSocial extends Migration
             $table->boolean('show_facebook')->default(1)->nullable();
             $table->boolean('show_twitter')->default(1)->nullable();
             $table->boolean('show_linkedin')->default(1)->nullable();
+            $table->boolean('show_github')->default(1)->nullable();
         });
     }
 

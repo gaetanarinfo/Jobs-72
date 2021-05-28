@@ -314,10 +314,10 @@
                                                                         value="{{ Auth::user()->linkedin }}">
                                                                 </div>
                                                             </div>
-                                                            {{-- <div class="col">
+                                                            <div class="col">
                                                                 <div class="form-group">
-                                                                    <label>Compte Twitter</label>
-                                                                    @if (Auth::user()->show_twitter == 0)<i
+                                                                    <label>Compte GitHub</label>
+                                                                    @if (Auth::user()->show_github == 0)<i
                                                                             class="far fa-eye-slash"
                                                                             data-mdb-toggle="tooltip"
                                                                         title="Non Visible"></i>@else<i
@@ -325,9 +325,23 @@
                                                                             data-mdb-toggle="tooltip" title="Visible"></i>
                                                                     @endif
                                                                     <input class="form-control mt-2" type="text"
-                                                                        name="twitter" value="{{ Auth::user()->twitter }}">
+                                                                        name="github" value="{{ Auth::user()->github }}">
                                                                 </div>
-                                                            </div> --}}
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="form-group">
+                                                                    <label>Site internet</label>
+                                                                    @if (Auth::user()->show_web == 0)<i
+                                                                            class="far fa-eye-slash"
+                                                                            data-mdb-toggle="tooltip"
+                                                                        title="Non Visible"></i>@else<i
+                                                                            class="fas fa-eye ml-2"
+                                                                            data-mdb-toggle="tooltip" title="Visible"></i>
+                                                                    @endif
+                                                                    <input class="form-control mt-2" type="text"
+                                                                        name="web" placeholder="http:// ou https://" value="{{ Auth::user()->web }}">
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                         <div class="row  mt-2 mb-2">
@@ -763,6 +777,65 @@
                                                                         </select>
                                                                     </div>
                                                                 </div>
+                                                            </div>
+
+                                                            <div class="row  mt-2 mb-2">
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Public compte GitHub</label>
+                                                                        @if (Auth::user()->show_github == 0)<i
+                                                                                class="far fa-eye-slash"
+                                                                                data-mdb-toggle="tooltip"
+                                                                            title="Non Visible"></i>@else<i
+                                                                                class="fas fa-eye ml-2"
+                                                                                data-mdb-toggle="tooltip"
+                                                                                title="Visible"></i>@endif
+
+                                                                        <select name="show_twitter"
+                                                                            class="form-control mt-2">
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_github }}">
+                                                                                @if (Auth::user()->show_github == 1)
+                                                                                Visible par les recruteurs @else Non
+                                                                                    visible par les recruteurs @endif
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non visible par les recruteurs
+                                                                            </option>
+                                                                            <option value="1">Visible par les recruteurs
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col">
+                                                                    <div class="form-group">
+                                                                        <label>Public site internet</label>
+                                                                        @if (Auth::user()->show_web == 0)<i
+                                                                                class="far fa-eye-slash"
+                                                                                data-mdb-toggle="tooltip"
+                                                                            title="Non Visible"></i>@else<i
+                                                                                class="fas fa-eye ml-2"
+                                                                                data-mdb-toggle="tooltip"
+                                                                                title="Visible"></i>@endif
+
+                                                                        <select name="show_web"
+                                                                            class="form-control mt-2">
+                                                                            <option selected
+                                                                                value="{{ Auth::user()->show_web }}">
+                                                                                @if (Auth::user()->show_web == 1)
+                                                                                Visible par les recruteurs @else Non
+                                                                                    visible par les recruteurs @endif
+                                                                            </option>
+                                                                            <option disabled>----------</option>
+                                                                            <option value="0">Non visible par les recruteurs
+                                                                            </option>
+                                                                            <option value="1">Visible par les recruteurs
+                                                                            </option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>

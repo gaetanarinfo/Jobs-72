@@ -6,6 +6,23 @@
 
     @include('components.head')
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3" style="padding: 9px 5px 0px 5px;">
+                    <div class="container-fluid">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                                <li class="breadcrumb-item active"><a>Actualités</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-5">
 
         <h3 class="mb-3 text-center"><strong>Toutes nos actualités</strong></h3>
@@ -69,7 +86,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $news->title }}</h5>
-                            <div class="mb-1 text-muted"><i class="fas fa-clock text-warning" aria-hidden="true"></i> Mise
+                            <div class="mb-1 text-muted"><i class="fas fa-clock text-warning" aria-hidden="true"></i>
+                                Mise
                                 en ligne le
                                 {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</div>
                             <p class="card-text">
