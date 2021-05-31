@@ -16,7 +16,6 @@ class NewsVues extends Migration
         Schema::create('news_vues', function (Blueprint $table) {
             $table->id();
             $table->integer('news_id');
-            $table->integer('user_id');
             $table->string('ip');
         });
     }

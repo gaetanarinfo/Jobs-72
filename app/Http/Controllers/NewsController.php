@@ -41,30 +41,21 @@ class NewsController extends Controller
                 {
                     $likeVue->ip = null;
                 }
+     
+                /*
+                    Insert le nombre de vue
+                */
+                DB::table('news_vues')->insert([
+                    'news_id' => $id,
+                    'ip' => request()->ip()
+                ]);
 
-                if(Auth::user())
-                {
-
-                    if($ipVue->user_id != Auth::user()->id || $ipVue->news_id != $id)
-                    {
-                        
-                        /*
-                            Insert le nombre de vue
-                        */
-                        DB::table('news_vues')->insert([
-                            'news_id' => $id,
-                            'user_id' => Auth::user()->id,
-                            'ip' => request()->ip()
-                        ]);
-
-                        /*
-                            Met à jour le nombre de vue
-                        */
-                        DB::table('news')
-                        ->where('id', $id)->increment('vue');                       
+                /*
+                    Met à jour le nombre de vue
+                */
+                DB::table('news')
+                ->where('id', $id)->increment('vue');                       
                     
-                    }    
-                }
 
                 $commentAll = DB::table('news_comment')->where('news_id', $id)->orderBy('created_at', 'desc')->get();
                 $countComment = DB::table('news_comment')->where('news_id', $id)->count();

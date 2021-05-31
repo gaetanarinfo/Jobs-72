@@ -22,7 +22,7 @@
     @endif
 
     @include('components.stepper')
-
+    <hr />
     @include('components.news')
     <hr />
     @include('components.emplois')

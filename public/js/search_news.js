@@ -64,7 +64,7 @@ form.addEventListener('submit', function(e) {
                         posts.innerHTML += `<div class="col-lg-4 col-md-12 mb-4">
                     <div class="card">
                         <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="images/news/${ e.image }" class="img-fluid" />
+                            <img width="112px" src="images/news/${ e.image }" class="img-fluid" />
                             <a href="article/${ e.id }">
                                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                             </a>

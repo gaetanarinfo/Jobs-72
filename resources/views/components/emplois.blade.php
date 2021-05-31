@@ -1,4 +1,4 @@
-<div class="container mt-5 fadeOn">
+<div class="container mt-2 fadeOn">
 
     <h4 class="mb-3 text-center"><strong>Offres d'emploi</strong></h4>
 
@@ -21,7 +21,7 @@
                                 @if (now()->addDays(1)->addHours(2)->format('Y-m-d H:i:s') > $jobs->created_at)
                                     Publié aujourd'hui
                                 @else
-                                    Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}    
+                                {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}
                                 @endif
                             </div>
                             <div class="mb-1 text-muted"> <i class="fas fa-map-pin text-secondary"></i>
@@ -46,7 +46,7 @@
             @endforeach
         @else
             <div class="text-center">
-                <h3>Désolé, il n'y a pas d'offre d'emploi, pour le moment !</h3>
+                <h4>Désolé, il n'y a pas d'offre d'emploi, pour le moment !</h4>
             </div>
         @endif
     </div>

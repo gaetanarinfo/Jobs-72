@@ -173,7 +173,7 @@
                                                     Administrateur @elseif($user->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
                                                 <div class="text-muted mt-1"><small>Inscrit le
-                                                        {{ date('d/m/Y à H:i', strtotime($user->created_at)) }}</small>
+                                                    {{ $user->created_at->translatedFormat('l jS F Y à H:i') }}</small>
                                                 </div>
                                                 <p class="mt-1">
                                                     @if ($user->show_email == 1)

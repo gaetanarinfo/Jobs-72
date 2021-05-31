@@ -22,9 +22,9 @@ class News extends Migration
             $table->text('content');
             $table->string('image')->default('default.jpg');
             $table->boolean('active');
-            $table->integer('vue');
-            $table->integer('likes');
-            $table->integer('comments');
+            $table->integer('vue')->default(0);
+            $table->integer('likes')->default(0);
+            $table->integer('comments')->default(0);
             $table->timestamps();
         });
     }

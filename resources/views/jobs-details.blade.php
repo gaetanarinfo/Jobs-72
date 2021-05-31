@@ -52,8 +52,7 @@
                         <div class="post-details-content bg-white mb-30 p-30 box-shadow">
                             <div class="blog-content">
                                 <div class="post-meta">
-                                    <a>Mise en ligne le
-                                        {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</a>
+                                    <a>{{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}</a>
                                     <a href="{{ url('emplois', $jobs->category) }}">Emplois {{ $jobs->category }}</a>
                                 </div>
                                 <h4 class="post-title">{{ $jobs->title }}</h4>

@@ -167,7 +167,7 @@
                                                     Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
                                                 <div class="text-muted"><small>Inscrit le
-                                                        {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
+                                                    {{ Auth::user()->created_at->translatedFormat('l jS F Y à H:i') }}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -869,7 +869,7 @@
                                                                 <div class="mb-1 text-muted mt-1"><i
                                                                         class="fas fa-clock text-warning"
                                                                         aria-hidden="true"></i> Mise en ligne le
-                                                                    {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}
+                                                                        {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}
                                                                 </div>
                                                                 <div class="mb-1 text-muted"> <i
                                                                         class="fas fa-map-pin text-secondary"></i>
@@ -943,7 +943,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <span>
-                                                                        {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                        {{ $contacts->created_at->translatedFormat('l jS F Y à H:i') }}
                                                                     </span>
                                                                 </td>
                                                                 @foreach (userId($contacts->user_id) as $user)
@@ -1147,7 +1147,7 @@
                                                         </div>
                                                         <div class="d-flex flex-row align-items-center">
                                                             <p class="small text-muted mb-0">Le
-                                                                {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                {{ $contacts->created_at->translatedFormat('l jS F Y à H:i') }}
                                                             </p>
                                                         </div>
                                                     </div>

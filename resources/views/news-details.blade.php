@@ -63,8 +63,7 @@
                         <div class="post-details-content bg-white mb-30 p-30 box-shadow">
                             <div class="blog-content">
                                 <div class="post-meta">
-                                    <a>Mise en ligne le
-                                        {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</a>
+                                    <a>{{ $news->created_at->translatedFormat('l jS F Y à H:i') }}</a>
                                     <a>{{ $news->category }}</a>
                                 </div>
                                 <h4 class="post-title">{{ $news->title }}</h4>
@@ -121,7 +120,7 @@
                                 <div class="col-12 col-md-6 col-lg-4">
                                     <div class="single-blog-post style-4 mb-30">
                                         <div class="post-thumbnail">
-                                            <img src="../../images/jobs/{{ $dataLatests->image }}"
+                                            <img style="width: 244px;height: 122px;" src="{{ asset('images/news/' . $dataLatests->image) }}"
                                             alt="{{ $dataLatests->title }}">
                                         </div>
                                         <div class="post-content">
@@ -163,7 +162,7 @@
                                             </div>
 
                                             <div class="comment-meta">
-                                                <a  class="comment-date">Le {{ date('d/m/Y à H:i', strtotime($comments->created_at)) }}</a>
+                                                <a  class="comment-date">{{ $comments->created_at->translatedFormat('l jS F Y à H:i') }}</a>
                                                 <h6>@foreach(user($comments->author) as $user){{ $user->lastname }} {{ $user->firstname }}@endforeach</h6>
                                                 <p>{{ $comments->content }}</p>
                                                 <div class="d-flex align-items-center">

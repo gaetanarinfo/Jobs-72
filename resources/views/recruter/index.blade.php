@@ -49,7 +49,7 @@
                                                     Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
                                                 <div class="text-muted"><small>Inscrit le
-                                                        {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
+                                                    {{ Auth::user()->created_at->translatedFormat('l jS F Y à H:i') }}</small>
                                                 </div>
                                                 <div class="text-muted"><i
                                                         class="fas fa-coins text-info mr-2"></i><small>Mes
@@ -118,7 +118,7 @@
                                                                 <td>
                                                                     <span>
                                                                         <i class="far fa-clock me-1"></i><span>Le
-                                                                            {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</span>
+                                                                            {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                     </span>
                                                                 </td>
                                                                 <td>
@@ -242,7 +242,7 @@
                                                             <td>
                                                                 <span>
                                                                     <i class="far fa-clock me-1"></i><span>Le
-                                                                        {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</span>
+                                                                        {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                 </span>
                                                             </td>
                                                             <td>
@@ -312,7 +312,7 @@
                                                             <td>
                                                                 <span>
                                                                     <i class="far fa-clock me-1"></i><span>Le
-                                                                        {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</span>
+                                                                        {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                 </span>
                                                             </td>
                                                             <td>
@@ -382,7 +382,7 @@
                                                             <td>
                                                                 <span>
                                                                     <i class="far fa-clock me-1"></i><span>Le
-                                                                        {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}</span>
+                                                                        {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                 </span>
                                                             </td>
                                                             <td>
@@ -630,7 +630,7 @@
                                                             <td>
                                                                 <span>
                                                                     <i class="far fa-clock me-1 text-secondary"></i><span>Le
-                                                                        {{ date('d/m/Y à H:i', strtotime($trans->created_at)) }}</span>
+                                                                        {{ $trans->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                 </span>
                                                             </td>
                                                             <td>

@@ -76,28 +76,39 @@
 
         <div class="row" id="search_res_news">
             @foreach ($newsAll as $news)
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
-                        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                            <img src="images/news/{{ $news->image }}" class="img-fluid" />
-                            <a href="{{ route('news', $news->id) }}">
-                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                            </a>
+                <div class="col-10 mt-0 mb-0 m-auto">
+                    <div class="card" style="box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);">
+                        <div class="card-horizontal">
+                            <div class="img-square-wrapper">
+                                <img class="" style="display: block;position: relative;top: 0;left: 0;width: 294px;"
+                                    src="images/news/{{ $news->image }}" alt="{{ $news->title }}">
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ route('news', $news->id) }}" title="{{ $news->title }}">
+                                    <h6 class="card-title text-left">{{ $news->title }}</h6>
+                                </a>
+                                <p style="font-size: 15px;" class="card-text text-left">
+                                    {{ $news->smallContent }}</p>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $news->title }}</h5>
-                            <div class="mb-1 text-muted"><i class="fas fa-clock text-warning" aria-hidden="true"></i>
-                                Mise
-                                en ligne le
-                                {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</div>
-                            <p class="card-text">
-                                {{ $news->smallContent }}
-                            </p>
-                            <a href="{{ route('news', $news->id) }}"
-                                class="btn btn-outline-success ripple-surface ripple-surface-dark">Lire la
-                                suite</a>
+                        <div class="card-footer foo text-left">
+                            <span class="badge bg-info" style="padding: 10px 12px !important;line-height: 14px;"><i
+                                    class="fas fa-clock text-white mr-0" aria-hidden="true"></i>
+                                    {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}</span>
+                            <a style="width: 135px; height: 32px; padding: 10px 12px;line-height: 14px; font-weight: 600 !important;"
+                                href="{{ route('news', $news->id) }}"
+                                class="btn btn-secondary ripple-surface ripple-surface-dark ml-2">Lire
+                                la
+                                suite...</a>
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6 m-auto">
+                            <hr style="text-align: center;">
+                        </div>
+                    </div>
+
                 </div>
             @endforeach
         </div>

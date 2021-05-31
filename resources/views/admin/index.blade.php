@@ -49,7 +49,7 @@
                                                     Administrateur @elseif(Auth::user()->roles == 'ROLES_RECRUTER')
                                                         Recruteur @endif</span>
                                                 <div class="text-muted"><small>Inscrit le
-                                                        {{ date('d/m/Y à H:i', strtotime(Auth::user()->created_at)) }}</small>
+                                                    {{ Auth::user()->created_at->translatedFormat('l jS F Y à H:i') }}</small>
                                                 </div>
                                                 <div class="text-muted"><i
                                                         class="fas fa-coins text-info mr-2"></i><small>Mes
@@ -121,14 +121,14 @@
                                                                 <td>
                                                                     <span>
                                                                         <i class="far fa-clock me-1"></i><span>Le
-                                                                            {{ date('d/m/Y à H:i', strtotime($news->created_at)) }}</span>
+                                                                            {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                     </span>
                                                                 </td>
                                                                 @if ($news->updated_at != null)
                                                                     <td>
                                                                         <span>
                                                                             <i class="far fa-clock me-1"></i><span>Le
-                                                                                {{ date('d/m/Y à H:i', strtotime($news->updated_at)) }}</span>
+                                                                                {{ $news->updated_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                         </span>
                                                                     </td>
                                                                 @else
@@ -289,7 +289,7 @@
                                                                 <td>
                                                                     <span>
                                                                         <i class="far fa-clock me-1"></i><span>Le
-                                                                            {{ date('d/m/Y à H:i', strtotime($users->created_at)) }}</span>
+                                                                            {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}</span>
                                                                     </span>
                                                                 </td>
                                                                 <td>
@@ -387,7 +387,7 @@
                                                                             target="_blank">{{ $devis->doc }}</a>
                                                                     </li>
                                                                     <li class="list-group-item"><b>Date de création :</b>
-                                                                        {{ date('d/m/Y à H:i', strtotime($devis->created_at)) }}
+                                                                        {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}
                                                                     </li>
                                                                 </ul>
 
@@ -445,8 +445,8 @@
                                                                     </span>
                                                                 </td>
                                                                 <td>
-                                                                    <span>
-                                                                        {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                    <span>Le 
+                                                                        {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}
                                                                     </span>
                                                                 </td>
                                                                 @foreach (userId($contacts->user_id) as $user)
@@ -513,31 +513,32 @@
                                                         @foreach ($careerAll as $careers)
                                                             <tr>
                                                                 <td>
-                                                                    <a href="{{ route('career', [$careers->id, strtolower(str_replace('?', '', str_replace(' ', '-', $careers->title)))]) }}"><span
+                                                                    <a
+                                                                        href="{{ route('career', [$careers->id, strtolower(str_replace('?', '', str_replace(' ', '-', $careers->title)))]) }}"><span
                                                                             class="text-bold">
                                                                             {{ $careers->title }}
                                                                         </span>
                                                                     </a>
                                                                 </td>
                                                                 <td>
-                                                                    <span>
-                                                                        {{ date('d/m/Y à H:i', strtotime($careers->created_at)) }}
+                                                                    <span>Le 
+                                                                        {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}
                                                                     </span>
                                                                 </td>
                                                                 @if ($careers->updated_at != null)
-                                                                <td>
-                                                                    <span>
-                                                                        <i class="far fa-clock me-1"></i><span>Le
-                                                                            {{ date('d/m/Y à H:i', strtotime($careers->updated_at)) }}</span>
-                                                                    </span>
-                                                                </td>
-                                                            @else
-                                                                <td>
-                                                                    <span>
-                                                                        Carrière non modifié
-                                                                    </span>
-                                                                </td>
-                                                            @endif
+                                                                    <td>
+                                                                        <span>
+                                                                            <i class="far fa-clock me-1"></i><span>Le
+                                                                                {{ $news->created_at->translatedFormat('l jS F Y à H:i') }}</span>
+                                                                        </span>
+                                                                    </td>
+                                                                @else
+                                                                    <td>
+                                                                        <span>
+                                                                            Carrière non modifié
+                                                                        </span>
+                                                                    </td>
+                                                                @endif
                                                                 <td>
                                                                     {{ $careers->author }}
                                                                 </td>
@@ -684,7 +685,7 @@
                                                         </div>
                                                         <div class="d-flex flex-row align-items-center">
                                                             <p class="small text-muted mb-0">Le
-                                                                {{ date('d/m/Y à H:i', strtotime($contacts->created_at)) }}
+                                                                {{ $contacts->created_at->translatedFormat('l jS F Y à H:i') }}
                                                             </p>
                                                         </div>
                                                     </div>

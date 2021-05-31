@@ -60,7 +60,7 @@
                                 @if (now()->addDays(1)->addHours(2)->format('Y-m-d H:i:s') > $jobs->created_at)
                                     Publié aujourd'hui
                                 @else
-                                    Mise en ligne le {{ date('d/m/Y à H:i', strtotime($jobs->created_at)) }}
+                                {{ $jobs->created_at->translatedFormat('l jS F Y à H:i') }}
                                 @endif
                             </div>
                             <div class="mb-1 text-muted"> <i class="fas fa-map-pin text-secondary"></i>
