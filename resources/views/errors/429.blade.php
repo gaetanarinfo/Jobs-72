@@ -1,6 +1,6 @@
 @extends('errors::minimal')
 
-@section('title', __('Server Error'))
+@section('title', __('Jobs-72 - Page erreur'))
 <div class="container row">
     <div class="moon"></div>
     <div class="moon__crater moon__crater1"></div>
@@ -18,7 +18,7 @@
         <div class="error__subtitle">Hmmm...</div>
         <div class="error__description">On dirait que l'un des développeurs s'est endormi</div>
         <a href="{{ route('login') }}" class="error__button error__button--active">Connexion</a>
-        <a href="" class="error__button">Contactez-nous</a>
+        <a href="{{ route('mail') }}" class="error__button">Contactez-nous</a>
     </div>
 
     <div class="astronaut">

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
+    protected $dates = ['created_at'];
+
     /**
      * Show the profile for a given user.
      *

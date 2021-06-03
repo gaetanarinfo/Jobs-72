@@ -14,9 +14,6 @@ return [
     |
     */
 
-    // setlocale(LC_TIME, 'fr_FR.utf8','fra'),
-    // date_default_timezone_set('Europe/Paris'),
-
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

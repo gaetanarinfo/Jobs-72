@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Careers;
 use App\Models\Jobs;
 use App\Models\News;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller

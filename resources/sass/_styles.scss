@@ -348,3 +348,27 @@ a:hover {
 .text-left {
     text-align: left !important;
 }
+
+.card-mobile {}
+
+.card-m {
+    display: none;
+}
+
+@media (max-width:600px) {
+    .card-mobile {
+        display: none;
+    }
+    .card-m {
+        display: block;
+    }
+}
+
+@media (min-width:600px) {
+    .card-mobile {
+        display: block;
+    }
+    .card-m {
+        display: none;
+    }
+}

@@ -10,20 +10,20 @@
 
     <title>Jobs-72 @yield('title') - Trouvez le job qu'il vous faut</title>
     <meta name="Description"
-        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils ! ✓ Postulez dès Maintenant ✓ Candidature Facile & Rapide !">
     <meta name="affiliate" content="jobs" />
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="Jobs-72 @yield('title') - Trouvez le job qu'il vous faut">
     <meta name="description"
-        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils ! ✓ Postulez dès Maintenant ✓ Candidature Facile & Rapide !">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jobs-72.com">
     <meta property="og:title" content="Jobs-72 @yield('title') - Trouvez le job qu'il vous faut">
     <meta property="og:description"
-        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils ! ✓ Postulez dès Maintenant ✓ Candidature Facile & Rapide !">
     <meta property="og:image" content="https://jobs-72.com/images/entreprises.jpg">
 
     <!-- Twitter -->
@@ -31,7 +31,7 @@
     <meta property="twitter:url" content="https://jobs-72.com/">
     <meta property="twitter:title" content="Jobs-72 @yield('title') - Trouvez le job qu'il vous faut">
     <meta property="twitter:description"
-        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils !">
+        content="Trouvez le job qu'il vous faut sur le site d'emploi Jobs-72. Parcourez des milliers d'offres, publiez votre CV et boostez votre carrière grâce à nos conseils ! ✓ Postulez dès Maintenant ✓ Candidature Facile & Rapide !">
     <meta property="twitter:image" content="https://jobs-72.com/images/entreprises.jpg">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
