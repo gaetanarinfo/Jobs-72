@@ -1,3 +1,5 @@
+{!! NoCaptcha::renderJs() !!}
+
 <link rel="stylesheet" type="text/css" href="{{ asset('css/input-file.css') }}">
 
 <section class="about section bg-2 fadeOn" id="recruter">
@@ -446,6 +448,18 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                </div>
+
+                                                <div class="row mt-2 mb-3 {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                                    <div class="col-md-12">
+                                                        {!! app('captcha')->display() !!}
+                                                        @if ($errors->has('g-recaptcha-response'))
+                                                            <div class="alert alert-danger alert-block mt-3 mb-2">
+                                                                <i class="fas fa-times mr-1 text-danger"></i>
+                                                                <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                            </div>
+                                                        @endif
+                                                    </div>
                                                 </div>
 
                                                 <button type="submit" class="btn btn-primary btn-block mb-4">Envoyer le devis</button>

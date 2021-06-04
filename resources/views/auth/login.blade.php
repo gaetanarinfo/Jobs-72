@@ -35,16 +35,20 @@
                         <h5 class="mt-3 mb-3">{{ __('Se connecter / S\'enregistrer avec un compte social') }}</h5>
                         <p>
                             <!-- Lien de redirection vers Google -->
-                            <a href=""
-                                title="{{ __('Connexion/Inscription avec Google (Bientôt Disponible)') }}" class="btn btn-danger mr-2 active"><i class="fab fa-google mr-2"></i>{{ __('Continuer avec Google (Bientôt Disponible)') }}</a>
+                            <a href="{{ url('auth/google') }}"
+                                title="{{ __('Connexion/Inscription avec Google') }}" class="btn btn-danger mr-2"><i class="fab fa-google mr-2"></i>{{ __('Continuer avec Google') }}</a>
 
-                            {{-- <!-- Lien de redirection vers GitHub -->
-                            <a href=""
-                            title="{{ __('Connexion/Inscription avec GitHub (Bientôt Disponible)') }}" class="btn btn-secondary mr-2 active"><i class="fab fa-github mr-2"></i>{{ __('Continuer avec GitHub (Bientôt Disponible)') }}</a>
+                            <!-- Lien de redirection vers GitHub -->
+                            <a href="{{ url('auth/github') }}"
+                            title="{{ __('Connexion/Inscription avec GitHub') }}" class="btn btn-secondary mr-2"><i class="fab fa-github mr-2"></i>{{ __('Continuer avec GitHub') }}</a>
 
                             <!-- Lien de redirection vers Twitter -->
-                            <a href=""
-                            title="{{ __('Connexion/Inscription avec Twitter (Bientôt Disponible)') }}" class="btn btn-info mr-2 active"><i class="fab fa-twitter mr-2"></i>{{ __('Continuer avec Twitter (Bientôt Disponible)') }}</a> --}}
+                            <a href="{{ url('auth/twitter') }}"
+                            title="{{ __('Connexion/Inscription avec Twitter') }}" class="btn btn-info mr-2"><i class="fab fa-twitter mr-2"></i>{{ __('Continuer avec Twitter') }}</a>
+
+                             <!-- Lien de redirection vers Linkedin -->
+                             <a href="{{ url('auth/linkedin') }}"
+                             title="{{ __('Connexion/Inscription avec Linkedin') }}" class="btn btn-primary mr-2 mt-2"><i class="fab fa-linkedin mr-2"></i>{{ __('Continuer avec Linkedin') }}</a>
                         </p>
                     </div>
 

@@ -13,7 +13,7 @@
                         @foreach ($latestNews as $news)
 
                             <div class="col-10 mt-0 mb-0 m-auto">
-                                <div class="card" style="box-shadow: 0 0 20px 0 rgb(0 0 0 / 15%);">
+                                <div class="card" style="box-shadow: 0 0 20px 0 rgb(0 0 0 / 28%);border-top-right-radius: 4px;border-bottom-right-radius: 4px;">
                                     <div class="card-horizontal">
                                         <div class="img-square-wrapper">
                                             <img class=""

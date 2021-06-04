@@ -37,7 +37,8 @@ class DevisController extends Controller
                 'cp' => 'max:255|required',
                 'pays' => 'max:255|required',
                 'content' => 'max:255|required',
-                'doc' => 'max:2048'
+                'doc' => 'max:2048',
+                'g-recaptcha-response' => 'required|captcha'
             ]);
 
             $destinationPath = 'admin/documents/';
@@ -74,6 +75,7 @@ class DevisController extends Controller
                 'cp' => 'max:255|required',
                 'pays' => 'max:255|required',
                 'content' => 'max:255|required',
+                'g-recaptcha-response' => 'required|captcha'
             ]);
 
             DB::table('devis')->insert([

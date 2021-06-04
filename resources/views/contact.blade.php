@@ -4,6 +4,8 @@
 
 @section('content')
 
+{!! NoCaptcha::renderJs() !!}
+
     @include('components.head')
 
     <div class="container mt-3">
@@ -105,6 +107,18 @@
                                                 title="Conditions générale d’utilisation">{{ __('Conditions Général D\'utilisation') }}</a>
                                         </label>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-2 mb-2 text-center {{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                                <div class="col-md-6">
+                                    {!! app('captcha')->display() !!}
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <div class="alert alert-danger alert-block mt-3 mb-2">
+                                            <i class="fas fa-times mr-1 text-danger"></i>
+                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
 

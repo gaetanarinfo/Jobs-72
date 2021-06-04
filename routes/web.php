@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\GitHubController;
 use App\Http\Controllers\Auth\TwitterController;
-
+use App\Http\Controllers\Auth\LinkedinController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -187,3 +187,7 @@ Route::get('auth/github/callback', [GitHubController::class, 'handleGitHubCallba
 // Facebook
 Route::get('auth/twitter', [TwitterController::class, 'redirectToTwitter']);
 Route::get('auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback']);
+
+// Linkedin
+Route::get('auth/linkedin', [LinkedinController::class, 'redirectToLinkedin']);
+Route::get('auth/linkedin/callback', [LinkedinController::class, 'handleLinkedinCallback']);
